@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maxi_by_MAXLIYO — Siz orzu qilgan hamma narsa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B2118;
+    --ink-soft:#5c4d3d;
+    --cream:#FBF6EF;
+    --cream-deep:#F3EADC;
+    --blush:#F8C8DC;
+    --blush-soft:#FFF0F5;
+    --gold:#C5A059;
+    --gold-bright:#E9CB82;
+    --gold-deep:#9C7A32;
+    --line:rgba(197,160,89,.28);
+    --shadow:0 20px 60px -30px rgba(43,33,24,.35);
+    --radius-lg:26px;
+    --radius-sm:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Jost',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+    font-weight:400;
+    line-height:1.6;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;}
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+  ::selection{background:var(--gold);color:#fff;}
+
+  /* ---------- background texture ---------- */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 8% 0%, var(--blush-soft) 0%, transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, #FDF0DF 0%, transparent 55%);
+    z-index:-2;
+    pointer-events:none;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    background:rgba(251,246,239,.72);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 40px;max-width:1320px;margin:0 auto;gap:32px;
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand .mono{
+    width:46px;height:46px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 35% 28%, #a9793f, #6b4423 75%);
+    box-shadow:0 6px 16px -6px rgba(107,68,35,.55), inset 0 0 0 1.5px rgba(233,203,130,.6);
+    flex-shrink:0;
+  }
+  .brand .mono svg{width:22px;height:22px;}
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text .name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.4rem;letter-spacing:.01em;color:var(--ink);}
+  .brand-text .tag{font-size:.6rem;letter-spacing:.15em;color:var(--gold-deep);font-weight:600;margin-top:1px;}
+
+  nav.primary-nav{display:flex;gap:38px;flex:1;justify-content:center;}
+  nav.primary-nav a{
+    font-size:.92rem;color:var(--ink);font-weight:500;position:relative;padding:4px 0;white-space:nowrap;
+    transition:color .25s;
+  }
+  nav.primary-nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold-deep);
+    transition:width .3s ease;
+  }
+  nav.primary-nav a:hover{color:var(--gold-deep);}
+  nav.primary-nav a:hover::after{width:100%;}
+
+  .header-actions{display:flex;align-items:center;gap:26px;}
+  .search-box{
+    display:flex;align-items:center;gap:10px;
+    background:var(--cream);border:1px solid rgba(43,33,24,.1);border-radius:999px;
+    padding:11px 20px;width:250px;transition:width .3s, box-shadow .3s, border-color .3s;
+  }
+  .search-box:focus-within{width:280px;border-color:var(--gold);box-shadow:0 6px 20px -10px rgba(156,122,50,.4);}
+  .search-box input{border:none;outline:none;font-family:inherit;font-size:.88rem;width:100%;background:transparent;color:var(--ink);}
+  .search-box input::placeholder{color:#a89b89;}
+  .search-box svg{flex-shrink:0;opacity:.5;}
+
+  .icon-btn{position:relative;display:flex;align-items:center;justify-content:center;width:24px;height:24px;color:var(--ink);}
+  .icon-btn svg{width:22px;height:22px;transition:transform .25s;}
+  .icon-btn:hover svg{transform:translateY(-2px);color:var(--gold-deep);}
+  .badge{
+    position:absolute;top:-6px;right:-8px;min-width:16px;height:16px;padding:0 3px;
+    background:var(--gold-deep);color:#fff;font-size:.62rem;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-weight:600;
+    transform:scale(0);transition:transform .3s cubic-bezier(.34,1.6,.64,1);
+  }
+  .badge.show{transform:scale(1);}
+  .badge.pop{animation:pop .38s cubic-bezier(.34,1.6,.64,1);}
+  @keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.5);}100%{transform:scale(1);}}
+
+  .burger{display:none;width:38px;height:38px;align-items:center;justify-content:center;}
+  .burger svg{width:22px;height:22px;}
+
+  .lang-switch{display:flex;gap:2px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px;}
+  .lang-switch button{padding:6px 11px;border-radius:999px;font-size:.7rem;letter-spacing:.03em;color:var(--ink-soft);transition:.25s;font-weight:500;}
+  .lang-switch button.active{background:var(--ink);color:#fff;}
+  .acc-lang-block{margin-bottom:24px;}
+  .acc-lang-label{font-size:.72rem;letter-spacing:.1em;color:var(--ink-soft);margin-bottom:8px;text-transform:uppercase;}
+  .acc-lang-block .lang-switch{width:100%;}
+  .acc-lang-block .lang-switch button{flex:1;padding:9px 0;font-size:.76rem;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:88px 0 70px;overflow:hidden;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+  }
+  .eyebrow-motto{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.72rem;letter-spacing:.14em;color:var(--gold-deep);font-weight:500;
+    margin-bottom:22px;
+  }
+  .eyebrow-motto::before{content:"";width:26px;height:1px;background:var(--gold-deep);}
+  .hero h1{
+    font-size:clamp(2.6rem,4.6vw,4.1rem);
+    font-weight:500;
+    line-height:1.05;
+    background:linear-gradient(100deg,#8f6f2c 0%, var(--gold) 22%, var(--gold-bright) 45%, var(--gold-deep) 68%, var(--gold) 100%);
+    background-size:220% auto;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shine 7s linear infinite;
+    letter-spacing:.005em;
+  }
+  @keyframes shine{to{background-position:220% center;}}
+  .hero p.lede{
+    margin-top:24px;max-width:480px;color:var(--ink-soft);font-size:1.04rem;
+  }
+  .hero-ctas{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;}
+  .btn-shine{
+    position:relative;overflow:hidden;
+    padding:16px 34px;border-radius:999px;
+    background:linear-gradient(120deg,var(--gold-deep),var(--gold),var(--gold-bright),var(--gold));
+    background-size:280% auto;
+    color:#fff;font-size:.92rem;letter-spacing:.03em;font-weight:500;
+    box-shadow:0 18px 40px -18px rgba(156,122,50,.75);
+    animation:shine 6s linear infinite;
+    transition:transform .3s;
+  }
+  .btn-shine:hover{transform:translateY(-2px);}
+  .btn-outline{
+    padding:16px 30px;border-radius:999px;border:1px solid var(--gold-deep);
+    color:var(--gold-deep);font-size:.92rem;font-weight:500;transition:.3s;
+  }
+  .btn-outline:hover{background:var(--gold-deep);color:#fff;}
+
+  .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;height:420px;}
+  .ring{
+    position:absolute;border-radius:50%;border:1px solid var(--line);
+  }
+  .ring.r1{width:380px;height:380px;animation:spin 40s linear infinite;}
+  .ring.r2{width:300px;height:300px;border-style:dashed;animation:spin 60s linear infinite reverse;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .hero-mono{
+    width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #fff, var(--cream-deep) 70%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 30px 70px -25px rgba(156,122,50,.55), inset 0 0 0 1px var(--line);
+  }
+  .hero-mono svg{width:96px;height:96px;}
+  .orbit-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--gold-bright);box-shadow:0 0 12px var(--gold);}
+  .glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,203,130,.4),transparent 70%);filter:blur(10px);z-index:-1;}
+
+  .motto-strip{
+    margin-top:64px;padding-top:36px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+  .motto-strip .words{font-size:.78rem;letter-spacing:.2em;color:var(--gold-deep);font-weight:500;}
+  .motto-strip .desc{max-width:420px;color:var(--ink-soft);font-size:.92rem;text-align:right;}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- section heads ---------- */
+  .section{padding:90px 0;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;gap:24px;flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.9rem,3vw,2.6rem);font-weight:500;}
+  .section-head p{color:var(--ink-soft);max-width:380px;font-size:.94rem;}
+
+  /* ---------- category bento ---------- */
+  .bento{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:150px;
+    gap:18px;
+  }
+  .cat-card{
+    position:relative;border-radius:var(--radius-lg);overflow:hidden;
+    background:linear-gradient(155deg,#fff, var(--cream-deep));
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:22px;
+    cursor:pointer;
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s;
+  }
+  .cat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+  .cat-card .icon-wrap{
+    position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:50%;
+    background:var(--blush-soft);display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);
+  }
+  .cat-card .icon-wrap svg{width:22px;height:22px;stroke:var(--gold-deep);}
+  .cat-card .cat-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;}
+  .cat-card .cat-name-en{font-size:.66rem;letter-spacing:.14em;color:var(--gold-deep);margin-top:2px;}
+  .cat-card::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 40%, rgba(43,33,24,.06) 100%);
+    opacity:0;transition:opacity .4s;
+  }
+  .cat-card:hover::before{opacity:1;}
+
+  .cat-card.big{grid-column:span 3;grid-row:span 2;}
+  .cat-card.wide{grid-column:span 2;}
+  .cat-card.reg{grid-column:span 2;}
+
+  /* ---------- catalog ---------- */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px;}
+  .pill{
+    padding:10px 20px;border-radius:999px;border:1px solid var(--line);
+    font-size:.82rem;color:var(--ink-soft);transition:.3s;background:#fff;
+  }
+  .pill.active,.pill:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .product-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
+  }
+  .p-card{
+    background:#fff;border-radius:var(--radius-lg);border:1px solid var(--line);
+    overflow:hidden;transition:transform .4s, box-shadow .4s;
+  }
+  .p-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+  .p-media{
+    position:relative;aspect-ratio:1/1;
+    background:linear-gradient(150deg,var(--blush-soft),var(--cream-deep));
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  .p-media svg{width:52%;height:52%;stroke:var(--gold-deep);opacity:.85;transition:transform .55s cubic-bezier(.2,.8,.2,1);}
+  .p-card:hover .p-media svg{transform:scale(1.12) rotate(-2deg);}
+  .p-wish{
+    position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.85);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .25s;
+  }
+  .p-wish:hover{transform:scale(1.1);}
+  .p-wish svg{width:16px;height:16px;stroke:var(--gold-deep);fill:none;transition:fill .25s,stroke .25s;}
+  .p-wish.active svg{fill:var(--gold-deep);}
+  .p-quick{
+    position:absolute;left:0;right:0;bottom:0;
+    display:flex;justify-content:center;padding:14px;
+    background:linear-gradient(0deg,rgba(43,33,24,.55),transparent);
+    transform:translateY(100%);opacity:0;transition:transform .4s ease, opacity .4s ease;
+  }
+  .p-card:hover .p-quick{transform:translateY(0);opacity:1;}
+  .p-quick button{
+    background:#fff;color:var(--ink);padding:9px 18px;border-radius:999px;font-size:.76rem;letter-spacing:.03em;
+  }
+  .p-body{padding:18px 20px 22px;}
+  .p-cat{font-size:.66rem;letter-spacing:.12em;color:var(--gold-deep);margin-bottom:6px;}
+  .p-name{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:600;margin-bottom:6px;}
+  .p-stars{display:flex;gap:2px;margin-bottom:10px;}
+  .p-stars svg{width:13px;height:13px;fill:var(--gold);stroke:none;}
+  .p-stars svg.empty{fill:var(--line);}
+  .p-foot{display:flex;align-items:center;justify-content:space-between;}
+  .p-price{font-weight:500;font-size:1.02rem;}
+  .p-price small{display:block;font-size:.66rem;color:var(--ink-soft);font-weight:400;}
+  .p-add{
+    width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;transition:.3s;
+  }
+  .p-add:hover{background:var(--gold-deep);}
+  .p-add svg{width:16px;height:16px;}
+
+  .no-results{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--ink-soft);}
+
+  /* ---------- promo band ---------- */
+  .promo{
+    margin:20px 0;border-radius:var(--radius-lg);
+    background:linear-gradient(120deg,#3A2E1F,#5b4526 55%,#3A2E1F);
+    color:#F6EBD6;padding:60px 50px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+    position:relative;overflow:hidden;
+  }
+  .promo::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle,rgba(233,203,130,.25),transparent 70%);
+  }
+  .promo h3{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:500;max-width:520px;}
+  .promo p{color:#D9C9A8;margin-top:10px;font-size:.92rem;max-width:440px;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:#E9DEC9;padding:70px 0 26px;margin-top:40px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(233,203,130,.15);}
+  .foot-brand .brand-text .name{color:#fff;}
+  .foot-brand p{color:#c9bda3;font-size:.88rem;margin-top:14px;max-width:280px;}
+  footer h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;margin-bottom:16px;color:#F6EBD6;}
+  footer ul li{margin-bottom:10px;}
+  footer ul li a{color:#c9bda3;font-size:.88rem;transition:color .25s;}
+  footer ul li a:hover{color:var(--gold-bright);}
+  .foot-social{display:flex;gap:12px;margin-top:16px;}
+  .foot-social a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(233,203,130,.3);display:flex;align-items:center;justify-content:center;transition:.3s;}
+  .foot-social a:hover{background:var(--gold);border-color:var(--gold);}
+  .foot-social svg{width:15px;height:15px;stroke:#E9DEC9;}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:24px;font-size:.78rem;color:#8f8267;flex-wrap:wrap;gap:10px;}
+
+  /* ---------- cart drawer ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(43,33,24,.4);backdrop-filter:blur(3px);
+    opacity:0;pointer-events:none;transition:opacity .35s;z-index:200;
+  }
+  .overlay.show{opacity:1;pointer-events:auto;}
+  .drawer{
+    position:fixed;top:0;right:0;height:100%;width:400px;max-width:92vw;
+    background:var(--cream);z-index:201;box-shadow:-30px 0 60px rgba(43,33,24,.25);
+    transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);
+    display:flex;flex-direction:column;
+  }
+  .drawer.show{transform:translateX(0);}
+  .drawer-head{padding:26px 26px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .drawer-head h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;}
+  .drawer-close{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);}
+  .drawer-body{flex:1;overflow-y:auto;padding:20px 26px;}
+  .drawer-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);}
+  .drawer-item .thumb{width:60px;height:60px;border-radius:12px;background:linear-gradient(150deg,var(--blush-soft),var(--cream-deep));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .drawer-item .thumb svg{width:60%;height:60%;stroke:var(--gold-deep);}
+  .drawer-item .info{flex:1;}
+  .drawer-item .info .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.02rem;}
+  .drawer-item .info .px{font-size:.82rem;color:var(--ink-soft);margin-top:2px;}
+  .drawer-item .remove{font-size:.72rem;color:var(--gold-deep);margin-top:6px;}
+  .drawer-empty{color:var(--ink-soft);text-align:center;padding:60px 0;font-size:.9rem;}
+  .drawer-foot{padding:22px 26px;border-top:1px solid var(--line);}
+  .drawer-foot .row{display:flex;justify-content:space-between;margin-bottom:16px;font-size:.95rem;}
+  .drawer-foot .row strong{font-family:'Cormorant Garamond',serif;font-size:1.3rem;}
+  .drawer-foot button{width:100%;padding:15px;border-radius:999px;}
+
+  .promo-box{margin-bottom:18px;}
+  .promo-input-row{display:flex;gap:8px;width:100%;}
+  .promo-input-row input{
+    flex:1 1 auto;min-width:0;font-family:inherit;font-size:.85rem;padding:12px 15px;border-radius:999px;
+    border:1px solid var(--line);background:#fff;outline:none;color:var(--ink);
+    transition:border-color .25s, box-shadow .25s;
+  }
+  .promo-input-row input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.15);}
+  .promo-input-row input.shake{animation:shake .4s;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-6px);}
+    40%{transform:translateX(6px);}
+    60%{transform:translateX(-4px);}
+    80%{transform:translateX(4px);}
+  }
+  .promo-input-row button{
+    width:auto;padding:10px 14px;border-radius:999px;background:var(--ink);color:#fff;font-size:.72rem;
+    flex:0 0 auto;white-space:nowrap;transition:background .25s;
+  }
+  .promo-input-row button:hover{background:var(--gold-deep);}
+  .promo-error{
+    font-size:.76rem;color:#b5493f;margin-top:8px;opacity:0;height:0;overflow:hidden;transition:opacity .25s, height .25s;
+  }
+  .promo-error.show{opacity:1;height:auto;margin-top:8px;}
+  .promo-applied{
+    display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;border-radius:12px;
+    background:linear-gradient(120deg,var(--blush-soft),#FDF0DF);border:1px solid var(--line);
+    font-size:.8rem;color:var(--ink-soft);
+    transform:scale(.85);opacity:0;height:0;overflow:hidden;
+  }
+  .promo-applied.show{
+    transform:scale(1);opacity:1;height:auto;padding:10px 14px;margin-top:10px;
+    animation:promoPop .5s cubic-bezier(.34,1.6,.64,1);
+    transition:opacity .3s, transform .3s;
+  }
+  @keyframes promoPop{
+    0%{transform:scale(.6);opacity:0;}
+    55%{transform:scale(1.08);opacity:1;}
+    100%{transform:scale(1);opacity:1;}
+  }
+  .promo-percent{
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.15rem;color:var(--gold-deep);
+  }
+  .promo-remove{margin-left:auto;cursor:pointer;color:var(--ink-soft);font-size:.75rem;}
+  #cartSubtotal{text-decoration:line-through;color:var(--ink-soft);}
+
+  /* ---------- account drawer ---------- */
+  .acc-avatar{
+    width:72px;height:72px;border-radius:50%;margin:0 auto 18px;
+    background:conic-gradient(from 180deg,var(--gold-bright),var(--gold),var(--gold-deep));
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.8rem;
+  }
+  .acc-tabs{display:flex;gap:8px;margin-bottom:24px;padding:4px;background:var(--cream-deep);border-radius:999px;}
+  .acc-tabs button{flex:1;padding:10px;border-radius:999px;font-size:.82rem;color:var(--ink-soft);transition:.25s;}
+  .acc-tabs button.active{background:var(--ink);color:#fff;}
+  .acc-form{display:flex;flex-direction:column;gap:14px;}
+  .acc-form input{
+    font-family:inherit;font-size:.9rem;padding:13px 16px;border-radius:12px;
+    border:1px solid var(--line);background:#fff;outline:none;color:var(--ink);
+    transition:border-color .25s, box-shadow .25s;
+  }
+  .acc-form input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.15);}
+  .acc-form button{margin-top:4px;padding:14px;border-radius:999px;}
+  .acc-switch{text-align:center;font-size:.82rem;color:var(--ink-soft);margin-top:16px;}
+  .acc-switch span{color:var(--gold-deep);cursor:pointer;}
+  .acc-profile-stats{display:flex;justify-content:space-between;margin:26px 0;text-align:center;}
+  .acc-profile-stats div strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold-deep);}
+  .acc-profile-stats div span{font-size:.68rem;color:var(--ink-soft);letter-spacing:.04em;}
+  .acc-info-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:.88rem;}
+  .acc-info-row span:first-child{color:var(--ink-soft);}
+  .acc-logout{
+    width:100%;margin-top:24px;padding:14px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft);transition:.25s;
+  }
+  .acc-logout:hover{border-color:#b5493f;color:#b5493f;}
+
+  /* ---------- quick view modal ---------- */
+  .qv{
+    position:fixed;inset:0;margin:auto;z-index:202;width:640px;max-width:90vw;max-height:82vh;
+    background:#fff;border-radius:var(--radius-lg);overflow:hidden;
+    opacity:0;pointer-events:none;transform:translateY(20px) scale(.97);
+    transition:opacity .35s, transform .35s;
+    display:grid;grid-template-columns:1fr 1fr;
+  }
+  .qv.show{opacity:1;pointer-events:auto;transform:translateY(0) scale(1);}
+  .qv-media{background:linear-gradient(150deg,var(--blush-soft),var(--cream-deep));display:flex;align-items:center;justify-content:center;}
+  .qv-media svg{width:46%;height:46%;stroke:var(--gold-deep);}
+  .qv-body{padding:36px;position:relative;overflow-y:auto;}
+  .qv-close{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .qv-cat{font-size:.68rem;letter-spacing:.12em;color:var(--gold-deep);}
+  .qv-body h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;margin:8px 0 10px;}
+  .qv-body .p-stars{margin-bottom:14px;}
+  .qv-desc{color:var(--ink-soft);font-size:.9rem;margin-bottom:20px;}
+  .qv-price{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;margin-bottom:20px;}
+  .qv-actions{display:flex;gap:12px;}
+  .qv-actions button:first-child{flex:1;}
+
+  /* ---------- info modal (about / reviews / contact) ---------- */
+  .info-modal{
+    position:fixed;top:0;right:0;height:100%;width:520px;max-width:94vw;
+    background:var(--cream);z-index:201;box-shadow:-30px 0 60px rgba(43,33,24,.25);
+    transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);
+    overflow-y:auto;padding:56px 40px 50px;
+  }
+  .info-modal.show{transform:translateX(0);}
+  .info-close{
+    position:fixed;top:26px;right:26px;width:36px;height:36px;border-radius:50%;
+    background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+    z-index:202;transform:translateX(600px);transition:transform .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .info-close.show{transform:translateX(0);}
+  .info-body .eyebrow-motto{margin-bottom:16px;}
+  .info-body h3{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;margin-bottom:18px;line-height:1.15;}
+  .info-body p{color:var(--ink-soft);font-size:.94rem;margin-bottom:16px;}
+  .info-stats{display:flex;gap:28px;margin:30px 0;flex-wrap:wrap;}
+  .info-stats div{display:flex;flex-direction:column;}
+  .info-stats strong{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--gold-deep);font-weight:600;}
+  .info-stats span{font-size:.72rem;color:var(--ink-soft);letter-spacing:.04em;}
+
+  .review-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:20px 22px;margin-bottom:16px;
+  }
+  .review-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .review-avatar{
+    width:38px;height:38px;border-radius:50%;flex-shrink:0;
+    background:conic-gradient(from 180deg,var(--gold-bright),var(--gold),var(--gold-deep));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:600;
+  }
+  .review-name{font-weight:500;font-size:.92rem;}
+  .review-cat{font-size:.7rem;color:var(--ink-soft);}
+  .review-card .p-stars{margin-bottom:8px;}
+  .review-card p{font-size:.88rem;margin-bottom:0;}
+
+  .contact-info{display:flex;flex-direction:column;gap:14px;margin:26px 0 34px;}
+  .contact-row{display:flex;align-items:center;gap:14px;font-size:.9rem;}
+  .contact-row .ic{
+    width:38px;height:38px;border-radius:50%;background:var(--blush-soft);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contact-row .ic svg{width:16px;height:16px;stroke:var(--gold-deep);}
+  .contact-form{display:flex;flex-direction:column;gap:14px;}
+  .contact-form label{font-size:.76rem;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:-8px;}
+  .contact-form input,.contact-form textarea{
+    font-family:inherit;font-size:.9rem;padding:13px 16px;border-radius:12px;
+    border:1px solid var(--line);background:#fff;outline:none;resize:none;color:var(--ink);
+    transition:border-color .25s, box-shadow .25s;
+  }
+  .contact-form input:focus,.contact-form textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.15);}
+  .contact-form button{margin-top:6px;padding:15px;border-radius:999px;}
+  .contact-sent{
+    display:flex;align-items:center;gap:10px;background:var(--blush-soft);border:1px solid var(--line);
+    padding:14px 18px;border-radius:12px;font-size:.86rem;margin-top:14px;opacity:0;height:0;overflow:hidden;
+    transition:opacity .3s, height .3s;
+  }
+  .contact-sent.show{opacity:1;height:auto;padding:14px 18px;}
+  .contact-sent svg{width:16px;height:16px;stroke:var(--gold-deep);flex-shrink:0;}
+
+  @media (max-width:760px){
+    .info-modal{padding:56px 24px 40px;}
+  }
+
+  /* ---------- toast ---------- */
+  .toast{
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#F6EBD6;padding:14px 26px;border-radius:999px;font-size:.85rem;
+    opacity:0;transition:opacity .35s, transform .35s;z-index:300;display:flex;align-items:center;gap:10px;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .toast svg{width:15px;height:15px;stroke:var(--gold-bright);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:130px;}
+    .cat-card.big{grid-column:span 4;grid-row:span 2;}
+    .cat-card.wide,.cat-card.reg{grid-column:span 2;}
+    .product-grid{grid-template-columns:repeat(3,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:280px;order:-1;}
+  }
+  @media (max-width:760px){
+    nav.primary-nav,.search-box{display:none;}
+    .burger{display:flex;}
+    .product-grid{grid-template-columns:repeat(2,1fr);gap:16px;}
+    .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;}
+    .cat-card.big{grid-column:span 2;grid-row:span 2;}
+    .cat-card.wide,.cat-card.reg{grid-column:span 1;}
+    .motto-strip{flex-direction:column;align-items:flex-start;}
+    .motto-strip .desc{text-align:left;}
+    .qv{grid-template-columns:1fr;overflow-y:auto;}
+    .qv-media{height:200px;}
+    .foot-grid{grid-template-columns:1fr;}
+    .header-inner{padding:12px 14px;gap:8px;}
+    .wrap{padding:0 20px;}
+    .promo{padding:40px 26px;}
+    .brand{gap:8px;min-width:0;}
+    .brand .mono{width:34px;height:34px;}
+    .brand .mono svg{width:17px;height:17px;}
+    .brand-text .name{font-size:1rem;white-space:nowrap;}
+    .brand-text .tag{display:none;}
+    .header-actions{gap:4px;}
+    .icon-btn{width:32px;height:32px;}
+    .icon-btn svg{width:18px;height:18px;}
+    .burger{width:32px;height:32px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <span class="mono"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18V6l4 5 4-5 4 5 4-5v12" stroke="#E9CB82" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="brand-text">
+        <span class="name">Maxi_by_MAXLIYO</span>
+        <span class="tag">SIFAT · ISHONCH · NAQISLIK</span>
+      </span>
+    </a>
+    <nav class="primary-nav">
+      <a href="#top" data-i18n="nav_home">Bosh sahifa</a>
+      <a href="#catalog" data-i18n="nav_catalog">Katalog</a>
+      <a href="#" data-modal="about" data-i18n="nav_about">Biz haqimizda</a>
+      <a href="#" data-modal="reviews" data-i18n="nav_reviews">Mijozlar fikri</a>
+      <a href="#" data-modal="contact" data-i18n="nav_contact">Aloqa</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#2B2118" stroke-width="1.7"/><path d="M21 21l-4.3-4.3" stroke="#2B2118" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <input id="searchInput" type="text" placeholder="Mahsulot qidirish..." data-i18n-ph="search_ph">
+      </div>
+      <button class="icon-btn" id="accountBtn" aria-label="Profil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-3.6 4.6-5.4 7.5-5.4S17.9 16.4 19.5 20" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" id="wishBtn" aria-label="Sevimlilar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9.3C.4 8 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.4C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
+        <span class="badge" id="wishBadge">0</span>
+      </button>
+      <button class="icon-btn" id="cartBtn" aria-label="Savatcha">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h2l2.4 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.3"/><circle cx="18" cy="21" r="1.3"/></svg>
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+      <button class="burger" id="burgerBtn" aria-label="Menyu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-motto" data-i18n="hero_eyebrow">Premium marketplace — O'zbekiston</div>
+      <h1 data-i18n="hero_title">Siz orzu qilgan hamma narsa, bir joyda to'plangan</h1>
+      <p class="lede" data-i18n="hero_lede">Moda, zargarlik buyumlari, texnika va uy jihozlaridan tortib avtomobil aksessuarlarigacha — biz har bir sohada siz uchun eng yaxshisini tanlaymiz.</p>
+      <div class="hero-ctas">
+        <a href="#catalog" class="btn-shine" data-i18n="hero_cta1">Katalogga o'tish</a>
+        <a href="#categories" class="btn-outline" data-i18n="hero_cta2">Yo'nalishlarni ko'rish</a>
+      </div>
+      <div class="motto-strip">
+        <div class="words" data-i18n="motto_words">SIFAT&nbsp; · &nbsp;ISHONCH&nbsp; · &nbsp;NAQISLIK</div>
+        <div class="desc" data-i18n="motto_desc">"Biz har bir sohada siz uchun eng yaxshisini taklif etamiz."</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="glow"></div>
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="hero-mono">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 18V6l4 5 4-5 4 5 4-5v12" stroke="url(#gg)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="gg" x1="0" y1="0" x2="24" y2="24"><stop offset="0%" stop-color="#C5A059"/><stop offset="100%" stop-color="#9C7A32"/></linearGradient></defs></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORIES ============ -->
+<section class="section" id="categories">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 data-i18n="cat_head_title">Yo'nalishlar bo'yicha xarid qiling</h2>
+      <p data-i18n="cat_head_desc">O'nta toifa — har biri o'ziga xos did va sifat bilan tanlangan.</p>
+    </div>
+    <div class="bento reveal" id="categoryGrid"></div>
+  </div>
+</section>
+
+<!-- ============ PROMO BAND ============ -->
+<div class="wrap">
+  <div class="promo reveal">
+    <div>
+      <h3 data-i18n="promo_title">Har bir buyurtmada — ishonch va naqislik</h3>
+      <p data-i18n="promo_desc">Yetkazib berish butun O'zbekiston bo'ylab. Original mahsulotlar, kafolatlangan sifat.</p>
+    </div>
+    <a href="#catalog" class="btn-outline" style="border-color:var(--gold-bright);color:var(--gold-bright);" data-i18n="promo_cta">Xarid qilish</a>
+  </div>
+</div>
+
+<!-- ============ CATALOG ============ -->
+<section class="section" id="catalog">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 data-i18n="catalog_title">Mahsulotlar katalogi</h2>
+      <p data-i18n="catalog_desc">Toifani tanlang yoki qidiruv orqali kerakli mahsulotni toping.</p>
+    </div>
+    <div class="filters reveal" id="filterBar"></div>
+    <div class="product-grid reveal" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap" style="max-width:760px;">
+    <div class="reveal">
+      <div class="eyebrow-motto" data-i18n="nav_about">Biz haqimizda</div>
+      <h2 class="serif" style="font-size:2.1rem;font-weight:500;margin-bottom:18px;" data-i18n="about_title">Maxi_by_MAXLIYO haqida</h2>
+      <p style="color:var(--ink-soft);" data-i18n="about_body">Maxi_by_MAXLIYO — bu moda, go'zallik, texnika va turmush uchun zarur bo'lgan barcha narsalarni bir maydonda jamlagan premium marketplace. Har bir mahsulot diqqat bilan tanlanadi, chunki bizning maqsadimiz — mijozlarimizga faqat sifatli va ishonchli xaridni taklif etish.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand">
+          <span class="mono"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18V6l4 5 4-5 4 5 4-5v12" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="brand-text"><span class="name">Maxi_by_MAXLIYO</span></span>
+        </a>
+        <p data-i18n="foot_desc">Siz orzu qilgan hamma narsa — bir joyda. Sifat, ishonch va naqislik asosida qurilgan marketplace.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M21 4L2 11l6 2m13-9L15 20l-7-7m13-9L8 13"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M15 4h-2a4 4 0 00-4 4v3H7v4h2v7h4v-7h3l1-4h-4V8a1 1 0 011-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 data-i18n="foot_col_catalog">Katalog</h4>
+        <ul>
+          <li><a href="#catalog" data-filter="Fashion">Fashion</a></li>
+          <li><a href="#catalog" data-filter="Jewelry">Jewelry</a></li>
+          <li><a href="#catalog" data-filter="Electronics">Electronics</a></li>
+          <li><a href="#catalog" data-filter="Beauty">Beauty</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot_col_company">Kompaniya</h4>
+        <ul>
+          <li><a href="#" data-modal="about" data-i18n="nav_about">Biz haqimizda</a></li>
+          <li><a href="#" data-modal="reviews" data-i18n="nav_reviews">Mijozlar fikri</a></li>
+          <li><a href="#" data-i18n="foot_partners">Hamkorlar uchun</a></li>
+          <li><a href="#" data-i18n="foot_careers">Vakansiyalar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="foot_col_help">Yordam</h4>
+        <ul>
+          <li><a href="#" data-i18n="foot_delivery">Yetkazib berish</a></li>
+          <li><a href="#" data-i18n="foot_returns">Qaytarish siyosati</a></li>
+          <li><a href="#" data-i18n="foot_privacy">Maxfiylik siyosati</a></li>
+          <li><a href="#" data-modal="contact">+998 90 123 45 67</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot_rights">© 2026 Maxi_by_MAXLIYO. Barcha huquqlar himoyalangan.</span>
+      <span data-i18n="foot_city">Toshkent, O'zbekiston</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3 data-i18n="cart_title">Savatcha</h3>
+    <button class="drawer-close" id="drawerClose">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot">
+    <div class="promo-box">
+      <div class="promo-input-row">
+        <input type="text" id="promoInput" placeholder="Promo kod" data-i18n-ph="promo_ph">
+        <button id="promoApply" data-i18n="promo_apply">Qo'llash</button>
+      </div>
+      <div class="promo-error" id="promoError" data-i18n="promo_error">Bunday promo kod topilmadi</div>
+      <div class="promo-applied" id="promoApplied">
+        <span class="promo-percent" id="promoPercent">-10%</span>
+        <span data-i18n="promo_applied_label">chegirma qo'llandi</span>
+        <span class="promo-remove" id="promoRemove">✕</span>
+      </div>
+    </div>
+    <div class="row" id="subtotalRow" style="display:none;"><span data-i18n="cart_products">Mahsulotlar:</span><span id="cartSubtotal">0 so'm</span></div>
+    <div class="row"><span data-i18n="cart_total">Jami:</span><strong id="cartTotal">0 so'm</strong></div>
+    <button class="btn-shine" style="display:block;text-align:center;" data-i18n="cart_checkout">Buyurtmani rasmiylashtirish</button>
+  </div>
+</div>
+
+<!-- ============ ACCOUNT DRAWER ============ -->
+<div class="drawer" id="accountDrawer"></div>
+
+<!-- ============ QUICK VIEW ============ -->
+<div class="qv" id="quickView"></div>
+
+<!-- ============ INFO MODALS ============ -->
+<div class="info-modal" id="infoModal">
+  <button class="info-close" id="infoClose">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="info-body" id="infoBody"></div>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toastMsg">Savatchaga qo'shildi</span>
+</div>
+
+<script>
+/* ---------------- ICONS ---------------- */
+const ICONS = {
+  fashion: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l3 2 3-2 4 3-2 3-2-1v11H8V9L6 10 4 7z"/></svg>`,
+  accessories: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10a2 2 0 01-2 1.7H7.5a2 2 0 01-2-1.7L4 9z"/><path d="M8 9V7a4 4 0 018 0v2"/></svg>`,
+  beauty: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6v4H9z"/><path d="M8 6h8l1 3v11a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"/><path d="M9 13h6"/></svg>`,
+  electronics: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>`,
+  home: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></svg>`,
+  automotive: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l1.5-6a2 2 0 012-1.4h9a2 2 0 012 1.4L20 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="20" r="1.3"/><circle cx="16.5" cy="20" r="1.3"/></svg>`,
+  food: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a3 3 0 003 3v8"/><path d="M6 3v7"/><path d="M18 3c-2 1-2 5-2 7 0 1.5 1 2 2 2v9"/></svg>`,
+  sport: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18"/></svg>`,
+  jewelry: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12 5-12-2-6"/></svg>`,
+  books: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/></svg>`
+};
+
+/* ---------------- DATA ---------------- */
+const CATEGORIES = [
+  {id:"Fashion", uz:"Moda", ru:"Одежда", icon:"fashion", size:"big"},
+  {id:"Jewelry", uz:"Zargarlik", ru:"Ювелирные изделия", icon:"jewelry", size:"big"},
+  {id:"Accessories", uz:"Aksessuarlar", ru:"Аксессуары", icon:"accessories", size:"wide"},
+  {id:"Beauty", uz:"Go'zallik", ru:"Красота", icon:"beauty", size:"wide"},
+  {id:"Electronics", uz:"Texnika", ru:"Электроника", icon:"electronics", size:"reg"},
+  {id:"Home", uz:"Uy uchun", ru:"Для дома", icon:"home", size:"reg"},
+  {id:"Automotive", uz:"Avto tovarlar", ru:"Автотовары", icon:"automotive", size:"reg"},
+  {id:"Food & Drink", uz:"Oziq-ovqat", ru:"Продукты и напитки", icon:"food", size:"reg"},
+  {id:"Sport", uz:"Sport", ru:"Спорт", icon:"sport", size:"reg"},
+  {id:"Books & Stationery", uz:"Kitob va kantselyariya", ru:"Книги и канцелярия", icon:"books", size:"reg"},
+];
+
+const PRODUCTS = [
+  {id:1, cat:"Fashion", icon:"fashion", name:"Ipak ko'ylak", desc:"Tabiiy ipakdan tikilgan, yumshoq tushish bilan nafis kesim.", name_ru:"Шёлковое платье", desc_ru:"Из натурального шёлка, изящный крой и мягкая драпировка.", price:680000, rating:5},
+  {id:2, cat:"Fashion", icon:"fashion", name:"Kashmir palto", desc:"Qishki mavsum uchun issiq va yengil kashmir palto.", name_ru:"Пальто из кашемира", desc_ru:"Тёплое и лёгкое пальто для зимнего сезона.", price:1450000, rating:4},
+  {id:3, cat:"Fashion", icon:"fashion", name:"Lyuks trenchkot", desc:"Klassik kesim, har qanday obrazga mos keladi.", name_ru:"Люкс-тренчкот", desc_ru:"Классический крой, подходит к любому образу.", price:920000, rating:5},
+  {id:4, cat:"Accessories", icon:"accessories", name:"Charm qo'l sumkasi", desc:"Tabiiy charmdan, oltin dekor bilan bezatilgan.", name_ru:"Кожаная сумка", desc_ru:"Натуральная кожа, украшена золотистым декором.", price:1250000, rating:5},
+  {id:5, cat:"Accessories", icon:"accessories", name:"Ipak ro'mol", desc:"Qo'lda chizilgan naqshli premium ipak ro'mol.", name_ru:"Шёлковый платок", desc_ru:"Премиальный шёлк с узором ручной росписи.", price:320000, rating:4},
+  {id:6, cat:"Accessories", icon:"accessories", name:"Oftob ko'zoynak", desc:"UV himoyali, oltin ramkali dizayn.", name_ru:"Солнцезащитные очки", desc_ru:"UV-защита, дизайн в золотистой оправе.", price:410000, rating:4},
+  {id:7, cat:"Beauty", icon:"beauty", name:"Rose Gold parfyum", desc:"Uzoq davom etadigan, nafis gullar aromati.", name_ru:"Парфюм Rose Gold", desc_ru:"Стойкий аромат с нотами нежных цветов.", price:390000, rating:5},
+  {id:8, cat:"Beauty", icon:"beauty", name:"Atir to'plami", desc:"3 xil xushbo'ylikdan iborat sovg'a to'plami.", name_ru:"Набор ароматов", desc_ru:"Подарочный набор из трёх ароматов.", price:560000, rating:5},
+  {id:9, cat:"Beauty", icon:"beauty", name:"Yuz parvarishi seti", desc:"Tabiiy tarkibli, barcha teri turlariga mos.", name_ru:"Набор для ухода за лицом", desc_ru:"Натуральный состав, подходит для всех типов кожи.", price:275000, rating:4},
+  {id:10, cat:"Electronics", icon:"electronics", name:"Simsiz quloqchinlar", desc:"Faol shovqin bosish funksiyasi bilan.", name_ru:"Беспроводные наушники", desc_ru:"С функцией активного шумоподавления.", price:890000, rating:5},
+  {id:11, cat:"Electronics", icon:"electronics", name:"Premium smartfon", desc:"Yuqori aniqlikdagi kamera va tezkor protsessor.", name_ru:"Премиум-смартфон", desc_ru:"Камера высокого разрешения и быстрый процессор.", price:9800000, rating:5},
+  {id:12, cat:"Electronics", icon:"electronics", name:"Aqlli soat", desc:"Sog'liq monitoringi va uzoq batareya resursi.", name_ru:"Умные часы", desc_ru:"Мониторинг здоровья и долгий заряд батареи.", price:1180000, rating:4},
+  {id:13, cat:"Home", icon:"home", name:"Baxmal yostiqchalar seti", desc:"Zamonaviy interyer uchun yumshoq baxmal dizayn.", name_ru:"Набор бархатных подушек", desc_ru:"Мягкий бархатный дизайн для современного интерьера.", price:245000, rating:4},
+  {id:14, cat:"Home", icon:"home", name:"Dekorativ shamdon", desc:"Oltin rangli metall, mehmonxona uchun ideal.", name_ru:"Декоративный подсвечник", desc_ru:"Металл золотистого цвета, идеален для гостиной.", price:180000, rating:4},
+  {id:15, cat:"Home", icon:"home", name:"Aromaterapiya sham to'plami", desc:"Tabiiy mum asosida, uzoq yonuvchi.", name_ru:"Набор ароматических свечей", desc_ru:"На основе натурального воска, долго горят.", price:210000, rating:5},
+  {id:16, cat:"Automotive", icon:"automotive", name:"Avtomobil parfyumi", desc:"Salon uchun nafis va uzoq davom etuvchi hid.", name_ru:"Автомобильный ароматизатор", desc_ru:"Нежный и стойкий аромат для салона.", price:95000, rating:4},
+  {id:17, cat:"Automotive", icon:"automotive", name:"Charm rul qopqog'i", desc:"Premium charmdan, qo'lga qulay ushlash.", name_ru:"Кожаный чехол на руль", desc_ru:"Премиальная кожа, удобный хват.", price:165000, rating:4},
+  {id:18, cat:"Food & Drink", icon:"food", name:"Premium shokolad to'plami", desc:"Belgiya shokoladidan tayyorlangan sovg'a qutisi.", name_ru:"Набор премиального шоколада", desc_ru:"Подарочная коробка бельгийского шоколада.", price:230000, rating:5},
+  {id:19, cat:"Food & Drink", icon:"food", name:"Tabiiy tog' asali", desc:"Ekologik toza, 100% tabiiy mahsulot.", name_ru:"Натуральный горный мёд", desc_ru:"Экологически чистый, 100% натуральный продукт.", price:140000, rating:5},
+  {id:20, cat:"Sport", icon:"sport", name:"Gantel to'plami", desc:"Uy mashg'ulotlari uchun sozlanuvchi og'irlik.", name_ru:"Набор гантелей", desc_ru:"Регулируемый вес для домашних тренировок.", price:480000, rating:4},
+  {id:21, cat:"Sport", icon:"sport", name:"Yoga kilimchasi", desc:"Kaymaydigan, ekologik toza material.", name_ru:"Коврик для йоги", desc_ru:"Нескользящий, экологически чистый материал.", price:165000, rating:5},
+  {id:22, cat:"Jewelry", icon:"jewelry", name:"Marvarid sirg'alar", desc:"Tabiiy marvarid, 18 karat oltin qoplama.", name_ru:"Жемчужные серьги", desc_ru:"Натуральный жемчуг, покрытие золотом 18 карат.", price:540000, rating:5},
+  {id:23, cat:"Jewelry", icon:"jewelry", name:"Oltin uzuk", desc:"Nafis dizaynli, mayda toshlar bilan bezatilgan.", name_ru:"Золотое кольцо", desc_ru:"Изящный дизайн, украшено мелкими камнями.", price:2100000, rating:5},
+  {id:24, cat:"Jewelry", icon:"jewelry", name:"Zargarlik soat", desc:"Klassik uslub, kunlik va bayram uchun mos.", name_ru:"Ювелирные часы", desc_ru:"Классический стиль для будней и праздников.", price:1650000, rating:4},
+  {id:25, cat:"Books & Stationery", icon:"books", name:"Charm bloknot", desc:"Qo'lda tikilgan, oltin qirrali sahifalar.", name_ru:"Кожаный блокнот", desc_ru:"Ручной пошив, страницы с золотым обрезом.", price:120000, rating:4},
+  {id:26, cat:"Books & Stationery", icon:"books", name:"Premium qalam to'plami", desc:"Sovg'a qutisida, oltin dekorli qalamlar.", name_ru:"Набор премиальных ручек", desc_ru:"В подарочной коробке, ручки с золотистым декором.", price:95000, rating:4},
+  {id:27, cat:"Fashion", icon:"fashion", name:"Kashtali ko'ylak", desc:"Qo'lda kashta tikilgan, mavsumiy kolleksiya.", name_ru:"Платье с вышивкой", desc_ru:"Ручная вышивка, сезонная коллекция.", price:540000, rating:4},
+  {id:28, cat:"Fashion", icon:"fashion", name:"Yengil trikotaj sviter", desc:"Yumshoq ip aralashmasi, kundalik kiyim uchun.", name_ru:"Лёгкий трикотажный свитер", desc_ru:"Мягкая пряжа, для повседневной носки.", price:310000, rating:4},
+  {id:29, cat:"Accessories", icon:"accessories", name:"Charm belbog'", desc:"Oltin tokali, klassik va zamonaviy uslubda.", name_ru:"Кожаный ремень", desc_ru:"Золотистая пряжка, классический и современный стиль.", price:280000, rating:4},
+  {id:30, cat:"Accessories", icon:"accessories", name:"Kechki klatch sumka", desc:"Marvarid dekorli, tantanali tadbirlar uchun.", name_ru:"Вечерний клатч", desc_ru:"Декор из жемчуга, для торжественных случаев.", price:640000, rating:5},
+  {id:31, cat:"Beauty", icon:"beauty", name:"Oltin seramid kremi", desc:"Terini qayta tiklovchi tungi parvarish kremi.", name_ru:"Крем с золотыми керамидами", desc_ru:"Восстанавливающий ночной крем для кожи.", price:340000, rating:5},
+  {id:32, cat:"Beauty", icon:"beauty", name:"Lab bo'yog'i to'plami", desc:"5 xil tabiiy tusda, uzoq turuvchi formula.", name_ru:"Набор помад", desc_ru:"5 натуральных оттенков, стойкая формула.", price:225000, rating:4},
+  {id:33, cat:"Electronics", icon:"electronics", name:"Planshet Pro", desc:"Ishlash va ijodkorlik uchun kuchli protsessor.", name_ru:"Планшет Pro", desc_ru:"Мощный процессор для работы и творчества.", price:6200000, rating:5},
+  {id:34, cat:"Electronics", icon:"electronics", name:"Portativ zaryadlovchi", desc:"Tezkor quvvatlash, safarlar uchun ixcham.", name_ru:"Портативное зарядное устройство", desc_ru:"Быстрая зарядка, компактно для поездок.", price:260000, rating:4},
+  {id:35, cat:"Home", icon:"home", name:"Charm divan yostig'i", desc:"Zamonaviy interyerga mos, mustahkam tikuv.", name_ru:"Кожаная диванная подушка", desc_ru:"Подходит для современного интерьера, прочный пошив.", price:195000, rating:4},
+  {id:36, cat:"Home", icon:"home", name:"Marmar taxta to'plami", desc:"Oshxona uchun servirovka taxtalari seti.", name_ru:"Набор мраморных досок", desc_ru:"Сервировочные доски для кухни.", price:310000, rating:4},
+  {id:37, cat:"Automotive", icon:"automotive", name:"Avtomobil oyoq gilamchasi", desc:"Suv o'tkazmaydigan, oson tozalanadigan material.", name_ru:"Автомобильные коврики", desc_ru:"Водонепроницаемый, легко чистится.", price:150000, rating:4},
+  {id:38, cat:"Automotive", icon:"automotive", name:"Video registrator", desc:"To'liq HD sifat, tungi ko'rish rejimi.", name_ru:"Видеорегистратор", desc_ru:"Качество Full HD, режим ночной съёмки.", price:720000, rating:4},
+  {id:39, cat:"Food & Drink", icon:"food", name:"Qora choy to'plami", desc:"Tog' o'tlari qo'shilgan premium choy kolleksiyasi.", name_ru:"Набор чёрного чая", desc_ru:"Премиальная коллекция чая с горными травами.", price:110000, rating:4},
+  {id:40, cat:"Food & Drink", icon:"food", name:"Zaytun moyi seti", desc:"Sovuq presslangan, birinchi siqim zaytun moyi.", name_ru:"Набор оливкового масла", desc_ru:"Холодный отжим, масло первого отжима.", price:175000, rating:5},
+  {id:41, cat:"Sport", icon:"sport", name:"Sport sumkasi", desc:"Keng hajmli, mashg'ulot va safar uchun qulay.", name_ru:"Спортивная сумка", desc_ru:"Вместительная, удобна для тренировок и поездок.", price:220000, rating:4},
+  {id:42, cat:"Sport", icon:"sport", name:"Fitnes trekker", desc:"Yurgan qadamlar va yurak urishini kuzatadi.", name_ru:"Фитнес-трекер", desc_ru:"Отслеживает шаги и пульс.", price:390000, rating:4},
+  {id:43, cat:"Jewelry", icon:"jewelry", name:"Oltin bilaguzuk", desc:"Nafis zanjir bilan, kundalik va bayram uchun.", name_ru:"Золотой браслет", desc_ru:"Изящная цепочка для будней и праздников.", price:980000, rating:5},
+  {id:44, cat:"Jewelry", icon:"jewelry", name:"Brilliant kulon", desc:"Zamonaviy dizayn, 18 karat oltin asosida.", name_ru:"Кулон с бриллиантом", desc_ru:"Современный дизайн на основе золота 18 карат.", price:2450000, rating:5},
+  {id:45, cat:"Books & Stationery", icon:"books", name:"Charm papka to'plami", desc:"Hujjatlar uchun ofis va sovg'a uchun mos.", name_ru:"Набор кожаных папок", desc_ru:"Для документов, подходит для офиса и подарка.", price:210000, rating:4},
+  {id:46, cat:"Books & Stationery", icon:"books", name:"Motivatsion kundalik", desc:"Yillik rejalashtirish uchun oltin qirrali kundalik.", name_ru:"Мотивационный ежедневник", desc_ru:"Ежедневник с золотым обрезом для планирования на год.", price:135000, rating:4},
+];
+
+/* ---------------- STATE ---------------- */
+let wishlist = new Set();
+let cart = {}; // id -> qty
+let activeFilter = "All";
+let searchQuery = "";
+let promo = null; // {code, percent}
+let account = {loggedIn:false, name:"", email:""};
+
+const PROMO_CODES = {
+  "MAXI10": 10,
+  "MAXI20": 20,
+  "SIFAT15": 15,
+  "WELCOME5": 5
+};
+
+let currentLang = "uz"; // 'uz' | 'ru' | 'cyrl'
+
+/* ---------------- I18N ---------------- */
+const I18N = {
+  uz: {
+    nav_home:"Bosh sahifa", nav_catalog:"Katalog", nav_about:"Biz haqimizda", nav_reviews:"Mijozlar fikri", nav_contact:"Aloqa",
+    search_ph:"Mahsulot qidirish...",
+    hero_eyebrow:"Premium marketplace — O'zbekiston",
+    hero_title:"Siz orzu qilgan hamma narsa, bir joyda to'plangan",
+    hero_lede:"Moda, zargarlik buyumlari, texnika va uy jihozlaridan tortib avtomobil aksessuarlarigacha — biz har bir sohada siz uchun eng yaxshisini tanlaymiz.",
+    hero_cta1:"Katalogga o'tish", hero_cta2:"Yo'nalishlarni ko'rish",
+    motto_words:"SIFAT · ISHONCH · NAQISLIK",
+    motto_desc:"\u201cBiz har bir sohada siz uchun eng yaxshisini taklif etamiz.\u201d",
+    cat_head_title:"Yo'nalishlar bo'yicha xarid qiling",
+    cat_head_desc:"O'nta toifa — har biri o'ziga xos did va sifat bilan tanlangan.",
+    promo_title:"Har bir buyurtmada — ishonch va naqislik",
+    promo_desc:"Yetkazib berish butun O'zbekiston bo'ylab. Original mahsulotlar, kafolatlangan sifat.",
+    promo_cta:"Xarid qilish",
+    catalog_title:"Mahsulotlar katalogi",
+    catalog_desc:"Toifani tanlang yoki qidiruv orqali kerakli mahsulotni toping.",
+    about_title:"Maxi_by_MAXLIYO haqida",
+    about_body:"Maxi_by_MAXLIYO — bu moda, go'zallik, texnika va turmush uchun zarur bo'lgan barcha narsalarni bir maydonda jamlagan premium marketplace. Har bir mahsulot diqqat bilan tanlanadi, chunki bizning maqsadimiz — mijozlarimizga faqat sifatli va ishonchli xaridni taklif etish.",
+    foot_desc:"Siz orzu qilgan hamma narsa — bir joyda. Sifat, ishonch va naqislik asosida qurilgan marketplace.",
+    foot_col_catalog:"Katalog", foot_col_company:"Kompaniya", foot_col_help:"Yordam",
+    foot_partners:"Hamkorlar uchun", foot_careers:"Vakansiyalar",
+    foot_delivery:"Yetkazib berish", foot_returns:"Qaytarish siyosati", foot_privacy:"Maxfiylik siyosati",
+    foot_rights:"© 2026 Maxi_by_MAXLIYO. Barcha huquqlar himoyalangan.", foot_city:"Toshkent, O'zbekiston",
+    cart_title:"Savatcha", cart_products:"Mahsulotlar:", cart_total:"Jami:", cart_checkout:"Buyurtmani rasmiylashtirish",
+    cart_empty:"Savatchangiz hozircha bo'sh",
+    cart_remove:"Olib tashlash",
+    promo_ph:"Promo kod", promo_apply:"Qo'llash", promo_error:"Bunday promo kod topilmadi", promo_applied_label:"chegirma qo'llandi",
+    filter_all:"Barchasi",
+    no_results:"Hech narsa topilmadi. Boshqa so'z bilan qidirib ko'ring.",
+    quick_view:"Tez ko'rish",
+    wish_aria:"Sevimlilarga qo'shish", add_aria:"Savatga qo'shish",
+    currency:"so'm",
+    toast_added:"Savatchaga qo'shildi",
+    toast_promo:"Promo kod qo'llandi: -{p}%",
+    toast_welcome:"Xush kelibsiz, {n}!",
+    toast_logout:"Tizimdan chiqdingiz",
+    toast_sent:"Xabaringiz yuborildi",
+    acc_login:"Kirish", acc_register:"Ro'yxatdan o'tish",
+    acc_email_ph:"Email yoki telefon", acc_pass_ph:"Parol", acc_name_ph:"Ismingiz",
+    acc_no_account:"Hisobingiz yo'qmi?", acc_have_account:"Hisobingiz bormi?",
+    acc_register_link:"Ro'yxatdan o'ting", acc_login_link:"Kiring",
+    profile_title:"Profil", profile_guest:"Mijoz",
+    profile_orders:"BUYURTMA", profile_saved:"SAQLANGAN", profile_discount:"CHEGIRMA",
+    profile_email_label:"Email/telefon", profile_address_label:"Manzil", profile_address_val:"Toshkent, O'zbekiston",
+    profile_logout:"Chiqish",
+    about_stat_products:"MAHSULOT TURI", about_stat_categories:"YO'NALISH", about_stat_rating:"O'RTACHA BAHO",
+    about_extra:"Yetkazib berish butun O'zbekiston bo'ylab amalga oshiriladi, barcha mahsulotlar original va kafolat bilan yetkaziladi.",
+    about_extra2:"10 ta yo'nalish, minglab mijozlar ishonchi va har bir buyurtmaga individual yondashuv — bizni boshqalardan ajratib turadigan narsa aynan shu.",
+    reviews_title:"Bizning mijozlarimiz nima deydi", reviews_avg:"O'RTACHA BAHO", reviews_count:"SO'NGGI SHARHLAR",
+    contact_title:"Biz bilan bog'laning",
+    contact_body:"Savollaringiz bormi? Quyidagi shakl orqali yozing yoki to'g'ridan-to'g'ri bog'laning — 24 soat ichida javob beramiz.",
+    contact_name_ph:"Ismingizni kiriting", contact_reach_ph:"Bog'lanish uchun manzil", contact_msg_ph:"Xabaringizni yozing...",
+    contact_send:"Xabar yuborish", contact_sent_msg:"Xabaringiz yuborildi, tez orada bog'lanamiz!",
+    lang_label:"Til",
+    qv_wish_save:"Saqlash", qv_wish_saved:"Saqlangan"
+  },
+  ru: {
+    nav_home:"Главная", nav_catalog:"Каталог", nav_about:"О нас", nav_reviews:"Отзывы", nav_contact:"Контакты",
+    search_ph:"Поиск товаров...",
+    hero_eyebrow:"Премиальный маркетплейс — Узбекистан",
+    hero_title:"Всё, о чём вы мечтали, в одном месте",
+    hero_lede:"От моды, ювелирных украшений и техники до товаров для дома и автоаксессуаров — мы выбираем для вас лучшее в каждой сфере.",
+    hero_cta1:"Перейти в каталог", hero_cta2:"Смотреть направления",
+    motto_words:"КАЧЕСТВО · ДОВЕРИЕ · ИЗЯЩЕСТВО",
+    motto_desc:"«Мы предлагаем вам лучшее в каждой сфере»",
+    cat_head_title:"Покупайте по направлениям",
+    cat_head_desc:"Десять категорий — каждая подобрана со своим вкусом и качеством.",
+    promo_title:"В каждом заказе — доверие и изящество",
+    promo_desc:"Доставка по всему Узбекистану. Оригинальные товары, гарантированное качество.",
+    promo_cta:"Сделать покупку",
+    catalog_title:"Каталог товаров",
+    catalog_desc:"Выберите категорию или найдите нужный товар через поиск.",
+    about_title:"О Maxi_by_MAXLIYO",
+    about_body:"Maxi_by_MAXLIYO — премиальный маркетплейс, объединивший в одном месте моду, красоту, технику и всё необходимое для жизни. Каждый товар отбирается тщательно, ведь наша цель — предложить клиентам только качественную и надёжную покупку.",
+    foot_desc:"Всё, о чём вы мечтали, — в одном месте. Маркетплейс, построенный на качестве, доверии и изяществе.",
+    foot_col_catalog:"Каталог", foot_col_company:"Компания", foot_col_help:"Помощь",
+    foot_partners:"Для партнёров", foot_careers:"Вакансии",
+    foot_delivery:"Доставка", foot_returns:"Политика возврата", foot_privacy:"Политика конфиденциальности",
+    foot_rights:"© 2026 Maxi_by_MAXLIYO. Все права защищены.", foot_city:"Ташкент, Узбекистан",
+    cart_title:"Корзина", cart_products:"Товары:", cart_total:"Итого:", cart_checkout:"Оформить заказ",
+    cart_empty:"Ваша корзина пока пуста",
+    cart_remove:"Удалить",
+    promo_ph:"Промокод", promo_apply:"Применить", promo_error:"Такой промокод не найден", promo_applied_label:"скидка применена",
+    filter_all:"Все",
+    no_results:"Ничего не найдено. Попробуйте другой запрос.",
+    quick_view:"Быстрый просмотр",
+    wish_aria:"Добавить в избранное", add_aria:"Добавить в корзину",
+    currency:"сум",
+    toast_added:"Добавлено в корзину",
+    toast_promo:"Промокод применён: -{p}%",
+    toast_welcome:"Добро пожаловать, {n}!",
+    toast_logout:"Вы вышли из аккаунта",
+    toast_sent:"Ваше сообщение отправлено",
+    acc_login:"Вход", acc_register:"Регистрация",
+    acc_email_ph:"Email или телефон", acc_pass_ph:"Пароль", acc_name_ph:"Ваше имя",
+    acc_no_account:"Нет аккаунта?", acc_have_account:"Уже есть аккаунт?",
+    acc_register_link:"Зарегистрируйтесь", acc_login_link:"Войти",
+    profile_title:"Профиль", profile_guest:"Клиент",
+    profile_orders:"ЗАКАЗЫ", profile_saved:"СОХРАНЁННЫЕ", profile_discount:"СКИДКА",
+    profile_email_label:"Email/телефон", profile_address_label:"Адрес", profile_address_val:"Ташкент, Узбекистан",
+    profile_logout:"Выйти",
+    about_stat_products:"ВИДОВ ТОВАРОВ", about_stat_categories:"НАПРАВЛЕНИЙ", about_stat_rating:"СРЕДНЯЯ ОЦЕНКА",
+    about_extra:"Доставка осуществляется по всему Узбекистану, все товары оригинальные и поставляются с гарантией.",
+    about_extra2:"10 направлений, доверие тысяч клиентов и индивидуальный подход к каждому заказу — вот что отличает нас от других.",
+    reviews_title:"Что говорят наши клиенты", reviews_avg:"СРЕДНЯЯ ОЦЕНКА", reviews_count:"ПОСЛЕДНИЕ ОТЗЫВЫ",
+    contact_title:"Свяжитесь с нами",
+    contact_body:"Остались вопросы? Напишите через форму ниже или свяжитесь напрямую — ответим в течение 24 часов.",
+    contact_name_ph:"Введите ваше имя", contact_reach_ph:"Контакт для связи", contact_msg_ph:"Напишите ваше сообщение...",
+    contact_send:"Отправить сообщение", contact_sent_msg:"Ваше сообщение отправлено, скоро свяжемся с вами!",
+    lang_label:"Язык",
+    qv_wish_save:"Сохранить", qv_wish_saved:"Сохранено"
+  }
+};
+
+/* ---------------- Uzbek Latin -> Cyrillic transliteration ---------------- */
+function transliterateWord(word){
+  const firstIsUpper = word.length>0 && word[0] === word[0].toUpperCase() && word[0] !== word[0].toLowerCase();
+  const lower = word.toLowerCase();
+  const map3 = {"yo'":"йў"};
+  const map2 = {"o'":"ў","g'":"ғ","sh":"ш","ch":"ч","ng":"нг","ya":"я","yo":"ё","yu":"ю","ye":"е"};
+  const map1 = {a:"а",b:"б",d:"д",e:"е",f:"ф",g:"г",h:"ҳ",i:"и",j:"ж",k:"к",l:"л",m:"м",n:"н",o:"о",p:"п",q:"қ",r:"р",s:"с",t:"т",u:"у",v:"в",x:"х",y:"й",z:"з",c:"с","'":"ъ","’":"ъ"};
+  let result = "", i = 0;
+  while(i < lower.length){
+    const three = lower.substr(i,3);
+    if(map3[three]){ result += map3[three]; i+=3; continue; }
+    const two = lower.substr(i,2);
+    if(map2[two]){ result += map2[two]; i+=2; continue; }
+    const one = lower[i];
+    result += (map1[one] !== undefined ? map1[one] : one);
+    i+=1;
+  }
+  if(firstIsUpper && result.length) result = result[0].toUpperCase() + result.slice(1);
+  return result;
+}
+function uzToCyr(text){
+  if(!text) return text;
+  const BRAND = "Maxi_by_MAXLIYO";
+  const PLACEHOLDER = "\u0001BRAND\u0001";
+  let guarded = text.split(BRAND).join(PLACEHOLDER);
+  guarded = guarded.replace(/[A-Za-z']+/g, w => transliterateWord(w));
+  return guarded.split(PLACEHOLDER).join(BRAND);
+}
+
+/* ---------------- translation helpers ---------------- */
+function t(key){
+  const dict = currentLang === "ru" ? I18N.ru : I18N.uz;
+  const val = dict[key] !== undefined ? dict[key] : key;
+  return currentLang === "cyrl" ? uzToCyr(val) : val;
+}
+function pName(p){ return currentLang === "ru" ? p.name_ru : (currentLang === "cyrl" ? uzToCyr(p.name) : p.name); }
+function pDesc(p){ return currentLang === "ru" ? p.desc_ru : (currentLang === "cyrl" ? uzToCyr(p.desc) : p.desc); }
+function catName(c){ return currentLang === "ru" ? c.ru : (currentLang === "cyrl" ? uzToCyr(c.uz) : c.uz); }
+function reviewText(r){ return currentLang === "ru" ? r.text_ru : (currentLang === "cyrl" ? uzToCyr(r.text) : r.text); }
+function reviewCat(r){ return currentLang === "ru" ? r.cat_ru : (currentLang === "cyrl" ? uzToCyr(r.cat) : r.cat); }
+function curr(){ return t("currency"); }
+function fmtPrice(n){ return n.toLocaleString('ru-RU') + " " + curr(); }
+
+function applyStaticI18n(){
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    el.placeholder = t(el.dataset.i18nPh);
+  });
+}
+
+/* ---------------- RENDER CATEGORIES ---------------- */
+const categoryGrid = document.getElementById("categoryGrid");
+function renderCategoryGrid(){
+  categoryGrid.innerHTML = CATEGORIES.map(c => `
+    <div class="cat-card ${c.size}" data-filter="${c.id}">
+      <div class="icon-wrap">${ICONS[c.icon]}</div>
+      <div class="cat-name">${catName(c)}</div>
+      <div class="cat-name-en">${c.id.toUpperCase()}</div>
+    </div>
+  `).join("");
+}
+renderCategoryGrid();
+
+categoryGrid.addEventListener("click", (e) => {
+  const card = e.target.closest(".cat-card");
+  if (!card) return;
+  setFilter(card.dataset.filter);
+  document.getElementById("catalog").scrollIntoView({behavior:"smooth"});
+});
+
+/* ---------------- FILTER BAR ---------------- */
+const filterBar = document.getElementById("filterBar");
+const allCats = ["All", ...CATEGORIES.map(c=>c.id)];
+function renderFilterBar(){
+  filterBar.innerHTML = allCats.map(c => `<button class="pill ${c===activeFilter?'active':''}" data-filter="${c}">${c==='All'?t('filter_all'):c}</button>`).join("");
+}
+renderFilterBar();
+filterBar.addEventListener("click",(e)=>{
+  const btn = e.target.closest(".pill");
+  if(!btn) return;
+  setFilter(btn.dataset.filter);
+});
+
+function setFilter(f){
+  activeFilter = f;
+  [...filterBar.children].forEach(b => b.classList.toggle("active", b.dataset.filter === f));
+  renderProducts();
+}
+
+document.querySelectorAll('[data-filter]').forEach(el=>{
+  if(el.closest('footer')){
+    el.addEventListener('click', (e)=>{ e.preventDefault(); setFilter(el.dataset.filter); document.getElementById("catalog").scrollIntoView({behavior:"smooth"});});
+  }
+});
+
+/* ---------------- SEARCH ---------------- */
+document.getElementById("searchInput").addEventListener("input",(e)=>{
+  searchQuery = e.target.value.trim().toLowerCase();
+  renderProducts();
+});
+
+/* ---------------- STARS ---------------- */
+function starsHTML(rating){
+  let s = "";
+  for(let i=1;i<=5;i++){
+    s += `<svg class="${i<=rating?'':'empty'}" viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>`;
+  }
+  return s;
+}
+
+/* ---------------- RENDER PRODUCTS ---------------- */
+const productGrid = document.getElementById("productGrid");
+
+function renderProducts(){
+  let list = PRODUCTS.filter(p => activeFilter === "All" || p.cat === activeFilter);
+  if(searchQuery){
+    list = list.filter(p => pName(p).toLowerCase().includes(searchQuery) || p.name.toLowerCase().includes(searchQuery) || p.cat.toLowerCase().includes(searchQuery));
+  }
+  if(list.length === 0){
+    productGrid.innerHTML = `<div class="no-results">${t('no_results')}</div>`;
+    return;
+  }
+  productGrid.innerHTML = list.map(p => `
+    <div class="p-card" data-id="${p.id}">
+      <div class="p-media">
+        ${ICONS[p.icon]}
+        <button class="p-wish ${wishlist.has(p.id)?'active':''}" data-wish="${p.id}" aria-label="${t('wish_aria')}">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.4C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
+        </button>
+        <div class="p-quick"><button data-quick="${p.id}">${t('quick_view')}</button></div>
+      </div>
+      <div class="p-body">
+        <div class="p-cat">${p.cat.toUpperCase()}</div>
+        <div class="p-name">${pName(p)}</div>
+        <div class="p-stars">${starsHTML(p.rating)}</div>
+        <div class="p-foot">
+          <div class="p-price">${fmtPrice(p.price)}<small>UZS</small></div>
+          <button class="p-add" data-add="${p.id}" aria-label="${t('add_aria')}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+renderProducts();
+
+/* ---------------- WISHLIST / CART interactions ---------------- */
+productGrid.addEventListener("click",(e)=>{
+  const wishBtn = e.target.closest("[data-wish]");
+  const addBtn = e.target.closest("[data-add]");
+  const quickBtn = e.target.closest("[data-quick]");
+  if(wishBtn){
+    const id = Number(wishBtn.dataset.wish);
+    if(wishlist.has(id)) wishlist.delete(id); else wishlist.add(id);
+    wishBtn.classList.toggle("active");
+    updateWishBadge();
+  }
+  if(addBtn){
+    const id = Number(addBtn.dataset.add);
+    addToCart(id);
+  }
+  if(quickBtn){
+    openQuickView(Number(quickBtn.dataset.quick));
+  }
+});
+
+function addToCart(id){
+  cart[id] = (cart[id]||0)+1;
+  updateCartBadge(true);
+  renderDrawer();
+  showToast(t('toast_added'));
+}
+
+function updateWishBadge(){
+  const badge = document.getElementById("wishBadge");
+  badge.textContent = wishlist.size;
+  badge.classList.toggle("show", wishlist.size>0);
+  badge.classList.remove("pop"); void badge.offsetWidth; badge.classList.add("pop");
+}
+
+function updateCartBadge(pop){
+  const count = Object.values(cart).reduce((a,b)=>a+b,0);
+  const badge = document.getElementById("cartBadge");
+  badge.textContent = count;
+  badge.classList.toggle("show", count>0);
+  if(pop){ badge.classList.remove("pop"); void badge.offsetWidth; badge.classList.add("pop"); }
+}
+
+/* ---------------- DRAWER ---------------- */
+const overlay = document.getElementById("overlay");
+const cartDrawer = document.getElementById("cartDrawer");
+const drawerBody = document.getElementById("drawerBody");
+
+function renderDrawer(){
+  const ids = Object.keys(cart);
+  if(ids.length === 0){
+    drawerBody.innerHTML = `<div class="drawer-empty">${t('cart_empty')}</div>`;
+    document.getElementById("cartTotal").textContent = "0 " + curr();
+    document.getElementById("subtotalRow").style.display = "none";
+    return;
+  }
+  let subtotal = 0;
+  drawerBody.innerHTML = ids.map(idStr => {
+    const id = Number(idStr);
+    const p = PRODUCTS.find(x=>x.id===id);
+    const qty = cart[id];
+    subtotal += p.price * qty;
+    return `
+      <div class="drawer-item">
+        <div class="thumb">${ICONS[p.icon]}</div>
+        <div class="info">
+          <div class="nm">${pName(p)}</div>
+          <div class="px">${qty} × ${fmtPrice(p.price)}</div>
+          <div class="remove" data-remove="${id}">${t('cart_remove')}</div>
+        </div>
+      </div>`;
+  }).join("");
+
+  const subtotalRow = document.getElementById("subtotalRow");
+  const cartTotalEl = document.getElementById("cartTotal");
+  if(promo){
+    const discounted = Math.round(subtotal * (1 - promo.percent/100));
+    subtotalRow.style.display = "flex";
+    document.getElementById("cartSubtotal").textContent = fmtPrice(subtotal);
+    cartTotalEl.textContent = fmtPrice(discounted);
+  }else{
+    subtotalRow.style.display = "none";
+    cartTotalEl.textContent = fmtPrice(subtotal);
+  }
+}
+
+/* ---------------- PROMO CODE ---------------- */
+const promoInput = document.getElementById("promoInput");
+const promoError = document.getElementById("promoError");
+const promoApplied = document.getElementById("promoApplied");
+const promoPercentEl = document.getElementById("promoPercent");
+
+function applyPromo(){
+  const code = promoInput.value.trim().toUpperCase();
+  if(!code) return;
+  if(PROMO_CODES[code]){
+    promo = {code, percent: PROMO_CODES[code]};
+    promoError.classList.remove("show");
+    promoPercentEl.textContent = "-" + promo.percent + "%";
+    promoApplied.classList.remove("show"); void promoApplied.offsetWidth; promoApplied.classList.add("show");
+    promoInput.value = "";
+    promoInput.parentElement.style.display = "none";
+    renderDrawer();
+    showToast(t('toast_promo').replace("{p}", promo.percent));
+  }else{
+    promoError.classList.add("show");
+    promoInput.classList.remove("shake"); void promoInput.offsetWidth; promoInput.classList.add("shake");
+  }
+}
+document.getElementById("promoApply").addEventListener("click", applyPromo);
+promoInput.addEventListener("keydown",(e)=>{ if(e.key === "Enter"){ e.preventDefault(); applyPromo(); }});
+document.getElementById("promoRemove").addEventListener("click", ()=>{
+  promo = null;
+  promoApplied.classList.remove("show");
+  promoInput.parentElement.style.display = "flex";
+  renderDrawer();
+});
+
+drawerBody.addEventListener("click",(e)=>{
+  const rm = e.target.closest("[data-remove]");
+  if(rm){
+    delete cart[rm.dataset.remove];
+    updateCartBadge(false);
+    renderDrawer();
+  }
+});
+
+function openDrawer(){
+  overlay.classList.add("show");
+  cartDrawer.classList.add("show");
+}
+function closeDrawer(){
+  overlay.classList.remove("show");
+  cartDrawer.classList.remove("show");
+}
+document.getElementById("cartBtn").addEventListener("click", ()=>{ renderDrawer(); openDrawer(); });
+document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+overlay.addEventListener("click", ()=>{ closeDrawer(); closeQuickView(); closeInfoModal(); closeAccountDrawer(); });
+
+/* ---------------- ACCOUNT / PROFILE ---------------- */
+const accountDrawer = document.getElementById("accountDrawer");
+
+function langSwitchHTML(){
+  return `
+    <div class="acc-lang-block">
+      <div class="acc-lang-label">${t('lang_label')}</div>
+      <div class="lang-switch" id="accLangSwitch">
+        <button data-lang="uz" class="${currentLang==='uz'?'active':''}">UZ</button>
+        <button data-lang="ru" class="${currentLang==='ru'?'active':''}">РУ</button>
+        <button data-lang="cyrl" class="${currentLang==='cyrl'?'active':''}">ЎЗ</button>
+      </div>
+    </div>
+  `;
+}
+
+function authView(mode){
+  return `
+    <div class="drawer-head">
+      <h3>${mode==='login' ? t('acc_login') : t('acc_register')}</h3>
+      <button class="drawer-close" id="accClose">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      ${langSwitchHTML()}
+      <div class="acc-tabs">
+        <button data-tab="login" class="${mode==='login'?'active':''}">${t('acc_login')}</button>
+        <button data-tab="register" class="${mode==='register'?'active':''}">${t('acc_register')}</button>
+      </div>
+      <form class="acc-form" id="accForm">
+        ${mode==='register' ? `<input type="text" id="accName" placeholder="${t('acc_name_ph')}" required>` : ''}
+        <input type="text" id="accEmail" placeholder="${t('acc_email_ph')}" required>
+        <input type="password" id="accPass" placeholder="${t('acc_pass_ph')}" required>
+        <button type="submit" class="btn-shine">${mode==='login' ? t('acc_login') : t('acc_register')}</button>
+      </form>
+      <div class="acc-switch">
+        ${mode==='login' ? `${t('acc_no_account')} <span data-switch="register">${t('acc_register_link')}</span>` : `${t('acc_have_account')} <span data-switch="login">${t('acc_login_link')}</span>`}
+      </div>
+    </div>
+  `;
+}
+
+function profileView(){
+  const initial = account.name.charAt(0).toUpperCase() || "M";
+  return `
+    <div class="drawer-head">
+      <h3>${t('profile_title')}</h3>
+      <button class="drawer-close" id="accClose">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      ${langSwitchHTML()}
+      <div class="acc-avatar">${initial}</div>
+      <div style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;">${account.name || t('profile_guest')}</div>
+      <div style="text-align:center;color:var(--ink-soft);font-size:.82rem;margin-top:4px;">${account.email}</div>
+      <div class="acc-profile-stats">
+        <div><strong>0</strong><span>${t('profile_orders')}</span></div>
+        <div><strong>${wishlist.size}</strong><span>${t('profile_saved')}</span></div>
+        <div><strong>${promo ? promo.percent+'%' : '0%'}</strong><span>${t('profile_discount')}</span></div>
+      </div>
+      <div class="acc-info-row"><span>${t('profile_email_label')}</span><span>${account.email}</span></div>
+      <div class="acc-info-row"><span>${t('profile_address_label')}</span><span>${t('profile_address_val')}</span></div>
+      <button class="acc-logout" id="accLogout">${t('profile_logout')}</button>
+    </div>
+  `;
+}
+
+function renderAccountDrawer(mode){
+  accountDrawer.innerHTML = account.loggedIn ? profileView() : authView(mode || "login");
+  wireAccountDrawer(mode || "login");
+}
+
+function wireAccountDrawer(mode){
+  const accLangSwitch = document.getElementById("accLangSwitch");
+  if(accLangSwitch){
+    accLangSwitch.addEventListener("click",(e)=>{
+      const btn = e.target.closest("button[data-lang]");
+      if(!btn) return;
+      setLang(btn.dataset.lang);
+    });
+  }
+  document.getElementById("accClose").addEventListener("click", closeAccountDrawer);
+  if(!account.loggedIn){
+    accountDrawer.querySelectorAll("[data-tab]").forEach(btn=>{
+      btn.addEventListener("click", ()=> renderAccountDrawer(btn.dataset.tab));
+    });
+    const sw = accountDrawer.querySelector("[data-switch]");
+    if(sw) sw.addEventListener("click", ()=> renderAccountDrawer(sw.dataset.switch));
+    document.getElementById("accForm").addEventListener("submit",(e)=>{
+      e.preventDefault();
+      const nameInput = document.getElementById("accName");
+      account.loggedIn = true;
+      account.name = nameInput ? nameInput.value.trim() : (account.name || t('profile_guest'));
+      account.email = document.getElementById("accEmail").value.trim();
+      renderAccountDrawer();
+      showToast(t('toast_welcome').replace("{n}", account.name || t('profile_guest')));
+    });
+  }else{
+    document.getElementById("accLogout").addEventListener("click", ()=>{
+      account = {loggedIn:false, name:"", email:""};
+      renderAccountDrawer("login");
+      showToast(t('toast_logout'));
+    });
+  }
+}
+
+function openAccountDrawer(){
+  renderAccountDrawer();
+  overlay.classList.add("show");
+  accountDrawer.classList.add("show");
+}
+function closeAccountDrawer(){
+  overlay.classList.remove("show");
+  accountDrawer.classList.remove("show");
+}
+document.getElementById("accountBtn").addEventListener("click", openAccountDrawer);
+
+/* ---------------- QUICK VIEW ---------------- */
+const qv = document.getElementById("quickView");
+function openQuickView(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  qv.innerHTML = `
+    <div class="qv-media">${ICONS[p.icon]}</div>
+    <div class="qv-body">
+      <button class="qv-close" id="qvClose"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <div class="qv-cat">${p.cat.toUpperCase()}</div>
+      <h3>${pName(p)}</h3>
+      <div class="p-stars">${starsHTML(p.rating)}</div>
+      <p class="qv-desc">${pDesc(p)}</p>
+      <div class="qv-price">${fmtPrice(p.price)}</div>
+      <div class="qv-actions">
+        <button class="btn-shine" id="qvAdd">${t('add_aria')}</button>
+        <button class="btn-outline" id="qvWish">${wishlist.has(p.id)?'♥ '+t('qv_wish_saved'):'♡ '+t('qv_wish_save')}</button>
+      </div>
+    </div>
+  `;
+  qv.classList.add("show");
+  overlay.classList.add("show");
+  document.getElementById("qvClose").addEventListener("click", closeQuickView);
+  document.getElementById("qvAdd").addEventListener("click", ()=>{ addToCart(p.id); });
+  document.getElementById("qvWish").addEventListener("click", (e)=>{
+    if(wishlist.has(p.id)){ wishlist.delete(p.id); e.target.textContent="♡ "+t('qv_wish_save'); }
+    else{ wishlist.add(p.id); e.target.textContent="♥ "+t('qv_wish_saved'); }
+    updateWishBadge();
+    renderProducts();
+  });
+}
+function closeQuickView(){
+  qv.classList.remove("show");
+  if(!cartDrawer.classList.contains("show")) overlay.classList.remove("show");
+}
+
+/* ---------------- INFO MODALS (about / reviews / contact) ---------------- */
+const REVIEWS = [
+  {name:"Malika Yusupova", cat:"Fashion buyurtmasi", cat_ru:"Заказ из категории Fashion", rating:5, text:"Ipak ko'ylak juda sifatli, rasmda ko'rsatilganidek keldi. Yetkazib berish ham tez bo'ldi, albatta yana buyurtma beraman.", text_ru:"Шёлковое платье очень качественное, пришло точно как на фото. Доставка была быстрой, обязательно закажу ещё."},
+  {name:"Dilnoza Karimova", cat:"Jewelry buyurtmasi", cat_ru:"Заказ из категории Jewelry", rating:5, text:"Oltin uzukni sovg'a sifatida oldim — qadoqlash ham juda chiroyli, sifatidan mamnunman.", text_ru:"Купила золотое кольцо в подарок — упаковка очень красивая, качеством довольна."},
+  {name:"Shahzod Rustamov", cat:"Electronics buyurtmasi", cat_ru:"Заказ из категории Electronics", rating:4, text:"Simsiz quloqchinlar narxiga nisbatan juda yaxshi ishlaydi. Faqat yetkazib berish bir kun kechikdi.", text_ru:"Беспроводные наушники отлично работают за свою цену. Только доставка задержалась на день."},
+  {name:"Nodira Aliyeva", cat:"Beauty buyurtmasi", cat_ru:"Заказ из категории Beauty", rating:5, text:"Parfyum hidi uzoq turadi, do'stlarimga ham tavsiya qildim. Xizmat ko'rsatish darajasi a'lo.", text_ru:"Парфюм держится долго, посоветовала подругам. Уровень сервиса отличный."},
+  {name:"Javlon Tursunov", cat:"Home buyurtmasi", cat_ru:"Заказ из категории Home", rating:4, text:"Interyer uchun buyumlar sifatli va nafis ko'rinishga ega. Saytda buyurtma berish ham qulay.", text_ru:"Товары для интерьера качественные и выглядят изящно. Заказывать на сайте тоже удобно."}
+];
+
+function avgRating(){
+  const sum = REVIEWS.reduce((a,r)=>a+r.rating,0);
+  return (sum/REVIEWS.length).toFixed(1);
+}
+
+function aboutContent(){
+  return `
+    <div class="eyebrow-motto">${t('nav_about')}</div>
+    <h3>${t('about_title')}</h3>
+    <p>${t('about_body')}</p>
+    <p>${t('about_extra2')}</p>
+    <div class="info-stats">
+      <div><strong>${PRODUCTS.length}+</strong><span>${t('about_stat_products')}</span></div>
+      <div><strong>10</strong><span>${t('about_stat_categories')}</span></div>
+      <div><strong>${avgRating()}</strong><span>${t('about_stat_rating')}</span></div>
+    </div>
+    <p>${t('about_extra')}</p>
+  `;
+}
+
+function reviewsContent(){
+  return `
+    <div class="eyebrow-motto">${t('nav_reviews')}</div>
+    <h3>${t('reviews_title')}</h3>
+    <div class="info-stats">
+      <div><strong>${avgRating()}</strong><span>${t('reviews_avg')}</span></div>
+      <div><strong>${REVIEWS.length}+</strong><span>${t('reviews_count')}</span></div>
+    </div>
+    ${REVIEWS.map(r=>`
+      <div class="review-card">
+        <div class="review-head">
+          <div class="review-avatar">${r.name.charAt(0)}</div>
+          <div>
+            <div class="review-name">${r.name}</div>
+            <div class="review-cat">${reviewCat(r)}</div>
+          </div>
+        </div>
+        <div class="p-stars">${starsHTML(r.rating)}</div>
+        <p>${reviewText(r)}</p>
+      </div>
+    `).join("")}
+  `;
+}
+
+function contactContent(){
+  return `
+    <div class="eyebrow-motto">${t('nav_contact')}</div>
+    <h3>${t('contact_title')}</h3>
+    <p>${t('contact_body')}</p>
+    <div class="contact-info">
+      <div class="contact-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L7.9 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span>+998 90 123 45 67</div>
+      <div class="contact-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg></span>info@maxibymaxliyo.uz</div>
+      <div class="contact-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.3"/></svg></span>${t('foot_city')}</div>
+    </div>
+    <form class="contact-form" id="contactForm">
+      <label>${t('acc_name_ph')}</label>
+      <input type="text" required placeholder="${t('contact_name_ph')}">
+      <label>${t('acc_email_ph')}</label>
+      <input type="text" required placeholder="${t('contact_reach_ph')}">
+      <label>${t('contact_msg_ph').replace('...','')}</label>
+      <textarea rows="4" required placeholder="${t('contact_msg_ph')}"></textarea>
+      <button type="submit" class="btn-shine">${t('contact_send')}</button>
+    </form>
+    <div class="contact-sent" id="contactSent">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      ${t('contact_sent_msg')}
+    </div>
+  `;
+}
+
+const infoModal = document.getElementById("infoModal");
+const infoBody = document.getElementById("infoBody");
+const infoClose = document.getElementById("infoClose");
+let currentInfoType = null;
+
+function openInfoModal(type){
+  currentInfoType = type;
+  const content = type === "about" ? aboutContent() : type === "reviews" ? reviewsContent() : contactContent();
+  infoBody.innerHTML = content;
+  infoModal.classList.add("show");
+  infoClose.classList.add("show");
+  overlay.classList.add("show");
+  if(type === "contact"){
+    document.getElementById("contactForm").addEventListener("submit",(e)=>{
+      e.preventDefault();
+      document.getElementById("contactSent").classList.add("show");
+      showToast(t('toast_sent'));
+      e.target.reset();
+    });
+  }
+}
+function closeInfoModal(){
+  currentInfoType = null;
+  infoModal.classList.remove("show");
+  infoClose.classList.remove("show");
+  if(!cartDrawer.classList.contains("show") && !qv.classList.contains("show")) overlay.classList.remove("show");
+}
+infoClose.addEventListener("click", closeInfoModal);
+
+document.querySelectorAll("[data-modal]").forEach(el=>{
+  el.addEventListener("click",(e)=>{
+    e.preventDefault();
+    openInfoModal(el.dataset.modal);
+  });
+});
+
+/* ---------------- TOAST ---------------- */
+let toastTimer;
+function showToast(msg){
+  const toast = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> toast.classList.remove("show"), 2200);
+}
+
+/* ---------------- MOBILE MENU ---------------- */
+document.getElementById("burgerBtn").addEventListener("click", ()=>{
+  const nav = document.querySelector(".primary-nav");
+  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+  nav.style.cssText += "flex-direction:column;position:absolute;top:70px;left:0;right:0;background:var(--cream);padding:20px 32px;border-bottom:1px solid var(--line);gap:16px;";
+});
+
+/* ---------------- SCROLL REVEAL ---------------- */
+const revealEls = document.querySelectorAll(".reveal");
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+  });
+},{threshold:0.15});
+revealEls.forEach(el=>io.observe(el));
+
+/* ---------------- LANGUAGE SWITCH ---------------- */
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang === "ru" ? "ru" : "uz";
+  applyStaticI18n();
+  renderCategoryGrid();
+  renderFilterBar();
+  renderProducts();
+  if(cartDrawer.classList.contains("show")) renderDrawer();
+  if(accountDrawer.classList.contains("show")) renderAccountDrawer();
+  if(currentInfoType) openInfoModal(currentInfoType);
+}
+</script>
+</body>
+</html>
