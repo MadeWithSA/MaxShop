@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biz haqimizda — Maxi_by_MAXLIYO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+    --ink:#2B2118;
+    --ink-soft:#5c4d3d;
+    --cream:#FBF6EF;
+    --cream-deep:#F3EADC;
+    --blush:#F8C8DC;
+    --blush-soft:#FFF0F5;
+    --gold:#C5A059;
+    --gold-bright:#E9CB82;
+    --gold-deep:#9C7A32;
+    --line:rgba(197,160,89,.28);
+    --shadow:0 20px 60px -30px rgba(43,33,24,.35);
+    --radius-lg:26px;
+    --radius-sm:14px;
+  }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+    font-family:'Jost',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    overflow-x:hidden;
+    font-weight:400;
+    line-height:1.6;
+  }
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px;}
+::selection{background:var(--gold);color:#fff;}
+body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 8% 0%, var(--blush-soft) 0%, transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, #FDF0DF 0%, transparent 55%);
+    z-index:-2;
+    pointer-events:none;
+  }
+header{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    background:rgba(251,246,239,.72);
+    border-bottom:1px solid var(--line);
+  }
+.header-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 40px;max-width:1320px;margin:0 auto;gap:32px;
+  }
+.brand{display:flex;align-items:center;gap:14px;}
+.brand .mono{
+    width:46px;height:46px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 35% 28%, #a9793f, #6b4423 75%);
+    box-shadow:0 6px 16px -6px rgba(107,68,35,.55), inset 0 0 0 1.5px rgba(233,203,130,.6);
+    flex-shrink:0;
+  }
+.brand .mono svg{width:22px;height:22px;}
+.brand-text{display:flex;flex-direction:column;line-height:1.15;}
+.brand-text .name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.4rem;letter-spacing:.01em;color:var(--ink);}
+.brand-text .tag{font-size:.6rem;letter-spacing:.15em;color:var(--gold-deep);font-weight:600;margin-top:1px;}
+nav.primary-nav{display:flex;gap:38px;flex:1;justify-content:center;}
+nav.primary-nav a{
+    font-size:.92rem;color:var(--ink);font-weight:500;position:relative;padding:4px 0;white-space:nowrap;
+    transition:color .25s;
+  }
+nav.primary-nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold-deep);
+    transition:width .3s ease;
+  }
+nav.primary-nav a:hover{color:var(--gold-deep);}
+nav.primary-nav a:hover::after{width:100%;}
+.header-actions{display:flex;align-items:center;gap:26px;}
+.search-box{
+    display:flex;align-items:center;gap:10px;
+    background:var(--cream);border:1px solid rgba(43,33,24,.1);border-radius:999px;
+    padding:11px 20px;width:250px;transition:width .3s, box-shadow .3s, border-color .3s;
+  }
+.search-box:focus-within{width:280px;border-color:var(--gold);box-shadow:0 6px 20px -10px rgba(156,122,50,.4);}
+.search-box input{border:none;outline:none;font-family:inherit;font-size:.88rem;width:100%;background:transparent;color:var(--ink);}
+.search-box input::placeholder{color:#a89b89;}
+.search-box svg{flex-shrink:0;opacity:.5;}
+.icon-btn{position:relative;display:flex;align-items:center;justify-content:center;width:24px;height:24px;color:var(--ink);}
+.icon-btn svg{width:22px;height:22px;transition:transform .25s;}
+.icon-btn:hover svg{transform:translateY(-2px);color:var(--gold-deep);}
+.badge{
+    position:absolute;top:-6px;right:-8px;min-width:16px;height:16px;padding:0 3px;
+    background:var(--gold-deep);color:#fff;font-size:.62rem;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-weight:600;
+    transform:scale(0);transition:transform .3s cubic-bezier(.34,1.6,.64,1);
+  }
+.badge.show{transform:scale(1);}
+.badge.pop{animation:pop .38s cubic-bezier(.34,1.6,.64,1);}
+@keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.5);}100%{transform:scale(1);}}
+.burger{display:none;width:38px;height:38px;align-items:center;justify-content:center;}
+.burger svg{width:22px;height:22px;}
+.lang-switch{display:flex;gap:2px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px;}
+.lang-switch button{padding:6px 11px;border-radius:999px;font-size:.7rem;letter-spacing:.03em;color:var(--ink-soft);transition:.25s;font-weight:500;}
+.lang-switch button.active{background:var(--ink);color:#fff;}
+.acc-lang-block{margin-bottom:24px;}
+.acc-lang-label{font-size:.72rem;letter-spacing:.1em;color:var(--ink-soft);margin-bottom:8px;text-transform:uppercase;}
+.acc-lang-block .lang-switch{width:100%;}
+.acc-lang-block .lang-switch button{flex:1;padding:9px 0;font-size:.76rem;}
+.hero{position:relative;padding:88px 0 70px;overflow:hidden;}
+.hero-grid{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+  }
+.eyebrow-motto{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:.72rem;letter-spacing:.14em;color:var(--gold-deep);font-weight:500;
+    margin-bottom:22px;
+  }
+.eyebrow-motto::before{content:"";width:26px;height:1px;background:var(--gold-deep);}
+.hero h1{
+    font-size:clamp(2.6rem,4.6vw,4.1rem);
+    font-weight:500;
+    line-height:1.05;
+    background:linear-gradient(100deg,#8f6f2c 0%, var(--gold) 22%, var(--gold-bright) 45%, var(--gold-deep) 68%, var(--gold) 100%);
+    background-size:220% auto;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    animation:shine 7s linear infinite;
+    letter-spacing:.005em;
+  }
+@keyframes shine{to{background-position:220% center;}}
+.hero p.lede{
+    margin-top:24px;max-width:480px;color:var(--ink-soft);font-size:1.04rem;
+  }
+.hero-ctas{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;}
+.btn-shine{
+    position:relative;overflow:hidden;
+    padding:16px 34px;border-radius:999px;
+    background:linear-gradient(120deg,var(--gold-deep),var(--gold),var(--gold-bright),var(--gold));
+    background-size:280% auto;
+    color:#fff;font-size:.92rem;letter-spacing:.03em;font-weight:500;
+    box-shadow:0 18px 40px -18px rgba(156,122,50,.75);
+    animation:shine 6s linear infinite;
+    transition:transform .3s;
+  }
+.btn-shine:hover{transform:translateY(-2px);}
+.btn-outline{
+    padding:16px 30px;border-radius:999px;border:1px solid var(--gold-deep);
+    color:var(--gold-deep);font-size:.92rem;font-weight:500;transition:.3s;
+  }
+.btn-outline:hover{background:var(--gold-deep);color:#fff;}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center;height:420px;}
+.ring{
+    position:absolute;border-radius:50%;border:1px solid var(--line);
+  }
+.ring.r1{width:380px;height:380px;animation:spin 40s linear infinite;}
+.ring.r2{width:300px;height:300px;border-style:dashed;animation:spin 60s linear infinite reverse;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hero-mono{
+    width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #fff, var(--cream-deep) 70%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 30px 70px -25px rgba(156,122,50,.55), inset 0 0 0 1px var(--line);
+  }
+.hero-mono svg{width:96px;height:96px;}
+.orbit-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--gold-bright);box-shadow:0 0 12px var(--gold);}
+.glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,203,130,.4),transparent 70%);filter:blur(10px);z-index:-1;}
+.motto-strip{
+    margin-top:64px;padding-top:36px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+.motto-strip .words{font-size:.78rem;letter-spacing:.2em;color:var(--gold-deep);font-weight:500;}
+.motto-strip .desc{max-width:420px;color:var(--ink-soft);font-size:.92rem;text-align:right;}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.section{padding:90px 0;}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;gap:24px;flex-wrap:wrap;}
+.section-head h2{font-size:clamp(1.9rem,3vw,2.6rem);font-weight:500;}
+.section-head p{color:var(--ink-soft);max-width:380px;font-size:.94rem;}
+.bento{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:150px;
+    gap:18px;
+  }
+.cat-card{
+    position:relative;border-radius:var(--radius-lg);overflow:hidden;
+    background:linear-gradient(155deg,#fff, var(--cream-deep));
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:22px;
+    cursor:pointer;
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s;
+  }
+.cat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+.cat-card .icon-wrap{
+    position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:50%;
+    background:var(--blush-soft);display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);
+  }
+.cat-card .icon-wrap svg{width:22px;height:22px;stroke:var(--gold-deep);}
+.cat-card .cat-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;}
+.cat-card .cat-name-en{font-size:.66rem;letter-spacing:.14em;color:var(--gold-deep);margin-top:2px;}
+.cat-card::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 40%, rgba(43,33,24,.06) 100%);
+    opacity:0;transition:opacity .4s;
+  }
+.cat-card:hover::before{opacity:1;}
+.cat-card.big{grid-column:span 3;grid-row:span 2;}
+.cat-card.wide{grid-column:span 2;}
+.cat-card.reg{grid-column:span 2;}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:38px;}
+.pill{
+    padding:10px 20px;border-radius:999px;border:1px solid var(--line);
+    font-size:.82rem;color:var(--ink-soft);transition:.3s;background:#fff;
+  }
+.pill.active,.pill:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.product-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
+  }
+.p-card{
+    background:#fff;border-radius:var(--radius-lg);border:1px solid var(--line);
+    overflow:hidden;transition:transform .4s, box-shadow .4s;
+  }
+.p-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+.p-media{
+    position:relative;aspect-ratio:1/1;
+    background:linear-gradient(150deg,var(--blush-soft),var(--cream-deep));
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+.p-media svg{width:52%;height:52%;stroke:var(--gold-deep);opacity:.85;transition:transform .55s cubic-bezier(.2,.8,.2,1);}
+.p-card:hover .p-media svg{transform:scale(1.12) rotate(-2deg);}
+.p-wish{
+    position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.85);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .25s;
+  }
+.p-wish:hover{transform:scale(1.1);}
+.p-wish svg{width:16px;height:16px;stroke:var(--gold-deep);fill:none;transition:fill .25s,stroke .25s;}
+.p-wish.active svg{fill:var(--gold-deep);}
+.p-quick{
+    position:absolute;left:0;right:0;bottom:0;
+    display:flex;justify-content:center;padding:14px;
+    background:linear-gradient(0deg,rgba(43,33,24,.55),transparent);
+    transform:translateY(100%);opacity:0;transition:transform .4s ease, opacity .4s ease;
+  }
+.p-card:hover .p-quick{transform:translateY(0);opacity:1;}
+.p-quick button{
+    background:#fff;color:var(--ink);padding:9px 18px;border-radius:999px;font-size:.76rem;letter-spacing:.03em;
+  }
+.p-body{padding:18px 20px 22px;}
+.p-cat{font-size:.66rem;letter-spacing:.12em;color:var(--gold-deep);margin-bottom:6px;}
+.p-name{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:600;margin-bottom:6px;}
+.p-stars{display:flex;gap:2px;margin-bottom:10px;}
+.p-stars svg{width:13px;height:13px;fill:var(--gold);stroke:none;}
+.p-stars svg.empty{fill:var(--line);}
+.p-foot{display:flex;align-items:center;justify-content:space-between;}
+.p-price{font-weight:500;font-size:1.02rem;}
+.p-price small{display:block;font-size:.66rem;color:var(--ink-soft);font-weight:400;}
+.p-add{
+    width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;transition:.3s;
+  }
+.p-add:hover{background:var(--gold-deep);}
+.p-add svg{width:16px;height:16px;}
+.no-results{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--ink-soft);}
+.promo{
+    margin:20px 0;border-radius:var(--radius-lg);
+    background:linear-gradient(120deg,#3A2E1F,#5b4526 55%,#3A2E1F);
+    color:#F6EBD6;padding:60px 50px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+    position:relative;overflow:hidden;
+  }
+.promo::after{
+    content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;
+    background:radial-gradient(circle,rgba(233,203,130,.25),transparent 70%);
+  }
+.promo h3{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:500;max-width:520px;}
+.promo p{color:#D9C9A8;margin-top:10px;font-size:.92rem;max-width:440px;}
+footer{background:var(--ink);color:#E9DEC9;padding:70px 0 26px;margin-top:40px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(233,203,130,.15);}
+.foot-brand .brand-text .name{color:#fff;}
+.foot-brand p{color:#c9bda3;font-size:.88rem;margin-top:14px;max-width:280px;}
+footer h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;margin-bottom:16px;color:#F6EBD6;}
+footer ul li{margin-bottom:10px;}
+footer ul li a{color:#c9bda3;font-size:.88rem;transition:color .25s;}
+footer ul li a:hover{color:var(--gold-bright);}
+.foot-social{display:flex;gap:12px;margin-top:16px;}
+.foot-social a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(233,203,130,.3);display:flex;align-items:center;justify-content:center;transition:.3s;}
+.foot-social a:hover{background:var(--gold);border-color:var(--gold);}
+.foot-social svg{width:15px;height:15px;stroke:#E9DEC9;}
+.foot-bottom{display:flex;justify-content:space-between;padding-top:24px;font-size:.78rem;color:#8f8267;flex-wrap:wrap;gap:10px;}
+.promo-box{margin-bottom:18px;}
+.promo-input-row{display:flex;gap:8px;width:100%;}
+.promo-input-row input{
+    flex:1 1 auto;min-width:0;font-family:inherit;font-size:.85rem;padding:12px 15px;border-radius:999px;
+    border:1px solid var(--line);background:#fff;outline:none;color:var(--ink);
+    transition:border-color .25s, box-shadow .25s;
+  }
+.promo-input-row input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.15);}
+.promo-input-row input.shake{animation:shake .4s;}
+@keyframes shake{
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-6px);}
+    40%{transform:translateX(6px);}
+    60%{transform:translateX(-4px);}
+    80%{transform:translateX(4px);}
+  }
+.promo-input-row button{
+    width:auto;padding:10px 14px;border-radius:999px;background:var(--ink);color:#fff;font-size:.72rem;
+    flex:0 0 auto;white-space:nowrap;transition:background .25s;
+  }
+.promo-input-row button:hover{background:var(--gold-deep);}
+.promo-error{
+    font-size:.76rem;color:#b5493f;margin-top:8px;opacity:0;height:0;overflow:hidden;transition:opacity .25s, height .25s;
+  }
+.promo-error.show{opacity:1;height:auto;margin-top:8px;}
+.promo-applied{
+    display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;border-radius:12px;
+    background:linear-gradient(120deg,var(--blush-soft),#FDF0DF);border:1px solid var(--line);
+    font-size:.8rem;color:var(--ink-soft);
+    transform:scale(.85);opacity:0;height:0;overflow:hidden;
+  }
+.promo-applied.show{
+    transform:scale(1);opacity:1;height:auto;padding:10px 14px;margin-top:10px;
+    animation:promoPop .5s cubic-bezier(.34,1.6,.64,1);
+    transition:opacity .3s, transform .3s;
+  }
+@keyframes promoPop{
+    0%{transform:scale(.6);opacity:0;}
+    55%{transform:scale(1.08);opacity:1;}
+    100%{transform:scale(1);opacity:1;}
+  }
+.promo-percent{
+    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.15rem;color:var(--gold-deep);
+  }
+.promo-remove{margin-left:auto;cursor:pointer;color:var(--ink-soft);font-size:.75rem;}
+#cartSubtotal{text-decoration:line-through;color:var(--ink-soft);}
+.pd-label{font-size:.74rem;letter-spacing:.08em;color:var(--ink-soft);margin:14px 0 8px;text-transform:uppercase;}
+.pd-label b{color:var(--ink);font-weight:500;}
+.pd-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.pd-chip{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:.82rem;color:var(--ink);transition:.25s;}
+.pd-chip:hover{border-color:var(--gold);}
+.pd-chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.pd-buy{display:flex;align-items:center;gap:10px;margin:20px 0 6px;flex-wrap:wrap;}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:#fff;}
+.qty button{width:34px;height:38px;font-size:1.05rem;color:var(--ink);}
+.qty span{min-width:26px;text-align:center;font-size:.9rem;font-weight:500;}
+.pd-buy .btn-shine,.pd-buy .btn-dark{padding:13px 22px;border-radius:999px;font-size:.84rem;}
+.btn-dark{background:var(--ink);color:#fff;transition:background .25s;}
+.btn-dark:hover{background:var(--gold-deep);}
+.pd-wish{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--gold-deep);background:#fff;}
+.pd-list{margin:6px 0 0;}
+.pd-list li{position:relative;padding-left:20px;margin-bottom:8px;font-size:.88rem;color:var(--ink-soft);}
+.pd-list li::before{content:"";position:absolute;left:2px;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--gold);}
+.spec-table{width:100%;border-collapse:collapse;font-size:.88rem;}
+.spec-table td{padding:11px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+.spec-table td:first-child{color:var(--ink-soft);width:42%;padding-right:12px;}
+.rev-sum{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.rev-sum strong{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold-deep);font-weight:600;line-height:1;}
+.rev-sum .p-stars{margin:0 0 4px;}
+.rev-sum small{color:var(--ink-soft);font-size:.78rem;}
+.rev-form{margin-top:18px;padding:18px;border:1px dashed var(--line);border-radius:var(--radius-sm);background:var(--blush-soft);display:flex;flex-direction:column;gap:10px;}
+.rev-form h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;}
+.rev-form input,.rev-form textarea,.co-form input,.co-form textarea{font-family:inherit;font-size:.88rem;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;outline:none;color:var(--ink);resize:none;transition:border-color .25s, box-shadow .25s;width:100%;}
+.rev-form input:focus,.rev-form textarea:focus,.co-form input:focus,.co-form textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.15);}
+.star-input{display:flex;gap:4px;align-items:center;}
+.star-input button{font-size:1.5rem;line-height:1;color:var(--line);transition:color .2s, transform .2s;}
+.star-input button.on{color:var(--gold);}
+.star-input button:hover{transform:scale(1.15);}
+.rev-form .btn-dark{padding:12px;border-radius:999px;font-size:.84rem;}
+.p-meta{font-size:.74rem;color:var(--ink-soft);margin:-2px 0 8px;}
+.p-count{font-size:.72rem;color:var(--ink-soft);margin-left:6px;align-self:center;}
+.p-stars{align-items:center;}
+.p-card{cursor:pointer;}
+.co-form{display:flex;flex-direction:column;gap:12px;}
+.co-form label{font-size:.74rem;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:-6px;}
+.co-pay{display:flex;gap:8px;}
+.co-pay label{flex:1;margin:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border:1px solid var(--line);border-radius:12px;background:#fff;font-size:.84rem;color:var(--ink);letter-spacing:0;cursor:pointer;}
+.co-pay input{width:auto;accent-color:var(--gold-deep);}
+.co-pay label.on{border-color:var(--gold-deep);background:var(--blush-soft);}
+.co-sum{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;font-size:.86rem;}
+.co-sum .row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;color:var(--ink-soft);}
+.co-sum .row span:last-child{white-space:nowrap;color:var(--ink);}
+.co-sum .tot{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:500;color:var(--ink);}
+.co-sum .tot span{color:var(--ink) !important;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;}
+.co-error{color:#b5493f;font-size:.82rem;display:none;}
+.co-error.show{display:block;}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;vertical-align:-2px;margin-right:8px;}
+.review-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:20px 22px;margin-bottom:16px;
+  }
+.review-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.review-avatar{
+    width:38px;height:38px;border-radius:50%;flex-shrink:0;
+    background:conic-gradient(from 180deg,var(--gold-bright),var(--gold),var(--gold-deep));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:600;
+  }
+.review-name{font-weight:500;font-size:.92rem;}
+.review-cat{font-size:.7rem;color:var(--ink-soft);}
+.review-card .p-stars{margin-bottom:8px;}
+.review-card p{font-size:.88rem;margin-bottom:0;}
+.contact-info{display:flex;flex-direction:column;gap:14px;margin:26px 0 34px;}
+.contact-row{display:flex;align-items:center;gap:14px;font-size:.9rem;}
+.contact-row .ic{
+    width:38px;height:38px;border-radius:50%;background:var(--blush-soft);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+.contact-row .ic svg{width:16px;height:16px;stroke:var(--gold-deep);}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.contact-form label{font-size:.76rem;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:-8px;}
+.contact-form input,.contact-form textarea{
+    font-family:inherit;font-size:.9rem;padding:13px 16px;border-radius:12px;
+    border:1px solid var(--line);background:#fff;outline:none;resize:none;color:var(--ink);
+    transition:border-color .25s, box-shadow .25s;
+  }
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.15);}
+.contact-form button{margin-top:6px;padding:15px;border-radius:999px;}
+.contact-sent{
+    display:flex;align-items:center;gap:10px;background:var(--blush-soft);border:1px solid var(--line);
+    padding:14px 18px;border-radius:12px;font-size:.86rem;margin-top:14px;opacity:0;height:0;overflow:hidden;
+    transition:opacity .3s, height .3s;
+  }
+.contact-sent.show{opacity:1;height:auto;padding:14px 18px;}
+.contact-sent svg{width:16px;height:16px;stroke:var(--gold-deep);flex-shrink:0;}
+.toast{
+    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#F6EBD6;padding:14px 26px;border-radius:999px;font-size:.85rem;
+    opacity:0;transition:opacity .35s, transform .35s;z-index:300;display:flex;align-items:center;gap:10px;
+  }
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast svg{width:15px;height:15px;stroke:var(--gold-bright);}
+@media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+@media (max-width:980px){
+    .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:130px;}
+    .cat-card.big{grid-column:span 4;grid-row:span 2;}
+    .cat-card.wide,.cat-card.reg{grid-column:span 2;}
+    .product-grid{grid-template-columns:repeat(3,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{height:280px;order:-1;}
+  }
+@media (max-width:760px){
+    nav.primary-nav,.search-box{display:none;}
+    .burger{display:flex;}
+    .product-grid{grid-template-columns:repeat(2,1fr);gap:16px;}
+    .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;}
+    .cat-card.big{grid-column:span 2;grid-row:span 2;}
+    .cat-card.wide,.cat-card.reg{grid-column:span 1;}
+    .motto-strip{flex-direction:column;align-items:flex-start;}
+    .motto-strip .desc{text-align:left;}
+    .foot-grid{grid-template-columns:1fr;}
+    .header-inner{padding:12px 14px;gap:8px;}
+    .wrap{padding:0 20px;}
+    .promo{padding:40px 26px;}
+    .brand{gap:8px;min-width:0;}
+    .brand .mono{width:34px;height:34px;}
+    .brand .mono svg{width:17px;height:17px;}
+    .brand-text .name{font-size:1rem;white-space:nowrap;}
+    .brand-text .tag{display:none;}
+    .header-actions{gap:4px;}
+    .icon-btn{width:32px;height:32px;}
+    .icon-btn svg{width:18px;height:18px;}
+    .burger{width:32px;height:32px;}
+  }
+
+@media (max-width:980px){
+  .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:130px;}
+  .cat-card.big{grid-column:span 4;grid-row:span 2;}
+  .cat-card.wide,.cat-card.reg{grid-column:span 2;}
+  .product-grid{grid-template-columns:repeat(3,1fr);}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-visual{height:280px;order:-1;}
+}
+@media (max-width:760px){
+  nav.primary-nav,.search-box{display:none;}
+  .burger{display:flex;}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:16px;}
+  .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;}
+  .cat-card.big{grid-column:span 2;grid-row:span 2;}
+  .cat-card.wide,.cat-card.reg{grid-column:span 1;}
+  .motto-strip{flex-direction:column;align-items:flex-start;}
+  .motto-strip .desc{text-align:left;}
+  .foot-grid{grid-template-columns:1fr;}
+  .header-inner{padding:12px 14px;gap:8px;}
+  .wrap{padding:0 20px;}
+  .promo{padding:40px 26px;}
+  .brand{gap:8px;min-width:0;}
+  .brand .mono{width:34px;height:34px;}
+  .brand .mono svg{width:17px;height:17px;}
+  .brand-text .name{font-size:1rem;white-space:nowrap;}
+  .brand-text .tag{display:none;}
+  .header-actions{gap:4px;}
+  .icon-btn{width:32px;height:32px;}
+  .icon-btn svg{width:18px;height:18px;}
+  .burger{width:32px;height:32px;}
+}
+
+/* ===================== multi-page additions ===================== */
+.header-inner{position:relative;}
+nav.primary-nav a.active{color:var(--gold-deep);}
+nav.primary-nav a.active::after{width:100%;}
+a.icon-btn{text-decoration:none;}
+.icon-btn.active{color:var(--gold-deep);}
+@media (max-width:760px){
+  header.nav-open nav.primary-nav{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:18px 24px 22px;border-bottom:1px solid var(--line);gap:14px;align-items:flex-start;box-shadow:0 20px 40px -24px rgba(43,33,24,.3);}
+}
+.lang-switch{display:flex;gap:2px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px;}
+.lang-switch button{flex:1;padding:9px 0;border-radius:999px;font-size:.78rem;letter-spacing:.03em;color:var(--ink-soft);transition:.25s;font-weight:500;}
+.lang-switch button.active{background:var(--ink);color:#fff;}
+
+/* cards */
+.p-card{position:relative;cursor:default;}
+.p-card .p-wish{top:14px;right:14px;z-index:2;}
+.p-media{text-decoration:none;}
+.p-name{display:block;}
+.p-name:hover{color:var(--gold-deep);}
+.p-quick .qk{background:#fff;color:var(--ink);padding:9px 18px;border-radius:999px;font-size:.76rem;letter-spacing:.03em;}
+.p-stars{display:flex;gap:2px;align-items:center;}
+
+/* inner page head */
+.page-head{padding:54px 0 6px;}
+.crumbs{font-size:.8rem;color:var(--ink-soft);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.crumbs a:hover{color:var(--gold-deep);}
+.crumbs .sep{opacity:.45;}
+.page-title{font-size:clamp(2rem,4vw,3.1rem);font-weight:500;line-height:1.1;}
+.page-sub{color:var(--ink-soft);max-width:640px;margin-top:12px;}
+.page-main{padding-bottom:30px;min-height:55vh;}
+.sec-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:500;margin:0 0 20px;}
+
+/* index features / steps */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.feat{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px 26px;transition:transform .4s, box-shadow .4s;}
+.feat:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
+.feat .ic{width:48px;height:48px;border-radius:50%;background:var(--blush-soft);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.feat .ic svg{width:22px;height:22px;stroke:var(--gold-deep);}
+.feat h3{font-size:1.4rem;font-weight:600;margin-bottom:8px;line-height:1.2;}
+.feat p{color:var(--ink-soft);font-size:.9rem;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.step{padding:24px 6px 0;border-top:1px solid var(--gold);}
+.step .n{font-family:'Cormorant Garamond',serif;font-size:3.2rem;line-height:1;color:var(--gold);margin-bottom:10px;}
+.step h3{font-size:1.35rem;margin-bottom:6px;}
+.step p{color:var(--ink-soft);font-size:.9rem;}
+.more-row{text-align:center;margin-top:34px;}
+.btn-line{display:inline-block;padding:14px 30px;border-radius:999px;border:1px solid var(--gold-deep);color:var(--gold-deep);font-size:.9rem;font-weight:500;transition:.3s;}
+.btn-line:hover{background:var(--gold-deep);color:#fff;}
+a.btn-shine{display:inline-block;text-align:center;}
+
+/* catalog toolbar */
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:26px 0 18px;}
+.tb-search{flex:1 1 260px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:11px 18px;}
+.tb-search input{border:none;outline:none;background:transparent;width:100%;font:inherit;font-size:.9rem;color:var(--ink);}
+.tb-select{padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;font:inherit;font-size:.86rem;color:var(--ink);outline:none;}
+.count{font-size:.84rem;color:var(--ink-soft);margin-left:auto;}
+
+/* product page */
+.pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:10px;align-items:start;}
+.pd-media{position:relative;aspect-ratio:1/1;border-radius:var(--radius-lg);background:linear-gradient(150deg,var(--blush-soft),var(--cream-deep));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+.pd-media svg{width:46%;height:46%;stroke:var(--gold-deep);}
+.pd-badge{position:absolute;left:18px;top:18px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.72rem;letter-spacing:.08em;color:var(--gold-deep);}
+.pd-cat{font-size:.74rem;letter-spacing:.14em;color:var(--gold-deep);}
+.pd-title{font-size:clamp(1.9rem,3.4vw,2.9rem);font-weight:600;line-height:1.1;margin:6px 0 12px;}
+.pd-rate{display:inline-flex;align-items:center;gap:10px;font-size:.84rem;color:var(--ink-soft);cursor:pointer;}
+.pd-price{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;margin:12px 0 4px;}
+.avail{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;color:#4f7a4a;margin-bottom:6px;}
+.avail::before{content:"";width:8px;height:8px;border-radius:50%;background:#6aa564;}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 6px;}
+.fact{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;}
+.fact small{display:block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px;}
+.fact b{font-weight:500;font-size:.9rem;line-height:1.3;display:block;}
+.pd-sec{margin-top:56px;}
+.pd-sec h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:500;margin-bottom:18px;}
+.pd-sec p{color:var(--ink-soft);font-size:.96rem;margin-bottom:12px;max-width:760px;}
+.pd-reviews{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:start;}
+.pd-page .review-card{margin-bottom:12px;}
+.pd-buy{margin:20px 0 6px;}
+.btn-dark{background:var(--ink);color:#fff;transition:background .25s;}
+.btn-dark:hover{background:var(--gold-deep);}
+.pd-buy .btn-shine,.pd-buy .btn-dark{padding:13px 24px;border-radius:999px;font-size:.86rem;}
+.related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+
+/* cart */
+.cart-layout{display:grid;grid-template-columns:1.45fr 1fr;gap:34px;align-items:start;margin-top:26px;}
+.cart-list{display:flex;flex-direction:column;gap:14px;}
+.cart-item{display:grid;grid-template-columns:96px 1fr auto;gap:18px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px;}
+.cart-item .th{width:96px;height:96px;border-radius:18px;background:linear-gradient(150deg,var(--blush-soft),var(--cream-deep));display:flex;align-items:center;justify-content:center;}
+.cart-item .th svg{width:50%;height:50%;stroke:var(--gold-deep);}
+.cart-item .nm{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;line-height:1.2;display:block;}
+.cart-item .vl{font-size:.78rem;color:var(--gold-deep);}
+.cart-item .un{font-size:.84rem;color:var(--ink-soft);margin:2px 0 8px;}
+.cart-item .sum{font-weight:500;font-size:1.05rem;white-space:nowrap;text-align:right;}
+.cart-item .rm{font-size:.76rem;color:var(--ink-soft);margin-top:8px;cursor:pointer;display:inline-block;}
+.cart-item .rm:hover{color:#b5493f;}
+.sum-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;}
+.cart-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:18px;}
+.sum-card h3{font-size:1.5rem;margin-bottom:14px;}
+.sum-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:.92rem;color:var(--ink-soft);}
+.sum-row span:last-child{color:var(--ink);text-align:right;}
+.sum-row.tot{border-top:1px solid var(--line);margin-top:8px;padding-top:14px;color:var(--ink);}
+.sum-row.tot b{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;}
+.cart-tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.link-btn{font-size:.82rem;color:var(--gold-deep);cursor:pointer;}
+.link-btn:hover{text-decoration:underline;}
+.cart-empty{text-align:center;padding:70px 20px;color:var(--ink-soft);}
+.cart-empty h3{font-size:1.8rem;color:var(--ink);margin-bottom:8px;font-weight:500;}
+.cart-empty .btn-shine{margin-top:20px;padding:14px 32px;border-radius:999px;}
+.co-success{text-align:center;padding:50px 10px;max-width:560px;margin:0 auto;}
+.co-check{width:80px;height:80px;border-radius:50%;margin:0 auto 20px;background:linear-gradient(135deg,var(--gold-bright),var(--gold-deep));display:flex;align-items:center;justify-content:center;animation:promoPop .6s cubic-bezier(.34,1.6,.64,1);}
+.co-check svg{width:36px;height:36px;stroke:#fff;}
+.co-success h2{font-size:2rem;font-weight:500;margin-bottom:8px;}
+.co-success p{color:var(--ink-soft);margin-bottom:6px;}
+.co-success .no{display:inline-block;margin:12px 0 24px;padding:8px 18px;border-radius:999px;background:var(--blush-soft);border:1px solid var(--line);font-weight:500;letter-spacing:.06em;}
+.co-success .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.promo-applied.show.static{animation:none;}
+
+/* profile */
+.prof-grid{display:grid;grid-template-columns:350px 1fr;gap:34px;align-items:start;margin-top:26px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;}
+.prof-side{display:flex;flex-direction:column;gap:18px;position:sticky;top:96px;}
+.avatar{width:84px;height:84px;border-radius:50%;margin:0 auto 14px;background:conic-gradient(from 180deg,var(--gold-bright),var(--gold),var(--gold-deep));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2.2rem;}
+.prof-name{text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;}
+.prof-sub{text-align:center;color:var(--ink-soft);font-size:.84rem;margin-bottom:6px;}
+.stat-row{display:flex;justify-content:space-between;gap:8px;margin:18px 0;text-align:center;}
+.stat-row div{flex:1;}
+.stat-row strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold-deep);line-height:1.2;}
+.stat-row span{font-size:.64rem;letter-spacing:.06em;color:var(--ink-soft);}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.field label{font-size:.74rem;letter-spacing:.06em;color:var(--ink-soft);}
+.field input,.field textarea{font:inherit;font-size:.9rem;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;outline:none;color:var(--ink);resize:none;transition:border-color .25s, box-shadow .25s;width:100%;}
+.field input:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(197,160,89,.15);}
+.card h3{font-size:1.4rem;margin-bottom:14px;}
+.acc-lang-label{font-size:.72rem;letter-spacing:.1em;color:var(--ink-soft);margin-bottom:8px;text-transform:uppercase;}
+.order-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:16px;}
+.order-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px;}
+.order-no{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;}
+.order-date{font-size:.8rem;color:var(--ink-soft);}
+.chip-st{padding:4px 12px;border-radius:999px;background:var(--blush-soft);border:1px solid var(--line);font-size:.72rem;color:var(--gold-deep);}
+.order-line{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:.88rem;}
+.order-line span:last-child{white-space:nowrap;}
+.order-meta{font-size:.82rem;color:var(--ink-soft);margin-top:10px;}
+.order-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:12px;flex-wrap:wrap;}
+.order-total{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;}
+.btn-sm{padding:9px 18px;border-radius:999px;font-size:.8rem;border:1px solid var(--gold-deep);color:var(--gold-deep);transition:.25s;background:transparent;}
+.btn-sm:hover{background:var(--gold-deep);color:#fff;}
+.prof-sec{margin-bottom:44px;}
+.saved-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.note{font-size:.78rem;color:var(--ink-soft);margin-top:10px;}
+
+/* about */
+.about-stats{display:flex;gap:44px;flex-wrap:wrap;margin:26px 0;}
+.about-stats div{display:flex;flex-direction:column;}
+.about-stats strong{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--gold-deep);font-weight:600;line-height:1.1;}
+.about-stats span{font-size:.72rem;color:var(--ink-soft);letter-spacing:.06em;}
+.about-text p{color:var(--ink-soft);margin-bottom:14px;max-width:760px;}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.value{padding:30px 26px;background:linear-gradient(155deg,#fff,var(--cream-deep));border:1px solid var(--line);border-radius:var(--radius-lg);}
+.value h3{font-size:1.7rem;color:var(--gold-deep);margin-bottom:8px;}
+.value p{color:var(--ink-soft);font-size:.92rem;}
+.reviews-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.reviews-grid .review-card{margin:0;}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:10px;}
+.faq summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:12px;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"+";color:var(--gold-deep);font-size:1.3rem;line-height:1;}
+.faq details[open] summary::after{content:"−";}
+.faq p{margin-top:10px;color:var(--ink-soft);font-size:.9rem;}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:start;}
+.contact-grid .contact-info{margin:20px 0 0;}
+.contact-form button{margin-top:6px;padding:15px;border-radius:999px;}
+.contact-sent{display:none;align-items:center;gap:10px;background:var(--blush-soft);border:1px solid var(--line);padding:14px 18px;border-radius:12px;font-size:.86rem;margin-top:14px;}
+.contact-sent.show{display:flex;}
+.contact-sent svg{width:16px;height:16px;stroke:var(--gold-deep);flex-shrink:0;}
+
+@media (max-width:980px){
+  .feat-grid,.values{grid-template-columns:repeat(2,1fr);}
+  .pd-grid{grid-template-columns:1fr;gap:28px;}
+  .pd-reviews{grid-template-columns:1fr;}
+  .cart-layout{grid-template-columns:1fr;}
+  .cart-side{position:static;}
+  .prof-grid{grid-template-columns:1fr;}
+  .prof-side{position:static;}
+  .contact-grid{grid-template-columns:1fr;}
+  .related-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:760px){
+  .feat-grid,.values,.steps,.reviews-grid,.saved-grid{grid-template-columns:1fr;}
+  .cart-item{grid-template-columns:72px 1fr;}
+  .cart-item .th{width:72px;height:72px;}
+  .cart-item .sum{grid-column:1/-1;text-align:left;}
+  .facts{grid-template-columns:1fr 1fr;}
+  .page-head{padding-top:34px;}
+  .count{margin-left:0;width:100%;}
+}
+
+.pd-wish{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:#fff;color:var(--gold-deep);}
+.pd-wish svg{width:18px;height:18px;stroke:var(--gold-deep);fill:none;stroke-width:1.8;transition:fill .25s;}
+.pd-wish.active svg{fill:var(--gold-deep);}
+
+</style>
+</head>
+<body data-page="about">
+
+<div id="siteHeader"></div>
+
+<main class="page-main">
+  <div class="wrap" id="aboutRoot"></div>
+</main>
+
+
+<div id="siteFooter"></div>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+/* =====================================================================
+   Maxi_by_MAXLIYO — shared engine (state, data helpers, header/footer, cart,
+   orders, Telegram). Every page of the site contains this same block so each
+   .html file works on its own. State is shared between pages via localStorage.
+   ===================================================================== */
+
+/* ---------------- state ---------------- */
+let currentLang = "uz";                 // 'uz' | 'ru' | 'cyrl'
+let cart = {};                          // "productId:variantIndex" -> qty
+let wishlist = new Set();
+let promo = null;                       // {code, percent}
+let account = {loggedIn:false, name:"", phone:"", address:""};
+let userReviews = {};                   // productId -> [{u,n,r,text,date}]
+let orders = [];                        // order history (newest first)
+const PROMO_CODES = {"MAXI10":10, "MAXI20":20, "SIFAT15":15, "WELCOME5":5};
+const STORE_KEY = "maxi_state_v3";
+
+/* ---------------- Telegram bot (orders) ----------------
+   chatId — your numeric Telegram ID. How to get it:
+   1) send /start to your bot  2) open
+   https://api.telegram.org/bot<TOKEN>/getUpdates  3) copy "chat":{"id": ...}
+   Without chatId orders cannot be delivered. */
+const TG = {
+  token: "8679445987:AAEXDsPCfldbRxHAwwej-64wZyKl2BYUUvM",
+  chatId: ""
+};
+
+function saveState(){
+  try{
+    localStorage.setItem(STORE_KEY, JSON.stringify({cart, wishlist:[...wishlist], promo, account, lang:currentLang, userReviews, orders}));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+    if(s.cart) cart = s.cart;
+    if(s.wishlist) wishlist = new Set(s.wishlist);
+    if(s.promo) promo = s.promo;
+    if(s.account) account = Object.assign(account, s.account);
+    if(s.lang) currentLang = s.lang;
+    if(s.userReviews) userReviews = s.userReviews;
+    if(s.orders) orders = s.orders;
+  }catch(e){}
+}
+loadState();
+
+
+/* ---------------- ICONS ---------------- */
+const ICONS = {
+  fashion: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l3 2 3-2 4 3-2 3-2-1v11H8V9L6 10 4 7z"/></svg>`,
+  accessories: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10a2 2 0 01-2 1.7H7.5a2 2 0 01-2-1.7L4 9z"/><path d="M8 9V7a4 4 0 018 0v2"/></svg>`,
+  beauty: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6v4H9z"/><path d="M8 6h8l1 3v11a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"/><path d="M9 13h6"/></svg>`,
+  electronics: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>`,
+  home: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></svg>`,
+  automotive: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l1.5-6a2 2 0 012-1.4h9a2 2 0 012 1.4L20 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="20" r="1.3"/><circle cx="16.5" cy="20" r="1.3"/></svg>`,
+  food: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a3 3 0 003 3v8"/><path d="M6 3v7"/><path d="M18 3c-2 1-2 5-2 7 0 1.5 1 2 2 2v9"/></svg>`,
+  sport: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18"/></svg>`,
+  jewelry: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12 5-12-2-6"/></svg>`,
+  books: `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z"/><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z"/></svg>`
+};
+
+/* ---------------- DATA ---------------- */
+const CATEGORIES = [
+  {id:"Fashion", uz:"Moda", ru:"Одежда", icon:"fashion", size:"big"},
+  {id:"Jewelry", uz:"Zargarlik", ru:"Ювелирные изделия", icon:"jewelry", size:"big"},
+  {id:"Accessories", uz:"Aksessuarlar", ru:"Аксессуары", icon:"accessories", size:"wide"},
+  {id:"Beauty", uz:"Go'zallik", ru:"Красота", icon:"beauty", size:"wide"},
+  {id:"Electronics", uz:"Texnika", ru:"Электроника", icon:"electronics", size:"reg"},
+  {id:"Home", uz:"Uy uchun", ru:"Для дома", icon:"home", size:"reg"},
+  {id:"Automotive", uz:"Avto tovarlar", ru:"Автотовары", icon:"automotive", size:"reg"},
+  {id:"Food & Drink", uz:"Oziq-ovqat", ru:"Продукты и напитки", icon:"food", size:"reg"},
+  {id:"Sport", uz:"Sport", ru:"Спорт", icon:"sport", size:"reg"},
+  {id:"Books & Stationery", uz:"Kitob va kantselyariya", ru:"Книги и канцелярия", icon:"books", size:"reg"},
+];
+
+const PRODUCTS = [
+  {id:1, cat:"Fashion", icon:"fashion", name:"Ipak ko'ylak", desc:"Tabiiy ipakdan tikilgan, yumshoq tushish bilan nafis kesim.", name_ru:"Шёлковое платье", desc_ru:"Из натурального шёлка, изящный крой и мягкая драпировка.", price:680000, rating:5},
+  {id:2, cat:"Fashion", icon:"fashion", name:"Kashmir palto", desc:"Qishki mavsum uchun issiq va yengil kashmir palto.", name_ru:"Пальто из кашемира", desc_ru:"Тёплое и лёгкое пальто для зимнего сезона.", price:1450000, rating:4},
+  {id:3, cat:"Fashion", icon:"fashion", name:"Lyuks trenchkot", desc:"Klassik kesim, har qanday obrazga mos keladi.", name_ru:"Люкс-тренчкот", desc_ru:"Классический крой, подходит к любому образу.", price:920000, rating:5},
+  {id:4, cat:"Accessories", icon:"accessories", name:"Charm qo'l sumkasi", desc:"Tabiiy charmdan, oltin dekor bilan bezatilgan.", name_ru:"Кожаная сумка", desc_ru:"Натуральная кожа, украшена золотистым декором.", price:1250000, rating:5},
+  {id:5, cat:"Accessories", icon:"accessories", name:"Ipak ro'mol", desc:"Qo'lda chizilgan naqshli premium ipak ro'mol.", name_ru:"Шёлковый платок", desc_ru:"Премиальный шёлк с узором ручной росписи.", price:320000, rating:4},
+  {id:6, cat:"Accessories", icon:"accessories", name:"Oftob ko'zoynak", desc:"UV himoyali, oltin ramkali dizayn.", name_ru:"Солнцезащитные очки", desc_ru:"UV-защита, дизайн в золотистой оправе.", price:410000, rating:4},
+  {id:7, cat:"Beauty", icon:"beauty", name:"Rose Gold parfyum", desc:"Uzoq davom etadigan, nafis gullar aromati.", name_ru:"Парфюм Rose Gold", desc_ru:"Стойкий аромат с нотами нежных цветов.", price:390000, rating:5},
+  {id:8, cat:"Beauty", icon:"beauty", name:"Atir to'plami", desc:"3 xil xushbo'ylikdan iborat sovg'a to'plami.", name_ru:"Набор ароматов", desc_ru:"Подарочный набор из трёх ароматов.", price:560000, rating:5},
+  {id:9, cat:"Beauty", icon:"beauty", name:"Yuz parvarishi seti", desc:"Tabiiy tarkibli, barcha teri turlariga mos.", name_ru:"Набор для ухода за лицом", desc_ru:"Натуральный состав, подходит для всех типов кожи.", price:275000, rating:4},
+  {id:10, cat:"Electronics", icon:"electronics", name:"Simsiz quloqchinlar", desc:"Faol shovqin bosish funksiyasi bilan.", name_ru:"Беспроводные наушники", desc_ru:"С функцией активного шумоподавления.", price:890000, rating:5},
+  {id:11, cat:"Electronics", icon:"electronics", name:"Premium smartfon", desc:"Yuqori aniqlikdagi kamera va tezkor protsessor.", name_ru:"Премиум-смартфон", desc_ru:"Камера высокого разрешения и быстрый процессор.", price:9800000, rating:5},
+  {id:12, cat:"Electronics", icon:"electronics", name:"Aqlli soat", desc:"Sog'liq monitoringi va uzoq batareya resursi.", name_ru:"Умные часы", desc_ru:"Мониторинг здоровья и долгий заряд батареи.", price:1180000, rating:4},
+  {id:13, cat:"Home", icon:"home", name:"Baxmal yostiqchalar seti", desc:"Zamonaviy interyer uchun yumshoq baxmal dizayn.", name_ru:"Набор бархатных подушек", desc_ru:"Мягкий бархатный дизайн для современного интерьера.", price:245000, rating:4},
+  {id:14, cat:"Home", icon:"home", name:"Dekorativ shamdon", desc:"Oltin rangli metall, mehmonxona uchun ideal.", name_ru:"Декоративный подсвечник", desc_ru:"Металл золотистого цвета, идеален для гостиной.", price:180000, rating:4},
+  {id:15, cat:"Home", icon:"home", name:"Aromaterapiya sham to'plami", desc:"Tabiiy mum asosida, uzoq yonuvchi.", name_ru:"Набор ароматических свечей", desc_ru:"На основе натурального воска, долго горят.", price:210000, rating:5},
+  {id:16, cat:"Automotive", icon:"automotive", name:"Avtomobil parfyumi", desc:"Salon uchun nafis va uzoq davom etuvchi hid.", name_ru:"Автомобильный ароматизатор", desc_ru:"Нежный и стойкий аромат для салона.", price:95000, rating:4},
+  {id:17, cat:"Automotive", icon:"automotive", name:"Charm rul qopqog'i", desc:"Premium charmdan, qo'lga qulay ushlash.", name_ru:"Кожаный чехол на руль", desc_ru:"Премиальная кожа, удобный хват.", price:165000, rating:4},
+  {id:18, cat:"Food & Drink", icon:"food", name:"Premium shokolad to'plami", desc:"Belgiya shokoladidan tayyorlangan sovg'a qutisi.", name_ru:"Набор премиального шоколада", desc_ru:"Подарочная коробка бельгийского шоколада.", price:230000, rating:5},
+  {id:19, cat:"Food & Drink", icon:"food", name:"Tabiiy tog' asali", desc:"Ekologik toza, 100% tabiiy mahsulot.", name_ru:"Натуральный горный мёд", desc_ru:"Экологически чистый, 100% натуральный продукт.", price:140000, rating:5},
+  {id:20, cat:"Sport", icon:"sport", name:"Gantel to'plami", desc:"Uy mashg'ulotlari uchun sozlanuvchi og'irlik.", name_ru:"Набор гантелей", desc_ru:"Регулируемый вес для домашних тренировок.", price:480000, rating:4},
+  {id:21, cat:"Sport", icon:"sport", name:"Yoga kilimchasi", desc:"Kaymaydigan, ekologik toza material.", name_ru:"Коврик для йоги", desc_ru:"Нескользящий, экологически чистый материал.", price:165000, rating:5},
+  {id:22, cat:"Jewelry", icon:"jewelry", name:"Marvarid sirg'alar", desc:"Tabiiy marvarid, 18 karat oltin qoplama.", name_ru:"Жемчужные серьги", desc_ru:"Натуральный жемчуг, покрытие золотом 18 карат.", price:540000, rating:5},
+  {id:23, cat:"Jewelry", icon:"jewelry", name:"Oltin uzuk", desc:"Nafis dizaynli, mayda toshlar bilan bezatilgan.", name_ru:"Золотое кольцо", desc_ru:"Изящный дизайн, украшено мелкими камнями.", price:2100000, rating:5},
+  {id:24, cat:"Jewelry", icon:"jewelry", name:"Zargarlik soat", desc:"Klassik uslub, kunlik va bayram uchun mos.", name_ru:"Ювелирные часы", desc_ru:"Классический стиль для будней и праздников.", price:1650000, rating:4},
+  {id:25, cat:"Books & Stationery", icon:"books", name:"Charm bloknot", desc:"Qo'lda tikilgan, oltin qirrali sahifalar.", name_ru:"Кожаный блокнот", desc_ru:"Ручной пошив, страницы с золотым обрезом.", price:120000, rating:4},
+  {id:26, cat:"Books & Stationery", icon:"books", name:"Premium qalam to'plami", desc:"Sovg'a qutisida, oltin dekorli qalamlar.", name_ru:"Набор премиальных ручек", desc_ru:"В подарочной коробке, ручки с золотистым декором.", price:95000, rating:4},
+  {id:27, cat:"Fashion", icon:"fashion", name:"Kashtali ko'ylak", desc:"Qo'lda kashta tikilgan, mavsumiy kolleksiya.", name_ru:"Платье с вышивкой", desc_ru:"Ручная вышивка, сезонная коллекция.", price:540000, rating:4},
+  {id:28, cat:"Fashion", icon:"fashion", name:"Yengil trikotaj sviter", desc:"Yumshoq ip aralashmasi, kundalik kiyim uchun.", name_ru:"Лёгкий трикотажный свитер", desc_ru:"Мягкая пряжа, для повседневной носки.", price:310000, rating:4},
+  {id:29, cat:"Accessories", icon:"accessories", name:"Charm belbog'", desc:"Oltin tokali, klassik va zamonaviy uslubda.", name_ru:"Кожаный ремень", desc_ru:"Золотистая пряжка, классический и современный стиль.", price:280000, rating:4},
+  {id:30, cat:"Accessories", icon:"accessories", name:"Kechki klatch sumka", desc:"Marvarid dekorli, tantanali tadbirlar uchun.", name_ru:"Вечерний клатч", desc_ru:"Декор из жемчуга, для торжественных случаев.", price:640000, rating:5},
+  {id:31, cat:"Beauty", icon:"beauty", name:"Oltin seramid kremi", desc:"Terini qayta tiklovchi tungi parvarish kremi.", name_ru:"Крем с золотыми керамидами", desc_ru:"Восстанавливающий ночной крем для кожи.", price:340000, rating:5},
+  {id:32, cat:"Beauty", icon:"beauty", name:"Lab bo'yog'i to'plami", desc:"5 xil tabiiy tusda, uzoq turuvchi formula.", name_ru:"Набор помад", desc_ru:"5 натуральных оттенков, стойкая формула.", price:225000, rating:4},
+  {id:33, cat:"Electronics", icon:"electronics", name:"Planshet Pro", desc:"Ishlash va ijodkorlik uchun kuchli protsessor.", name_ru:"Планшет Pro", desc_ru:"Мощный процессор для работы и творчества.", price:6200000, rating:5},
+  {id:34, cat:"Electronics", icon:"electronics", name:"Portativ zaryadlovchi", desc:"Tezkor quvvatlash, safarlar uchun ixcham.", name_ru:"Портативное зарядное устройство", desc_ru:"Быстрая зарядка, компактно для поездок.", price:260000, rating:4},
+  {id:35, cat:"Home", icon:"home", name:"Charm divan yostig'i", desc:"Zamonaviy interyerga mos, mustahkam tikuv.", name_ru:"Кожаная диванная подушка", desc_ru:"Подходит для современного интерьера, прочный пошив.", price:195000, rating:4},
+  {id:36, cat:"Home", icon:"home", name:"Marmar taxta to'plami", desc:"Oshxona uchun servirovka taxtalari seti.", name_ru:"Набор мраморных досок", desc_ru:"Сервировочные доски для кухни.", price:310000, rating:4},
+  {id:37, cat:"Automotive", icon:"automotive", name:"Avtomobil oyoq gilamchasi", desc:"Suv o'tkazmaydigan, oson tozalanadigan material.", name_ru:"Автомобильные коврики", desc_ru:"Водонепроницаемый, легко чистится.", price:150000, rating:4},
+  {id:38, cat:"Automotive", icon:"automotive", name:"Video registrator", desc:"To'liq HD sifat, tungi ko'rish rejimi.", name_ru:"Видеорегистратор", desc_ru:"Качество Full HD, режим ночной съёмки.", price:720000, rating:4},
+  {id:39, cat:"Food & Drink", icon:"food", name:"Qora choy to'plami", desc:"Tog' o'tlari qo'shilgan premium choy kolleksiyasi.", name_ru:"Набор чёрного чая", desc_ru:"Премиальная коллекция чая с горными травами.", price:110000, rating:4},
+  {id:40, cat:"Food & Drink", icon:"food", name:"Zaytun moyi seti", desc:"Sovuq presslangan, birinchi siqim zaytun moyi.", name_ru:"Набор оливкового масла", desc_ru:"Холодный отжим, масло первого отжима.", price:175000, rating:5},
+  {id:41, cat:"Sport", icon:"sport", name:"Sport sumkasi", desc:"Keng hajmli, mashg'ulot va safar uchun qulay.", name_ru:"Спортивная сумка", desc_ru:"Вместительная, удобна для тренировок и поездок.", price:220000, rating:4},
+  {id:42, cat:"Sport", icon:"sport", name:"Fitnes trekker", desc:"Yurgan qadamlar va yurak urishini kuzatadi.", name_ru:"Фитнес-трекер", desc_ru:"Отслеживает шаги и пульс.", price:390000, rating:4},
+  {id:43, cat:"Jewelry", icon:"jewelry", name:"Oltin bilaguzuk", desc:"Nafis zanjir bilan, kundalik va bayram uchun.", name_ru:"Золотой браслет", desc_ru:"Изящная цепочка для будней и праздников.", price:980000, rating:5},
+  {id:44, cat:"Jewelry", icon:"jewelry", name:"Brilliant kulon", desc:"Zamonaviy dizayn, 18 karat oltin asosida.", name_ru:"Кулон с бриллиантом", desc_ru:"Современный дизайн на основе золота 18 карат.", price:2450000, rating:5},
+  {id:45, cat:"Books & Stationery", icon:"books", name:"Charm papka to'plami", desc:"Hujjatlar uchun ofis va sovg'a uchun mos.", name_ru:"Набор кожаных папок", desc_ru:"Для документов, подходит для офиса и подарка.", price:210000, rating:4},
+  {id:46, cat:"Books & Stationery", icon:"books", name:"Motivatsion kundalik", desc:"Yillik rejalashtirish uchun oltin qirrali kundalik.", name_ru:"Мотивационный ежедневник", desc_ru:"Ежедневник с золотым обрезом для планирования на год.", price:135000, rating:4},
+  {id:47, cat:"Fashion", icon:"fashion", name:"Klassik jins shim", desc:"Paxta va elastandan, har mavsumga mos klassik kesim.", name_ru:"Классические джинсы", desc_ru:"Из хлопка и эластана, классический крой на любой сезон.", price:420000, rating:4},
+  {id:48, cat:"Fashion", icon:"fashion", name:"Charm kurtka", desc:"Tabiiy charm kurtka bahor va kuz uchun.", name_ru:"Кожаная куртка", desc_ru:"Куртка из натуральной кожи для весны и осени.", price:2100000, rating:5},
+  {id:49, cat:"Accessories", icon:"accessories", name:"Charm hamyon", desc:"8 ta karta uchun joyi bor ixcham hamyon.", name_ru:"Кожаный кошелёк", desc_ru:"Компактный кошелёк на 8 карт.", price:260000, rating:4},
+  {id:50, cat:"Beauty", icon:"beauty", name:"Yuz niqoblari to'plami", desc:"Gialuron kislotali mato niqoblar.", name_ru:"Набор тканевых масок", desc_ru:"Тканевые маски с гиалуроновой кислотой.", price:150000, rating:4},
+  {id:51, cat:"Beauty", icon:"beauty", name:"Soch parvarishi seti", desc:"Argan moyli shampun va konditsioner.", name_ru:"Набор для ухода за волосами", desc_ru:"Шампунь и кондиционер с аргановым маслом.", price:330000, rating:5},
+  {id:52, cat:"Electronics", icon:"electronics", name:"Bluetooth karnay", desc:"Suvdan himoyalangan portativ karnay.", name_ru:"Bluetooth-колонка", desc_ru:"Портативная колонка с защитой от воды.", price:540000, rating:4},
+  {id:53, cat:"Home", icon:"home", name:"Dekorativ ko'zgu", desc:"Oltin rangli ramkali devor ko'zgusi.", name_ru:"Декоративное зеркало", desc_ru:"Настенное зеркало в золотистой раме.", price:480000, rating:4},
+  {id:54, cat:"Home", icon:"home", name:"Choyshab to'plami", desc:"Sateen paxtadan to'liq yotoq to'plami.", name_ru:"Комплект постельного белья", desc_ru:"Полный комплект из хлопкового сатина.", price:690000, rating:5},
+  {id:55, cat:"Food & Drink", icon:"food", name:"Quritilgan mevalar assorti", desc:"Tabiiy quritilgan mevalar va yong'oqlar.", name_ru:"Ассорти сухофруктов", desc_ru:"Натуральные сухофрукты и орехи.", price:120000, rating:5},
+  {id:56, cat:"Sport", icon:"sport", name:"Yugurish krossovkalari", desc:"Yengil va amortizatsiyali krossovkalar.", name_ru:"Беговые кроссовки", desc_ru:"Лёгкие кроссовки с амортизацией.", price:760000, rating:4},
+  {id:57, cat:"Automotive", icon:"automotive", name:"Avto changyutgich", desc:"Salon uchun ixcham changyutgich.", name_ru:"Автомобильный пылесос", desc_ru:"Компактный пылесос для салона.", price:380000, rating:4},
+  {id:58, cat:"Jewelry", icon:"jewelry", name:"Kumush bilaguzuk", desc:"925 sinovli nafis kumush bilaguzuk.", name_ru:"Серебряный браслет", desc_ru:"Изящный браслет из серебра 925 пробы.", price:450000, rating:4},
+];
+
+/* ---------------- I18N ---------------- */
+const I18N = {
+  uz: {
+    nav_home:"Bosh sahifa", nav_catalog:"Katalog", nav_about:"Biz haqimizda", nav_reviews:"Mijozlar fikri", nav_contact:"Aloqa",
+    search_ph:"Mahsulot qidirish...",
+    hero_eyebrow:"Premium marketplace — O'zbekiston",
+    hero_title:"Siz orzu qilgan hamma narsa, bir joyda to'plangan",
+    hero_lede:"Moda, zargarlik buyumlari, texnika va uy jihozlaridan tortib avtomobil aksessuarlarigacha — biz har bir sohada siz uchun eng yaxshisini tanlaymiz.",
+    hero_cta1:"Katalogga o'tish", hero_cta2:"Yo'nalishlarni ko'rish",
+    motto_words:"SIFAT · ISHONCH · NAQISLIK",
+    motto_desc:"\u201cBiz har bir sohada siz uchun eng yaxshisini taklif etamiz.\u201d",
+    cat_head_title:"Yo'nalishlar bo'yicha xarid qiling",
+    cat_head_desc:"O'nta toifa — har biri o'ziga xos did va sifat bilan tanlangan.",
+    promo_title:"Har bir buyurtmada — ishonch va naqislik",
+    promo_desc:"Yetkazib berish butun O'zbekiston bo'ylab. Original mahsulotlar, kafolatlangan sifat.",
+    promo_cta:"Xarid qilish",
+    catalog_title:"Mahsulotlar katalogi",
+    catalog_desc:"Toifani tanlang yoki qidiruv orqali kerakli mahsulotni toping.",
+    about_title:"Maxi_by_MAXLIYO haqida",
+    about_body:"Maxi_by_MAXLIYO — bu moda, go'zallik, texnika va turmush uchun zarur bo'lgan barcha narsalarni bir maydonda jamlagan premium marketplace. Har bir mahsulot diqqat bilan tanlanadi, chunki bizning maqsadimiz — mijozlarimizga faqat sifatli va ishonchli xaridni taklif etish.",
+    foot_desc:"Siz orzu qilgan hamma narsa — bir joyda. Sifat, ishonch va naqislik asosida qurilgan marketplace.",
+    foot_col_catalog:"Katalog", foot_col_company:"Kompaniya", foot_col_help:"Yordam",
+    foot_partners:"Hamkorlar uchun", foot_careers:"Vakansiyalar",
+    foot_delivery:"Yetkazib berish", foot_returns:"Qaytarish siyosati", foot_privacy:"Maxfiylik siyosati",
+    foot_rights:"© 2026 Maxi_by_MAXLIYO. Barcha huquqlar himoyalangan.", foot_city:"Toshkent, O'zbekiston",
+    cart_title:"Savatcha", cart_products:"Mahsulotlar:", cart_total:"Jami:", cart_checkout:"Buyurtmani rasmiylashtirish",
+    cart_empty:"Savatchangiz hozircha bo'sh",
+    cart_remove:"Olib tashlash",
+    promo_ph:"Promo kod", promo_apply:"Qo'llash", promo_error:"Bunday promo kod topilmadi", promo_applied_label:"chegirma qo'llandi",
+    filter_all:"Barchasi",
+    no_results:"Hech narsa topilmadi. Boshqa so'z bilan qidirib ko'ring.",
+    quick_view:"Tez ko'rish",
+    wish_aria:"Sevimlilarga qo'shish", add_aria:"Savatga qo'shish",
+    currency:"so'm",
+    toast_added:"Savatchaga qo'shildi",
+    toast_promo:"Promo kod qo'llandi: -{p}%",
+    toast_welcome:"Xush kelibsiz, {n}!",
+    toast_logout:"Tizimdan chiqdingiz",
+    toast_sent:"Xabaringiz yuborildi",
+    acc_login:"Kirish", acc_register:"Ro'yxatdan o'tish",
+    acc_email_ph:"Email yoki telefon", acc_pass_ph:"Parol", acc_name_ph:"Ismingiz",
+    acc_no_account:"Hisobingiz yo'qmi?", acc_have_account:"Hisobingiz bormi?",
+    acc_register_link:"Ro'yxatdan o'ting", acc_login_link:"Kiring",
+    profile_title:"Profil", profile_guest:"Mijoz",
+    profile_orders:"BUYURTMA", profile_saved:"SAQLANGAN", profile_discount:"CHEGIRMA",
+    profile_email_label:"Email/telefon", profile_address_label:"Manzil", profile_address_val:"Toshkent, O'zbekiston",
+    profile_logout:"Chiqish",
+    about_stat_products:"MAHSULOT TURI", about_stat_categories:"YO'NALISH", about_stat_rating:"O'RTACHA BAHO",
+    about_extra:"Yetkazib berish butun O'zbekiston bo'ylab amalga oshiriladi, barcha mahsulotlar original va kafolat bilan yetkaziladi.",
+    about_extra2:"10 ta yo'nalish, minglab mijozlar ishonchi va har bir buyurtmaga individual yondashuv — bizni boshqalardan ajratib turadigan narsa aynan shu.",
+    reviews_title:"Bizning mijozlarimiz nima deydi", reviews_avg:"O'RTACHA BAHO", reviews_count:"SO'NGGI SHARHLAR",
+    contact_title:"Biz bilan bog'laning",
+    contact_body:"Savollaringiz bormi? Quyidagi shakl orqali yozing yoki to'g'ridan-to'g'ri bog'laning — 24 soat ichida javob beramiz.",
+    contact_name_ph:"Ismingizni kiriting", contact_reach_ph:"Bog'lanish uchun manzil", contact_msg_ph:"Xabaringizni yozing...",
+    contact_send:"Xabar yuborish", contact_sent_msg:"Xabaringiz yuborildi, tez orada bog'lanamiz!",
+    pd_tab_info:"Ma'lumot", pd_tab_specs:"Xususiyatlari", pd_tab_reviews:"Sharhlar", pd_qty:"Soni",
+    pd_buy_now:"Hozir sotib olish", pd_reviews_n:"Sharhlar: {n}", pd_no_reviews:"Hozircha sharhlar yo'q — birinchi bo'ling!",
+    pd_write_review:"Sharh qoldiring", pd_your_review:"Sharhingizni yozing...", pd_rating:"Bahoyingiz", pd_submit_review:"Yuborish",
+    pd_review_thanks:"Sharh uchun rahmat!", pd_review_invalid:"Ismingiz va sharhni kiriting", pd_you:"Siz",
+    info_b1:"Original mahsulot, sifat kafolati", info_b2:"Butun O'zbekiston bo'ylab yetkazib berish", info_b3:"Naqd yoki karta orqali to'lov",
+    co_title:"Buyurtma berish", co_back:"← Savatchaga qaytish", co_items:"Buyurtma tarkibi", co_name:"Ismingiz", co_phone:"Telefon raqamingiz",
+    co_address:"Yetkazib berish manzili", co_comment:"Izoh (ixtiyoriy)", co_payment:"To'lov usuli", co_cash:"Naqd pul", co_card:"Karta orqali",
+    co_submit:"Buyurtmani yuborish", co_sending:"Yuborilmoqda...", co_success_title:"Buyurtma qabul qilindi!",
+    co_success_text:"Tez orada menejerimiz siz bilan bog'lanadi.", co_order_no:"Buyurtma raqami", co_close:"Yopish",
+    co_error:"Buyurtmani yuborib bo'lmadi. Internetni tekshirib qayta urinib ko'ring yoki biz bilan bog'laning.",
+    co_invalid:"Ism, telefon va manzilni to'g'ri kiriting", co_discount:"Chegirma", co_total:"Jami",
+    nav_profile:"Profil",
+    nav_cart:"Savatcha",
+    idx_feat_eyebrow:"Saytda nimalar qilish mumkin",
+    idx_feat_title:"Xaridni bir joyda boshlang va tugating",
+    feat1_t:"50 dan ortiq mahsulot",
+    feat1_d:"10 ta toifa bo'yicha mahsulotlarni ko'ring, qidiring va narx yoki reyting bo'yicha saralang.",
+    feat2_t:"Har bir mahsulot — alohida sahifa",
+    feat2_d:"Hajmi, sifati, ishlab chiqarilgan davlati, tarkibi va mijozlar sharhlari bir joyda.",
+    feat3_t:"Hajm va o'lchamni tanlang",
+    feat3_d:"Parfyum 30/50/100 ml, kiyim o'lchamlari, og'irlik — narx avtomatik o'zgaradi.",
+    feat4_t:"Savatcha va promo-kod",
+    feat4_d:"Mahsulotlarni savatga soling, promo-kod kiriting va chegirmani darhol ko'ring.",
+    feat5_t:"Buyurtma Telegram orqali",
+    feat5_d:"Buyurtma menejerga bir zumda yetib boradi va u siz bilan bog'lanadi.",
+    feat6_t:"Profil va buyurtmalar tarixi",
+    feat6_d:"Oldingi buyurtmalarni ko'ring, takrorlang va sevimli mahsulotlarni saqlang.",
+    idx_pop_title:"Mashhur mahsulotlar",
+    idx_pop_desc:"Mijozlar eng ko'p tanlaydigan buyumlar.",
+    idx_view_all:"Barcha mahsulotlar",
+    idx_steps_title:"Qanday buyurtma beriladi?",
+    step1_t:"Mahsulotni tanlang",
+    step1_d:"Katalogdan kerakli mahsulotni toping va uning sahifasini oching.",
+    step2_t:"Savatga soling",
+    step2_d:"Hajm yoki o'lchamni tanlang, soni va promo-kodni kiriting.",
+    step3_t:"Buyurtmani yuboring",
+    step3_d:"Ism, telefon va manzilni qoldiring — menejer tez orada bog'lanadi.",
+    sort_label:"Saralash",
+    sort_default:"Mashhurligi bo'yicha",
+    sort_price_asc:"Avval arzonlari",
+    sort_price_desc:"Avval qimmatlari",
+    sort_rating:"Reyting bo'yicha",
+    results_n:"Topildi: {n}",
+    back_catalog:"← Katalogga qaytish",
+    fact_country:"Ishlab chiqargan davlat",
+    fact_quality:"Sifat",
+    fact_category:"Toifa",
+    pd_available:"Mavjud",
+    pd_about_title:"Mahsulot haqida",
+    pd_reviews_title:"Mijozlar sharhlari",
+    related_title:"O'xshash mahsulotlar",
+    cart_go_catalog:"Katalogga o'tish",
+    cart_items_title:"Tanlangan mahsulotlar",
+    cart_summary:"Buyurtma xulosasi",
+    cart_clear:"Savatni tozalash",
+    cart_count:"Mahsulotlar soni",
+    cart_shipping:"Yetkazib berish",
+    cart_shipping_v:"Menejer hisoblaydi",
+    co_view_orders:"Buyurtmalarim",
+    prof_guest_title:"Profil yarating",
+    prof_guest_text:"Ism va telefon raqamingizni saqlang — buyurtma berishda avtomatik to'ldiriladi. Ma'lumotlar faqat shu qurilmada saqlanadi.",
+    prof_save:"Saqlash",
+    prof_saved_ok:"Profil saqlandi",
+    prof_data:"Mening ma'lumotlarim",
+    prof_phone:"Telefon",
+    prof_address:"Manzil",
+    prof_orders_title:"Buyurtmalar tarixi",
+    prof_no_orders:"Hali buyurtmalar yo'q. Birinchi buyurtmangizni katalogdan boshlang.",
+    prof_order:"Buyurtma",
+    prof_status_sent:"Menejerga yuborildi",
+    prof_repeat:"Takrorlash",
+    prof_repeat_ok:"Mahsulotlar savatga qo'shildi",
+    prof_saved_title:"Saqlangan mahsulotlar",
+    prof_no_saved:"Saqlangan mahsulotlar yo'q. Mahsulot kartasidagi ♡ tugmasini bosing.",
+    prof_logout:"Chiqish",
+    prof_stat_orders:"BUYURTMA",
+    prof_stat_spent:"JAMI XARID",
+    prof_stat_saved:"SAQLANGAN",
+    prof_total:"Jami",
+    prof_payment:"To'lov",
+    prof_hello:"Salom",
+    prof_guest_name:"Mehmon",
+    about_story_title:"Bizning hikoyamiz",
+    about_values_title:"Bizning qadriyatlarimiz",
+    val1_t:"Sifat",
+    val1_d:"Har bir mahsulot tanlab olinadi va tekshiriladi.",
+    val2_t:"Ishonch",
+    val2_d:"Halol narx, aniq ta'rif va ochiq muloqot.",
+    val3_t:"Naqislik",
+    val3_d:"Qadoqdan tortib xizmatgacha — har bir detalda uslub.",
+    faq_title:"Ko'p so'raladigan savollar",
+    faq1_q:"Buyurtma qanday beriladi?",
+    faq1_a:"Mahsulotni savatga soling va buyurtma shaklini to'ldiring — menejer siz bilan bog'lanadi.",
+    faq2_q:"To'lov qanday amalga oshiriladi?",
+    faq2_a:"Naqd pul yoki karta orqali, buyurtma tasdiqlangach.",
+    faq3_q:"Yetkazib berish qancha vaqt oladi?",
+    faq3_a:"Muddat manzilga bog'liq — buyurtmani tasdiqlashda menejer aniq aytadi.",
+    faq4_q:"Mahsulotni qaytarish mumkinmi?",
+    faq4_a:"Qaytarish shartlarini menejer buyurtma tasdiqlanganda tushuntiradi.",
+    contact_phone_l:"Telefon",
+    contact_email_l:"Email",
+    contact_addr_l:"Manzil",
+    contact_hours_l:"Ish vaqti",
+    contact_hours_v:"Har kuni 09:00–20:00",
+    contact_error:"Xabar yuborilmadi. Keyinroq urinib ko'ring.",
+    view_product:"Batafsil",
+    load_more:"Yana ko'rsatish",
+    lang_label:"Til",
+    qv_wish_save:"Saqlash", qv_wish_saved:"Saqlangan"
+  },
+  ru: {
+    nav_home:"Главная", nav_catalog:"Каталог", nav_about:"О нас", nav_reviews:"Отзывы", nav_contact:"Контакты",
+    search_ph:"Поиск товаров...",
+    hero_eyebrow:"Премиальный маркетплейс — Узбекистан",
+    hero_title:"Всё, о чём вы мечтали, в одном месте",
+    hero_lede:"От моды, ювелирных украшений и техники до товаров для дома и автоаксессуаров — мы выбираем для вас лучшее в каждой сфере.",
+    hero_cta1:"Перейти в каталог", hero_cta2:"Смотреть направления",
+    motto_words:"КАЧЕСТВО · ДОВЕРИЕ · ИЗЯЩЕСТВО",
+    motto_desc:"«Мы предлагаем вам лучшее в каждой сфере»",
+    cat_head_title:"Покупайте по направлениям",
+    cat_head_desc:"Десять категорий — каждая подобрана со своим вкусом и качеством.",
+    promo_title:"В каждом заказе — доверие и изящество",
+    promo_desc:"Доставка по всему Узбекистану. Оригинальные товары, гарантированное качество.",
+    promo_cta:"Сделать покупку",
+    catalog_title:"Каталог товаров",
+    catalog_desc:"Выберите категорию или найдите нужный товар через поиск.",
+    about_title:"О Maxi_by_MAXLIYO",
+    about_body:"Maxi_by_MAXLIYO — премиальный маркетплейс, объединивший в одном месте моду, красоту, технику и всё необходимое для жизни. Каждый товар отбирается тщательно, ведь наша цель — предложить клиентам только качественную и надёжную покупку.",
+    foot_desc:"Всё, о чём вы мечтали, — в одном месте. Маркетплейс, построенный на качестве, доверии и изяществе.",
+    foot_col_catalog:"Каталог", foot_col_company:"Компания", foot_col_help:"Помощь",
+    foot_partners:"Для партнёров", foot_careers:"Вакансии",
+    foot_delivery:"Доставка", foot_returns:"Политика возврата", foot_privacy:"Политика конфиденциальности",
+    foot_rights:"© 2026 Maxi_by_MAXLIYO. Все права защищены.", foot_city:"Ташкент, Узбекистан",
+    cart_title:"Корзина", cart_products:"Товары:", cart_total:"Итого:", cart_checkout:"Оформить заказ",
+    cart_empty:"Ваша корзина пока пуста",
+    cart_remove:"Удалить",
+    promo_ph:"Промокод", promo_apply:"Применить", promo_error:"Такой промокод не найден", promo_applied_label:"скидка применена",
+    filter_all:"Все",
+    no_results:"Ничего не найдено. Попробуйте другой запрос.",
+    quick_view:"Быстрый просмотр",
+    wish_aria:"Добавить в избранное", add_aria:"Добавить в корзину",
+    currency:"сум",
+    toast_added:"Добавлено в корзину",
+    toast_promo:"Промокод применён: -{p}%",
+    toast_welcome:"Добро пожаловать, {n}!",
+    toast_logout:"Вы вышли из аккаунта",
+    toast_sent:"Ваше сообщение отправлено",
+    acc_login:"Вход", acc_register:"Регистрация",
+    acc_email_ph:"Email или телефон", acc_pass_ph:"Пароль", acc_name_ph:"Ваше имя",
+    acc_no_account:"Нет аккаунта?", acc_have_account:"Уже есть аккаунт?",
+    acc_register_link:"Зарегистрируйтесь", acc_login_link:"Войти",
+    profile_title:"Профиль", profile_guest:"Клиент",
+    profile_orders:"ЗАКАЗЫ", profile_saved:"СОХРАНЁННЫЕ", profile_discount:"СКИДКА",
+    profile_email_label:"Email/телефон", profile_address_label:"Адрес", profile_address_val:"Ташкент, Узбекистан",
+    profile_logout:"Выйти",
+    about_stat_products:"ВИДОВ ТОВАРОВ", about_stat_categories:"НАПРАВЛЕНИЙ", about_stat_rating:"СРЕДНЯЯ ОЦЕНКА",
+    about_extra:"Доставка осуществляется по всему Узбекистану, все товары оригинальные и поставляются с гарантией.",
+    about_extra2:"10 направлений, доверие тысяч клиентов и индивидуальный подход к каждому заказу — вот что отличает нас от других.",
+    reviews_title:"Что говорят наши клиенты", reviews_avg:"СРЕДНЯЯ ОЦЕНКА", reviews_count:"ПОСЛЕДНИЕ ОТЗЫВЫ",
+    contact_title:"Свяжитесь с нами",
+    contact_body:"Остались вопросы? Напишите через форму ниже или свяжитесь напрямую — ответим в течение 24 часов.",
+    contact_name_ph:"Введите ваше имя", contact_reach_ph:"Контакт для связи", contact_msg_ph:"Напишите ваше сообщение...",
+    contact_send:"Отправить сообщение", contact_sent_msg:"Ваше сообщение отправлено, скоро свяжемся с вами!",
+    pd_tab_info:"Описание", pd_tab_specs:"Характеристики", pd_tab_reviews:"Отзывы", pd_qty:"Количество",
+    pd_buy_now:"Купить сейчас", pd_reviews_n:"Отзывов: {n}", pd_no_reviews:"Пока нет отзывов — будьте первым!",
+    pd_write_review:"Оставить отзыв", pd_your_review:"Напишите ваш отзыв...", pd_rating:"Ваша оценка", pd_submit_review:"Отправить",
+    pd_review_thanks:"Спасибо за отзыв!", pd_review_invalid:"Введите имя и текст отзыва", pd_you:"Вы",
+    info_b1:"Оригинальный товар, гарантия качества", info_b2:"Доставка по всему Узбекистану", info_b3:"Оплата наличными или картой",
+    co_title:"Оформление заказа", co_back:"← Вернуться в корзину", co_items:"Состав заказа", co_name:"Ваше имя", co_phone:"Номер телефона",
+    co_address:"Адрес доставки", co_comment:"Комментарий (необязательно)", co_payment:"Способ оплаты", co_cash:"Наличными", co_card:"Картой",
+    co_submit:"Отправить заказ", co_sending:"Отправка...", co_success_title:"Заказ принят!",
+    co_success_text:"Скоро с вами свяжется наш менеджер.", co_order_no:"Номер заказа", co_close:"Закрыть",
+    co_error:"Не удалось отправить заказ. Проверьте интернет и попробуйте снова или свяжитесь с нами.",
+    co_invalid:"Введите корректные имя, телефон и адрес", co_discount:"Скидка", co_total:"Итого",
+    nav_profile:"Профиль",
+    nav_cart:"Корзина",
+    idx_feat_eyebrow:"Что можно делать на сайте",
+    idx_feat_title:"Начните и завершите покупки в одном месте",
+    feat1_t:"Более 50 товаров",
+    feat1_d:"Просматривайте товары по 10 категориям, ищите и сортируйте по цене или рейтингу.",
+    feat2_t:"У каждого товара своя страница",
+    feat2_d:"Объём, качество, страна производства, состав и отзывы покупателей в одном месте.",
+    feat3_t:"Выбирайте объём и размер",
+    feat3_d:"Парфюм 30/50/100 мл, размеры одежды, вес — цена меняется автоматически.",
+    feat4_t:"Корзина и промокод",
+    feat4_d:"Добавляйте товары в корзину, вводите промокод и сразу видьте скидку.",
+    feat5_t:"Заказ через Telegram",
+    feat5_d:"Заказ мгновенно попадает менеджеру, и он свяжется с вами.",
+    feat6_t:"Профиль и история заказов",
+    feat6_d:"Смотрите прошлые заказы, повторяйте их и сохраняйте избранное.",
+    idx_pop_title:"Популярные товары",
+    idx_pop_desc:"То, что клиенты выбирают чаще всего.",
+    idx_view_all:"Все товары",
+    idx_steps_title:"Как сделать заказ?",
+    step1_t:"Выберите товар",
+    step1_d:"Найдите нужный товар в каталоге и откройте его страницу.",
+    step2_t:"Добавьте в корзину",
+    step2_d:"Выберите объём или размер, количество и введите промокод.",
+    step3_t:"Отправьте заказ",
+    step3_d:"Оставьте имя, телефон и адрес — менеджер скоро свяжется с вами.",
+    sort_label:"Сортировка",
+    sort_default:"По популярности",
+    sort_price_asc:"Сначала дешёвые",
+    sort_price_desc:"Сначала дорогие",
+    sort_rating:"По рейтингу",
+    results_n:"Найдено: {n}",
+    back_catalog:"← Назад в каталог",
+    fact_country:"Страна производства",
+    fact_quality:"Качество",
+    fact_category:"Категория",
+    pd_available:"В наличии",
+    pd_about_title:"О товаре",
+    pd_reviews_title:"Отзывы покупателей",
+    related_title:"Похожие товары",
+    cart_go_catalog:"Перейти в каталог",
+    cart_items_title:"Выбранные товары",
+    cart_summary:"Итог заказа",
+    cart_clear:"Очистить корзину",
+    cart_count:"Количество товаров",
+    cart_shipping:"Доставка",
+    cart_shipping_v:"Рассчитает менеджер",
+    co_view_orders:"Мои заказы",
+    prof_guest_title:"Создайте профиль",
+    prof_guest_text:"Сохраните имя и телефон — они подставятся при оформлении заказа. Данные хранятся только на этом устройстве.",
+    prof_save:"Сохранить",
+    prof_saved_ok:"Профиль сохранён",
+    prof_data:"Мои данные",
+    prof_phone:"Телефон",
+    prof_address:"Адрес",
+    prof_orders_title:"История заказов",
+    prof_no_orders:"Заказов пока нет. Начните с каталога.",
+    prof_order:"Заказ",
+    prof_status_sent:"Отправлен менеджеру",
+    prof_repeat:"Повторить",
+    prof_repeat_ok:"Товары добавлены в корзину",
+    prof_saved_title:"Сохранённые товары",
+    prof_no_saved:"Сохранённых товаров нет. Нажмите ♡ на карточке товара.",
+    prof_logout:"Выйти",
+    prof_stat_orders:"ЗАКАЗЫ",
+    prof_stat_spent:"ВСЕГО ПОКУПОК",
+    prof_stat_saved:"СОХРАНЕНО",
+    prof_total:"Итого",
+    prof_payment:"Оплата",
+    prof_hello:"Здравствуйте",
+    prof_guest_name:"Гость",
+    about_story_title:"Наша история",
+    about_values_title:"Наши ценности",
+    val1_t:"Качество",
+    val1_d:"Каждый товар проходит отбор и проверку.",
+    val2_t:"Доверие",
+    val2_d:"Честные цены, точное описание и открытое общение.",
+    val3_t:"Изящество",
+    val3_d:"От упаковки до сервиса — стиль в каждой детали.",
+    faq_title:"Частые вопросы",
+    faq1_q:"Как сделать заказ?",
+    faq1_a:"Добавьте товар в корзину и заполните форму заказа — менеджер свяжется с вами.",
+    faq2_q:"Как происходит оплата?",
+    faq2_a:"Наличными или картой после подтверждения заказа.",
+    faq3_q:"Сколько занимает доставка?",
+    faq3_a:"Срок зависит от адреса — точный срок назовёт менеджер при подтверждении заказа.",
+    faq4_q:"Можно ли вернуть товар?",
+    faq4_a:"Условия возврата объяснит менеджер при подтверждении заказа.",
+    contact_phone_l:"Телефон",
+    contact_email_l:"Email",
+    contact_addr_l:"Адрес",
+    contact_hours_l:"Время работы",
+    contact_hours_v:"Ежедневно 09:00–20:00",
+    contact_error:"Не удалось отправить сообщение. Попробуйте позже.",
+    view_product:"Подробнее",
+    load_more:"Показать ещё",
+    lang_label:"Язык",
+    qv_wish_save:"Сохранить", qv_wish_saved:"Сохранено"
+  }
+};
+
+/* ---------------- Uzbek Latin -> Cyrillic transliteration ---------------- */
+function transliterateWord(word){
+  const firstIsUpper = word.length>0 && word[0] === word[0].toUpperCase() && word[0] !== word[0].toLowerCase();
+  const lower = word.toLowerCase();
+  const map3 = {"yo'":"йў"};
+  const map2 = {"o'":"ў","g'":"ғ","sh":"ш","ch":"ч","ng":"нг","ya":"я","yo":"ё","yu":"ю","ye":"е"};
+  const map1 = {a:"а",b:"б",d:"д",e:"е",f:"ф",g:"г",h:"ҳ",i:"и",j:"ж",k:"к",l:"л",m:"м",n:"н",o:"о",p:"п",q:"қ",r:"р",s:"с",t:"т",u:"у",v:"в",x:"х",y:"й",z:"з",c:"с","'":"ъ","’":"ъ"};
+  let result = "", i = 0;
+  while(i < lower.length){
+    const three = lower.substr(i,3);
+    if(map3[three]){ result += map3[three]; i+=3; continue; }
+    const two = lower.substr(i,2);
+    if(map2[two]){ result += map2[two]; i+=2; continue; }
+    const one = lower[i];
+    result += (map1[one] !== undefined ? map1[one] : one);
+    i+=1;
+  }
+  if(firstIsUpper && result.length) result = result[0].toUpperCase() + result.slice(1);
+  return result;
+}
+const KEEP_RE = /Maxi_by_MAXLIYO|Bluetooth|SpO₂|USB-[CA]|mAh|\bGB\b|\bATM\b|OLED|TPE|Full HD|microSD|G-sensor|UV400|IPX?\d+|18K|Extra Virgin|Eau de Parfum|Rose Gold|\bPro\b|\b(?:XS|S|M|L|XL)\b|\bA\d\b/g;
+function uzToCyr(text){
+  if(!text) return text;
+  const kept = [];
+  let s = String(text).replace(KEEP_RE, m => { kept.push(m); return "\u0001" + (kept.length-1) + "\u0001"; });
+  s = s.replace(/[A-Za-z']+/g, w => transliterateWord(w));
+  return s.replace(/\u0001(\d+)\u0001/g, (_, i) => kept[+i]);
+}
+
+/* ---------------- translation helpers ---------------- */
+function t(key){
+  const dict = currentLang === "ru" ? I18N.ru : I18N.uz;
+  const val = dict[key] !== undefined ? dict[key] : key;
+  return currentLang === "cyrl" ? uzToCyr(val) : val;
+}
+function pName(p){ return currentLang === "ru" ? p.name_ru : (currentLang === "cyrl" ? uzToCyr(p.name) : p.name); }
+function pDesc(p){ return currentLang === "ru" ? p.desc_ru : (currentLang === "cyrl" ? uzToCyr(p.desc) : p.desc); }
+function catName(c){ return currentLang === "ru" ? c.ru : (currentLang === "cyrl" ? uzToCyr(c.uz) : c.uz); }
+function catById(id){ return CATEGORIES.find(c => c.id === id); }
+function catLabel(id){ const c = catById(id); return c ? catName(c) : id; }
+function reviewText(r){ return currentLang === "ru" ? r.text_ru : (currentLang === "cyrl" ? uzToCyr(r.text) : r.text); }
+function reviewCat(r){ return currentLang === "ru" ? r.cat_ru : (currentLang === "cyrl" ? uzToCyr(r.cat) : r.cat); }
+function curr(){ return t("currency"); }
+function fmtPrice(n){ return n.toLocaleString('ru-RU') + " " + curr(); }
+
+
+/* ---------------- PRODUCT DETAILS DATA ---------------- */
+const SPEC_LABELS = {
+  uz:{material:"Material",season:"Mavsum",care:"Parvarish",features:"Xususiyatlari",color:"Rangi",size:"O'lcham",type:"Turi",notes:"Hid notalari",longevity:"Turg'unlik",gender:"Kimlar uchun",contents:"Komplekt tarkibi",ingredients:"Tarkibi",skin:"Teri turi",battery:"Batareya",warranty:"Kafolat",display:"Ekran",water:"Suvdan himoya",burn:"Yonish vaqti",volume:"Hajmi",fit:"Moslik",shelf:"Yaroqlilik muddati",country:"Ishlab chiqargan davlat",origin:"Kelib chiqishi",weight:"Og'irligi",stones:"Toshlar",mechanism:"Mexanizm",strap:"Tasma",pages:"Sahifalar",paper:"Qog'oz",ink:"Siyoh",usage:"Qo'llash",resolution:"Video sifati",memory:"Xotira kartasi",ports:"Portlar",thickness:"Qalinligi",scent:"Hid",shade:"Rang tusi",kit:"Komplekt",compat:"Mos keladi",storage:"Xotira",capacity:"Sig'imi",quality:"Sifat"},
+  ru:{material:"Материал",season:"Сезон",care:"Уход",features:"Особенности",color:"Цвет",size:"Размер",type:"Тип",notes:"Ноты аромата",longevity:"Стойкость",gender:"Для кого",contents:"Состав набора",ingredients:"Состав",skin:"Тип кожи",battery:"Аккумулятор",warranty:"Гарантия",display:"Экран",water:"Защита от воды",burn:"Время горения",volume:"Объём",fit:"Совместимость",shelf:"Срок годности",country:"Страна производства",origin:"Происхождение",weight:"Вес",stones:"Вставки",mechanism:"Механизм",strap:"Ремешок",pages:"Страницы",paper:"Бумага",ink:"Чернила",usage:"Применение",resolution:"Разрешение",memory:"Карта памяти",ports:"Порты",thickness:"Толщина",scent:"Аромат",shade:"Оттенок",kit:"Комплект",compat:"Подходит для",storage:"Память",capacity:"Ёмкость",quality:"Качество"}
+};
+
+/* id | variantKey | variants (label:multiplier:ruLabel) | defaultIndex | specs (key=uz~ru) */
+const EXTRA_DSL = `
+1|size|S,M,L,XL|1|material=100% tabiiy ipak~100% натуральный шёлк;season=Bahor va yoz~Весна и лето;care=Qo'lda yuvish, 30°C~Ручная стирка, 30°C;country=Turkiya~Турция;quality=Yuqori sifat~Высокое качество
+2|size|S,M,L,XL|1|material=Kashmir va jun aralashmasi~Кашемир с шерстью;season=Kuz va qish~Осень и зима;care=Quruq tozalash~Химчистка;country=Italiya~Италия;quality=Yuqori sifat~Высокое качество
+3|size|S,M,L,XL|1|material=Suv o'tkazmaydigan gabardin~Водоотталкивающая габардин;season=Bahor va kuz~Весна и осень;features=Kamar bilan, ikki qatorli tugmalar~С поясом, двубортный;country=Fransiya~Франция;quality=Yuqori sifat~Высокое качество
+4||||material=Tabiiy charm~Натуральная кожа;color=Qora, bej~Чёрный, бежевый;features=Oltin rangli furnitura, ichki cho'ntak~Золотистая фурнитура, внутренний карман;country=Italiya~Италия;quality=Premium sinf~Премиум-класс
+5||||material=Ipak~Шёлк;size=90 × 90 sm~90 × 90 см;care=Quruq tozalash~Химчистка;country=Turkiya~Турция;quality=Premium sinf~Премиум-класс
+6||||features=UV400 himoya~Защита UV400;material=Metall ramka~Металлическая оправа;color=Oltin / qora~Золото / чёрный;country=Italiya~Италия;quality=Premium sinf~Премиум-класс
+7|volume|30 ml:0.6,50 ml:1,100 ml:1.65|1|type=Eau de Parfum;notes=Atirgul, pion, oq mushk~Роза, пион, белый мускус;longevity=8–10 soat~8–10 часов;gender=Ayollar uchun~Для женщин;country=Fransiya~Франция;quality=Original mahsulot~Оригинальный продукт
+8|volume|3 × 15 ml:0.75,3 × 30 ml:1|1|type=Parfyum to'plami~Парфюмерный набор;notes=Gulli, shirin, yog'ochli~Цветочный, сладкий, древесный;features=Sovg'a qutisida~В подарочной коробке;country=BAA~ОАЭ;quality=Original mahsulot~Оригинальный продукт
+9|volume|50 ml × 3:1,100 ml × 3:1.7|0|contents=Ko'pik, tonik, krem~Пенка, тоник, крем;ingredients=Aloe vera, gialuron kislotasi, vitamin E~Алоэ вера, гиалуроновая кислота, витамин E;skin=Barcha teri turlari~Все типы кожи;country=Koreya~Южная Корея;quality=Original mahsulot~Оригинальный продукт
+10||||battery=6 soat (g'ilof bilan 24 soat)~6 ч (с кейсом 24 ч);features=Faol shovqin bosish, Bluetooth 5.3~Активное шумоподавление, Bluetooth 5.3;warranty=12 oy~12 месяцев;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
+11|storage|128 GB:1,256 GB:1.15,512 GB:1.4|0|display=6.7″ OLED;battery=5000 mAh;warranty=12 oy~12 месяцев;country=Koreya~Южная Корея;quality=Rasmiy kafolat bilan~С официальной гарантией
+12|size|40 mm:1,44 mm:1.1|0|battery=7 kungacha~До 7 дней;features=Yurak urishi, uyqu, SpO₂~Пульс, сон, SpO₂;water=IP68;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
+13|size|40 × 40 sm:1,50 × 50 sm:1.25|0|material=Baxmal~Бархат;contents=2 dona~2 шт.;color=Pushti va oltin~Розовый и золотистый;country=Turkiya~Турция;quality=Sinovdan o'tgan materiallar~Проверенные материалы
+14|size|20 sm:1,30 sm:1.4|0|material=Metall, oltin rangli qoplama~Металл с золотистым покрытием;features=Mehmonxona va yotoqxona uchun~Для гостиной и спальни;country=Turkiya~Турция;quality=Sinovdan o'tgan materiallar~Проверенные материалы
+15|weight|150 g:1,300 g:1.7|0|ingredients=Tabiiy mum, efir moylari~Натуральный воск, эфирные масла;burn=40 soatgacha~До 40 часов;country=O'zbekiston~Узбекистан;quality=Sinovdan o'tgan materiallar~Проверенные материалы
+16|scent|Vanil:1:Ваниль,Okean:1:Океан,Sandal:1:Сандал|0|volume=8 ml~8 мл;longevity=30 kungacha~До 30 дней;country=Germaniya~Германия;quality=Chidamli materiallar~Прочные материалы
+17|size|M (37 sm):1:M (37 см),L (39 sm):1.05:L (39 см)|0|material=Tabiiy charm~Натуральная кожа;color=Qora~Чёрный;fit=Ko'pchilik avtomobillar uchun~Подходит для большинства авто;country=Italiya~Италия;quality=Chidamli materiallar~Прочные материалы
+18|weight|200 g:0.55,400 g:1,800 g:1.8|1|ingredients=Kakao 55%, kakao yog'i, shakar~Какао 55%, масло какао, сахар;shelf=12 oy~12 месяцев;country=Belgiya~Бельгия;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
+19|weight|250 g:0.55,500 g:1,1 kg:1.85|1|ingredients=100% tabiiy asal~100% натуральный мёд;shelf=24 oy~24 месяца;origin=Tog' hududlari~Горные районы;country=O'zbekiston~Узбекистан;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
+20|weight|2 × 3 kg:0.7,2 × 5 kg:1,2 × 8 kg:1.5|1|material=Po'lat, neopren qoplama~Сталь с неопреновым покрытием;features=Sozlanuvchi og'irlik~Регулируемый вес;country=Germaniya~Германия;quality=Mustahkam va chidamli~Прочный и износостойкий
+21|thickness|6 mm:1,8 mm:1.15|0|material=TPE (ekologik)~TPE (экологичный);size=183 × 61 sm~183 × 61 см;features=Kaymaydigan sirt~Нескользящая поверхность;country=Xitoy~Китай;quality=Mustahkam va chidamli~Прочный и износостойкий
+22||||material=Tabiiy marvarid, 18K oltin qoplama~Натуральный жемчуг, золотое покрытие 18K;features=Sovg'a qutisida~В подарочной коробке;weight=Taxminan 6 g~Примерно 6 г;country=Turkiya~Турция;quality=Sinov belgisi bilan~С пробирным клеймом
+23|size|16,17,18,19|1|material=Oltin 585 sinov~Золото 585 пробы;stones=Mayda toshlar~Мелкие камни;weight=Taxminan 3.2 g~Примерно 3.2 г;country=Italiya~Италия;quality=Sinov belgisi bilan~С пробирным клеймом
+24||||mechanism=Kvars~Кварцевый;strap=Zanglamaydigan po'lat~Нержавеющая сталь;water=3 ATM;country=Yaponiya~Япония;quality=Sinov belgisi bilan~С пробирным клеймом
+25|size|A6:0.8,A5:1|1|pages=192 bet~192 страницы;material=Charm muqova~Кожаная обложка;paper=100 g/m²~100 г/м²;country=Italiya~Италия;quality=Sifatli materiallar~Качественные материалы
+26|kit|3 ta:0.7:3 шт.,5 ta:1:5 шт.|1|material=Metall korpus~Металлический корпус;ink=Qora va ko'k~Чёрные и синие;features=Sovg'a qutisida~В подарочной коробке;country=Germaniya~Германия;quality=Sifatli materiallar~Качественные материалы
+27|size|S,M,L,XL|1|material=Paxta va viskoza~Хлопок и вискоза;features=Qo'lda kashta~Ручная вышивка;season=Mavsumiy kolleksiya~Сезонная коллекция;country=O'zbekiston~Узбекистан;quality=Yuqori sifat~Высокое качество
+28|size|S,M,L,XL|1|material=Yumshoq trikotaj ip~Мягкая трикотажная пряжа;season=Kuz va bahor~Осень и весна;care=30°C da yuvish~Стирка при 30°C;country=Turkiya~Турция;quality=Yuqori sifat~Высокое качество
+29|size|85 sm:1,95 sm:1,105 sm:1|1|material=Tabiiy charm~Натуральная кожа;features=Oltin rangli toka~Золотистая пряжка;country=Italiya~Италия;quality=Premium sinf~Премиум-класс
+30|color|Oltin:1:Золотой,Qora:1:Чёрный,Pushti:1:Розовый|0|material=Atlas va marvarid dekor~Атлас, декор из жемчуга;features=Olinadigan zanjirli tasma~Съёмная цепочка;country=Turkiya~Турция;quality=Premium sinf~Премиум-класс
+31|volume|30 ml:0.65,50 ml:1|1|ingredients=Seramidlar, peptidlar~Керамиды, пептиды;usage=Kechqurun, toza teriga~Вечером, на очищенную кожу;skin=Barcha teri turlari~Все типы кожи;country=Koreya~Южная Корея;quality=Original mahsulot~Оригинальный продукт
+32|shade|Nude:1:Нюд,Atirgul:1:Розовый,Marjon:1:Коралловый,Qizil:1:Красный,Bordo:1:Бордовый|0|features=Uzoq turuvchi formula~Стойкая формула;country=Fransiya~Франция;quality=Original mahsulot~Оригинальный продукт
+33|storage|128 GB:1,256 GB:1.2|0|display=11″;battery=10 soatgacha~До 10 часов;warranty=12 oy~12 месяцев;country=Koreya~Южная Корея;quality=Rasmiy kafolat bilan~С официальной гарантией
+34|capacity|10 000 mAh:0.75,20 000 mAh:1|1|features=Tez zaryadlash 22.5 W~Быстрая зарядка 22.5 Вт;ports=USB-C, USB-A;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
+35|size|40 × 40 sm:1,50 × 50 sm:1.2|0|material=Tabiiy charm~Натуральная кожа;features=Mustahkam tikuv~Прочный пошив;country=O'zbekiston~Узбекистан;quality=Sinovdan o'tgan materiallar~Проверенные материалы
+36|kit|3 dona:0.75,5 dona:1|1|material=Tabiiy marmar~Натуральный мрамор;features=Servirovka uchun~Для сервировки;country=Italiya~Италия;quality=Sinovdan o'tgan materiallar~Проверенные материалы
+37|compat|Sedan:0.9:Седан,Krossover:1:Кроссовер,Minivan:1.2:Минивэн|1|material=Suv o'tkazmaydigan rezina~Водонепроницаемая резина;features=Oson tozalanadi~Легко моется;country=Germaniya~Германия;quality=Chidamli materiallar~Прочные материалы
+38|kit|1 kamera:1:1 камера,2 kamera:1.4:2 камеры|0|resolution=1080p Full HD;features=Tungi ko'rish, G-sensor~Ночной режим, G-сенсор;memory=microSD 128 GB gacha~microSD до 128 GB;country=Koreya~Южная Корея;quality=Chidamli materiallar~Прочные материалы
+39|weight|100 g:0.5,250 g:1|1|contents=Qora choy va tog' o'tlari~Чёрный чай с горными травами;shelf=24 oy~24 месяца;country=Hindiston~Индия;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
+40|volume|250 ml:0.55,500 ml:1,1 l:1.8|1|features=Sovuq presslangan~Холодный отжим;shelf=18 oy~18 месяцев;type=Extra Virgin;country=Ispaniya~Испания;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
+41|capacity|30 l:1,45 l:1.2|0|material=Suv o'tkazmaydigan mato~Водоотталкивающая ткань;features=Poyabzal uchun alohida bo'lim~Отдельный отсек для обуви;country=Turkiya~Турция;quality=Mustahkam va chidamli~Прочный и износостойкий
+42|color|Qora:1:Чёрный,Pushti:1:Розовый|0|battery=10 kungacha~До 10 дней;features=Qadamlar, yurak urishi~Шаги, пульс;water=IP67;country=Xitoy~Китай;quality=Mustahkam va chidamli~Прочный и износостойкий
+43|size|17 sm:1,19 sm:1.05|0|material=Oltin 585 sinov~Золото 585 пробы;features=Nafis zanjir~Изящная цепочка;country=Turkiya~Турция;quality=Sinov belgisi bilan~С пробирным клеймом
+44|size|45 sm:1,50 sm:1.04|0|material=18K oltin asosida~Основа золото 18K;stones=Brilliant~Бриллиант;features=Zanjir bilan birga~Цепочка в комплекте;country=BAA~ОАЭ;quality=Sinov belgisi bilan~С пробирным клеймом
+45|size|A4:1,A5:0.8|0|material=Tabiiy charm~Натуральная кожа;features=Hujjatlar uchun~Для документов;country=Italiya~Италия;quality=Sifatli materiallar~Качественные материалы
+46|color|Oltin:1:Золотой,Pushti:1:Розовый|0|pages=192 bet~192 страницы;size=A5;features=Oltin qirrali sahifalar~Страницы с золотым обрезом;country=Turkiya~Турция;quality=Sifatli materiallar~Качественные материалы
+47|size|28,30,32,34,36|2|material=Paxta va elastan~Хлопок и эластан;season=Barcha mavsumlar~Всесезонные;care=30°C da yuvish~Стирка при 30°C;country=Turkiya~Турция;quality=Yuqori sifat~Высокое качество
+48|size|S,M,L,XL|1|material=Tabiiy charm~Натуральная кожа;season=Bahor va kuz~Весна и осень;care=Maxsus charm vositasi bilan~Специальным средством для кожи;country=Italiya~Италия;quality=Yuqori sifat~Высокое качество
+49||||material=Tabiiy charm~Натуральная кожа;color=Qora, jigarrang~Чёрный, коричневый;features=8 ta karta uchun joy, tanga bo'limi~8 отделений для карт, монетница;country=Turkiya~Турция;quality=Premium sinf~Премиум-класс
+50|kit|5 dona:0.55,10 dona:1,20 dona:1.8|1|ingredients=Gialuron kislotasi, aloe~Гиалуроновая кислота, алоэ;usage=Haftada 2–3 marta~2–3 раза в неделю;skin=Barcha teri turlari~Все типы кожи;country=Koreya~Южная Корея;quality=Original mahsulot~Оригинальный продукт
+51|volume|2 × 150 ml:0.8,2 × 250 ml:1|1|contents=Shampun va konditsioner~Шампунь и кондиционер;ingredients=Argan moyi, keratin~Аргановое масло, кератин;type=Barcha soch turlari~Все типы волос;country=Fransiya~Франция;quality=Original mahsulot~Оригинальный продукт
+52|color|Qora:1:Чёрный,Pushti:1:Розовый|0|battery=12 soatgacha~До 12 часов;features=Bluetooth 5.3, suvdan himoya~Bluetooth 5.3, защита от воды;water=IPX6;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
+53|size|50 × 70 sm:1,70 × 100 sm:1.6|0|material=Metall ramka, shisha~Металлическая рама, стекло;features=Devorga osiladi~Настенное крепление;color=Oltin~Золотистый;country=Italiya~Италия;quality=Sinovdan o'tgan materiallar~Проверенные материалы
+54|size|1.5 kishilik:0.85:1.5-спальный,2 kishilik:1:2-спальный,Evro:1.2:Евро|1|material=Sateen paxta~Хлопковый сатин;contents=Choyshab, jild, 2 ta yostiq jildi~Простыня, пододеяльник, 2 наволочки;care=40°C da yuvish~Стирка при 40°C;country=O'zbekiston~Узбекистан;quality=Sinovdan o'tgan materiallar~Проверенные материалы
+55|weight|250 g:0.55,500 g:1,1 kg:1.8|1|contents=O'rik, mayiz, anjir, bodom~Курага, изюм, инжир, миндаль;shelf=12 oy~12 месяцев;origin=Tabiiy quritilgan~Натуральная сушка;country=O'zbekiston~Узбекистан;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
+56|size|38,39,40,41,42,43,44|3|material=Yengil to'r mato, rezina taglik~Лёгкая сетка, резиновая подошва;features=Amortizatsiya, nafas oluvchi~Амортизация, дышащий материал;season=Barcha mavsumlar~Всесезонные;country=Vetnam~Вьетнам;quality=Mustahkam va chidamli~Прочный и износостойкий
+57|compat|12 V avtomobil:1:12 В автомобиль,Simsiz:1.3:Беспроводной|0|features=Kuchli so'rish~Мощное всасывание;material=ABS plastik~ABS-пластик;country=Xitoy~Китай;quality=Chidamli materiallar~Прочные материалы
+58|size|17 sm:1,19 sm:1.05,21 sm:1.1|1|material=925 kumush~Серебро 925 пробы;features=Nafis zanjir~Изящная цепочка;weight=Taxminan 8 g~Примерно 8 г;country=Italiya~Италия;quality=Sinov belgisi bilan~С пробирным клеймом
+`;
+
+const CAT_ABOUT = {
+  "Fashion":{uz:"Kolleksiyadagi kiyimlar sifatli matolardan tikilgan va har kuni kiyish uchun qulay. O'lchamni tanlashda yordam kerak bo'lsa, menejerlarimizga yozing.", ru:"Одежда из коллекции сшита из качественных тканей и удобна в ежедневной носке. Если нужна помощь с размером, напишите нашим менеджерам."},
+  "Accessories":{uz:"Aksessuarlar obrazingizni to'ldiradi va har qanday kiyim bilan uyg'unlashadi. Har bir buyum sinchiklab tanlangan.", ru:"Аксессуары дополняют образ и сочетаются с любой одеждой. Каждое изделие тщательно отобрано."},
+  "Beauty":{uz:"Parfyumeriya va parvarish vositalari ishonchli ishlab chiqaruvchilardan. Hajmni o'zingizga mos tanlang: sinash uchun kichik, doimiy foydalanish uchun katta.", ru:"Парфюмерия и средства ухода от проверенных производителей. Выбирайте объём под себя: небольшой для пробы, большой для постоянного использования."},
+  "Electronics":{uz:"Texnika kafolat bilan yetkaziladi. Qurilmani qabul qilishda komplektatsiyani tekshiring.", ru:"Техника поставляется с гарантией. При получении проверьте комплектацию."},
+  "Home":{uz:"Uyingizga iliqlik va nafislik olib keladigan buyumlar. Interyer uslubiga qarab tanlang.", ru:"Предметы, которые добавляют дому тепла и изящества. Выбирайте под стиль интерьера."},
+  "Automotive":{uz:"Avtomobil uchun qulay va chiroyli aksessuarlar. Modelingizga mosligini tanlov bosqichida ko'rsating.", ru:"Удобные и красивые аксессуары для авто. Выберите вариант, подходящий вашей модели."},
+  "Food & Drink":{uz:"Tabiiy va sifatli mahsulotlar. Yaroqlilik muddati va saqlash shartlari qadoqda ko'rsatilgan.", ru:"Натуральные качественные продукты. Срок годности и условия хранения указаны на упаковке."},
+  "Sport":{uz:"Mashg'ulotlarni qulay va xavfsiz qilish uchun jihozlar. O'zingizga mos hajm yoki og'irlikni tanlang.", ru:"Инвентарь для комфортных и безопасных тренировок. Выберите подходящий объём или вес."},
+  "Jewelry":{uz:"Zargarlik buyumlari sovg'a qutisida beriladi. Sinov va vazn haqidagi ma'lumot xususiyatlar bo'limida.", ru:"Ювелирные изделия поставляются в подарочной упаковке. Информация о пробе и весе — в разделе характеристик."},
+  "Books & Stationery":{uz:"Yozish va rejalashtirish uchun chiroyli va qulay buyumlar. Sovg'a sifatida ham ajoyib tanlov.", ru:"Красивые и удобные вещи для записей и планирования. Отличный выбор и в подарок."}
+};
+
+const REVIEW_POOL = [
+  {n:"Malika Yusupova", r:5, uz:"Sifati juda yaxshi, rasmdagidek keldi. Tavsiya qilaman!", ru:"Качество очень хорошее, пришло как на фото. Рекомендую!"},
+  {n:"Dilnoza Karimova", r:5, uz:"Qadoqlash chiroyli, sovg'a sifatida ham oldim. Mamnunman.", ru:"Красивая упаковка, брала в подарок. Довольна."},
+  {n:"Nodira Aliyeva", r:5, uz:"Narxiga arziydi, xizmat ko'rsatish a'lo darajada.", ru:"Стоит своих денег, сервис на высоте."},
+  {n:"Sardor Tursunov", r:5, uz:"Tez yetkazib berishdi, hammasi ta'rifdagidek.", ru:"Доставили быстро, всё как в описании."},
+  {n:"Gulnora Rahimova", r:5, uz:"Ikkinchi marta buyurtma beryapman, hech qachon xafa qilishmagan.", ru:"Заказываю уже второй раз, ни разу не подводили."},
+  {n:"Shahzod Rustamov", r:4, uz:"Yaxshi mahsulot, faqat yetkazib berish bir kunga kechikdi.", ru:"Хороший товар, только доставка задержалась на день."},
+  {n:"Javlon Tursunov", r:4, uz:"Sifat yaxshi, narxi biroz yuqoriroq, lekin arziydi.", ru:"Качество хорошее, цена чуть высоковата, но оно того стоит."},
+  {n:"Madina Saidova", r:4, uz:"Kutganimdek, rangi rasmdan biroz farq qiladi.", ru:"Как и ожидала, цвет немного отличается от фото."},
+  {n:"Bekzod Nazarov", r:4, uz:"Yaxshi, tavsiya qilaman. Menejerlar tez javob berishdi.", ru:"Хорошо, рекомендую. Менеджеры быстро отвечают."},
+  {n:"Zarina Mirzayeva", r:5, uz:"Juda chiroyli va sifatli! Do'stlarimga ham tavsiya qildim.", ru:"Очень красиво и качественно! Посоветовала подругам."}
+];
+
+const EXTRA = {};
+EXTRA_DSL.trim().split("\n").forEach(line=>{
+  const parts = line.split("|");
+  const id = parseInt(parts[0],10);
+  const e = {vkey:(parts[1]||"").trim(), variants:[], def:parseInt(parts[3]||"0",10)||0, specs:[]};
+  if(parts[2]) parts[2].split(",").forEach(it=>{
+    const a = it.split(":");
+    e.variants.push({l:a[0].trim(), m:a[1]?parseFloat(a[1]):1, r:a[2]?a[2].trim():""});
+  });
+  if(parts[4]) parts[4].split(";").forEach(s=>{
+    const i = s.indexOf("=");
+    const v = s.slice(i+1).split("~");
+    e.specs.push({k:s.slice(0,i).trim(), uz:v[0].trim(), ru:v[1]!==undefined?v[1].trim():null});
+  });
+  EXTRA[id] = e;
+});
+
+function extraOf(p){ return EXTRA[p.id] || {vkey:"", variants:[], def:0, specs:[]}; }
+function defVi(p){ return extraOf(p).def || 0; }
+function hasVariants(p){ return extraOf(p).variants.length > 0; }
+function unitPrice(p, vi){
+  const v = extraOf(p).variants[vi];
+  const m = v ? v.m : 1;
+  return m === 1 ? p.price : Math.round(p.price * m / 1000) * 1000;
+}
+function ruUnits(s){
+  return s.replace(/\bml\b/g,"мл").replace(/\bkg\b/g,"кг").replace(/\bsm\b/g,"см").replace(/\bmm\b/g,"мм")
+          .replace(/\bg\b/g,"г").replace(/\bl\b/g,"л").replace(/\bdona\b/g,"шт.").replace(/\bta\b/g,"шт.");
+}
+function vLabelRu(v){ return v.r || ruUnits(v.l); }
+function vLabel(v){
+  if(currentLang === "ru") return vLabelRu(v);
+  if(currentLang === "cyrl") return uzToCyr(v.l);
+  return v.l;
+}
+function specLabel(k){
+  const L = (currentLang === "ru" ? SPEC_LABELS.ru : SPEC_LABELS.uz)[k] || k;
+  return currentLang === "cyrl" ? uzToCyr(L) : L;
+}
+function specVal(s){
+  if(currentLang === "ru") return s.ru !== null ? s.ru : s.uz;
+  if(currentLang === "cyrl") return s.ru !== null ? uzToCyr(s.uz) : s.uz;
+  return s.uz;
+}
+function catAbout(cat){
+  const a = CAT_ABOUT[cat]; if(!a) return "";
+  return currentLang === "ru" ? a.ru : (currentLang === "cyrl" ? uzToCyr(a.uz) : a.uz);
+}
+function nameFor(n){ return currentLang === "uz" ? n : uzToCyr(n); }
+function reviewsFor(p){
+  const fives = REVIEW_POOL.filter(r=>r.r===5), fours = REVIEW_POOL.filter(r=>r.r===4);
+  const pick = (arr, n, seed)=>{ const out=[]; for(let i=0;i<n;i++) out.push(arr[(seed+i*2)%arr.length]); return out; };
+  const base = p.rating >= 5 ? pick(fives,3,p.id).concat(pick(fours,1,p.id+1)) : pick(fours,2,p.id).concat(pick(fives,1,p.id+3));
+  return (userReviews[p.id] || []).concat(base);
+}
+function avgOf(revs){ return revs.length ? revs.reduce((a,r)=>a+r.r,0)/revs.length : 0; }
+
+const LONG_DESC = {
+  1:{uz:"Tabiiy ipakdan tikilgan bu ko'ylak tanaga yengil yopishadi va nafis tushadi. Kundalik kiyim ham, bayram obrazi ham uchun mos keladi.", ru:"Платье из натурального шёлка легко ложится по фигуре и красиво драпируется. Подойдёт и на каждый день, и для праздничного образа."},
+  2:{uz:"Kashmir va jun aralashmasi sovuq kunlarda issiq saqlaydi, ammo og'ir emas. Klassik siluet bir necha mavsum modadan chiqmaydi.", ru:"Смесь кашемира и шерсти согревает в холода и при этом не тяжёлая. Классический силуэт не выйдет из моды ещё не один сезон."},
+  3:{uz:"Suvni o'tkazmaydigan mato va kamarli klassik kesim — bahor va kuz yomg'irlarida ishonchli himoya va chiroyli ko'rinish.", ru:"Водоотталкивающая ткань и классический крой с поясом — надёжная защита и стильный вид в весенние и осенние дожди."},
+  4:{uz:"Tabiiy charmdan tikilgan, oltin rangli furnitura bilan bezatilgan keng sumka. Ichki cho'ntaklari kundalik narsalarni tartibda saqlaydi.", ru:"Просторная сумка из натуральной кожи с золотистой фурнитурой. Внутренние карманы помогают держать повседневные вещи в порядке."},
+  5:{uz:"Qo'lda chizilgan naqshli ipak ro'mol bo'yin, bosh yoki sumka bezagi sifatida ishlatiladi. Teriga yoqimli va yengil.", ru:"Шёлковый платок с узором ручной росписи можно носить на шее, на голове или повязать на сумку. Лёгкий и приятный к коже."},
+  6:{uz:"UV400 himoyali linzalar ko'zni quyoshdan asraydi. Oltin rangli ramka har qanday yuz shakliga uyg'unlashadi.", ru:"Линзы с защитой UV400 оберегают глаза от солнца. Золотистая оправа сочетается с любой формой лица."},
+  7:{uz:"Atirgul, pion va oq mushk notalari nafis va iliq aromat yaratadi. Eau de Parfum konsentratsiyasi 8–10 soat turg'unlikni ta'minlaydi.", ru:"Ноты розы, пиона и белого мускуса создают нежный и тёплый аромат. Концентрация Eau de Parfum обеспечивает стойкость 8–10 часов."},
+  8:{uz:"Uch xil xushbo'ylikdan iborat to'plam — gulli, shirin va yog'ochli. Sovg'a qutisida beriladi, bayramga tayyor sovg'a.", ru:"Набор из трёх ароматов — цветочного, сладкого и древесного. Поставляется в подарочной коробке — готовый подарок к празднику."},
+  9:{uz:"Ko'pik, tonik va krem — kundalik parvarishning uch bosqichi. Aloe vera va gialuron kislotasi terini namlaydi.", ru:"Пенка, тоник и крем — три шага ежедневного ухода. Алоэ вера и гиалуроновая кислота увлажняют кожу."},
+  10:{uz:"Faol shovqin bosish tashqi tovushlarni kamaytiradi, Bluetooth 5.3 esa barqaror ulanishni beradi. Quti bilan 24 soatgacha ishlaydi.", ru:"Активное шумоподавление приглушает посторонние звуки, а Bluetooth 5.3 даёт стабильное соединение. С кейсом работают до 24 часов."},
+  11:{uz:"Yuqori aniqlikdagi kamera, 6.7″ OLED ekran va tezkor protsessor. 5000 mAh batareya kun bo'yi yetadi.", ru:"Камера высокого разрешения, экран 6.7″ OLED и быстрый процессор. Аккумулятора 5000 mAh хватает на целый день."},
+  12:{uz:"Yurak urishi, uyqu va SpO₂ ni kuzatadi, IP68 himoyasi bor. Batareya 7 kungacha yetadi.", ru:"Следит за пульсом, сном и SpO₂, имеет защиту IP68. Заряда батареи хватает до 7 дней."},
+  13:{uz:"Yumshoq baxmal qoplamali ikki yostiqcha divan va yotoqxonaga iliq kayfiyat beradi. Pushti va oltin ranglar uyg'unligi.", ru:"Две подушки с мягким бархатным чехлом добавят дивану и спальне уюта. Сочетание розового и золотистого цветов."},
+  14:{uz:"Oltin rangli metall shamdon stol yoki javonni bezaydi. Kechki ovqat va dam olish onlarida alohida muhit yaratadi.", ru:"Золотистый металлический подсвечник украсит стол или полку. Создаёт особую атмосферу за ужином и во время отдыха."},
+  15:{uz:"Tabiiy mum va efir moylaridan quyilgan shamlar 40 soatgacha tekis yonadi va xonani yumshoq hid bilan to'ldiradi.", ru:"Свечи из натурального воска и эфирных масел горят ровно до 40 часов и наполняют комнату мягким ароматом."},
+  16:{uz:"Salon uchun ixcham xushbo'ylagich: vanil, okean yoki sandal hidi. Taxminan 30 kun davomida yoqimli hid saqlanadi.", ru:"Компактный ароматизатор для салона: ваниль, океан или сандал. Приятный запах сохраняется около 30 дней."},
+  17:{uz:"Tabiiy charm rul qopqog'i qo'lga qulay ushlanadi va sirpanmaydi. Ko'pchilik avtomobillarga mos keladi.", ru:"Чехол на руль из натуральной кожи удобно лежит в руках и не скользит. Подходит для большинства автомобилей."},
+  18:{uz:"Belgiya shokoladidan tayyorlangan to'plam, tarkibida 55% kakao. Chiroyli qutida — sovg'a uchun ideal.", ru:"Набор из бельгийского шоколада с содержанием какао 55%. В красивой коробке — идеальный подарок."},
+  19:{uz:"Tog' hududlarida yig'ilgan 100% tabiiy asal. Qo'shimchalarsiz, xona haroratida 24 oy saqlanadi.", ru:"100% натуральный мёд, собранный в горных районах. Без добавок, хранится при комнатной температуре до 24 месяцев."},
+  20:{uz:"Po'lat o'zakli, neopren qoplamali gantellar qo'lda sirpanmaydi. Uy mashg'ulotlari uchun og'irlikni tanlang.", ru:"Гантели со стальным сердечником и неопреновым покрытием не скользят в руке. Выберите вес для домашних тренировок."},
+  21:{uz:"Ekologik TPE materialdan, kaymaydigan sirt bilan. 183×61 sm o'lchami yoga va cho'zilish mashqlariga qulay.", ru:"Из экологичного материала TPE с нескользящей поверхностью. Размер 183×61 см удобен для йоги и растяжки."},
+  22:{uz:"Tabiiy marvarid va 18K oltin qoplama — klassik va nafis. Sovg'a qutisida beriladi.", ru:"Натуральный жемчуг и золотое покрытие 18K — классика и изящество. Поставляются в подарочной коробке."},
+  23:{uz:"585 sinovli oltin uzuk mayda toshlar bilan bezatilgan. O'lchamni tanlang va sovg'a qutisida oling.", ru:"Золотое кольцо 585 пробы, украшенное мелкими камнями. Выберите размер — доставим в подарочной коробке."},
+  24:{uz:"Kvars mexanizmi aniq vaqtni ko'rsatadi, zanglamaydigan po'lat tasma uzoq xizmat qiladi. 3 ATM suvdan himoya.", ru:"Кварцевый механизм точно показывает время, ремешок из нержавеющей стали служит долго. Защита от воды 3 ATM."},
+  25:{uz:"Charm muqovali, 192 betli bloknot. Oltin qirrali sahifalar va 100 g/m² qog'oz yozishni yoqimli qiladi.", ru:"Блокнот в кожаной обложке на 192 страницы. Страницы с золотым обрезом и бумага 100 г/м² делают письмо приятным."},
+  26:{uz:"Metall korpusli qora va ko'k siyohli qalamlar sovg'a qutisida. Ish stoli va sovg'a uchun nafis tanlov.", ru:"Ручки в металлическом корпусе с чёрными и синими чернилами в подарочной коробке. Элегантный выбор для рабочего стола и в подарок."},
+  27:{uz:"Paxta va viskozadan tikilgan, qo'lda kashta bilan bezatilgan ko'ylak. Mavsumiy kolleksiyaning noyob modeli.", ru:"Платье из хлопка и вискозы с ручной вышивкой. Уникальная модель сезонной коллекции."},
+  28:{uz:"Yumshoq ipdan to'qilgan yengil sviter kuz va bahor uchun. 30°C da yuvish mumkin.", ru:"Лёгкий свитер из мягкой пряжи для осени и весны. Можно стирать при 30°C."},
+  29:{uz:"Tabiiy charm belbog' oltin rangli toka bilan — klassik va zamonaviy kiyimga mos.", ru:"Ремень из натуральной кожи с золотистой пряжкой — подходит и к классической, и к современной одежде."},
+  30:{uz:"Atlas va marvarid dekorli kechki klatch, olinadigan zanjirli tasma bilan. Tantanali tadbirlar uchun.", ru:"Вечерний клатч из атласа с декором из жемчуга и съёмной цепочкой. Для торжественных мероприятий."},
+  31:{uz:"Seramidlar va peptidlar tungi vaqtda terini qayta tiklaydi. Toza teriga kechqurun suring.", ru:"Керамиды и пептиды восстанавливают кожу в ночное время. Наносите вечером на очищенную кожу."},
+  32:{uz:"Beshta tabiiy tus va uzoq turuvchi formula. Rangni o'zingizga mos tanlang.", ru:"Пять натуральных оттенков и стойкая формула. Выберите цвет под свой образ."},
+  33:{uz:"11″ ekran va kuchli protsessor ish, o'qish va ijod uchun. Batareya 10 soatgacha ishlaydi.", ru:"Экран 11″ и мощный процессор для работы, учёбы и творчества. Батарея работает до 10 часов."},
+  34:{uz:"22.5 W tez zaryad va USB-C/USB-A portlari. Safarlarda telefon va quloqchinlarni quvvatlaydi.", ru:"Быстрая зарядка 22.5 Вт и порты USB-C/USB-A. В поездках заряжает телефон и наушники."},
+  35:{uz:"Tabiiy charmdan, mustahkam tikuv bilan. Zamonaviy interyerga qat'iy uslub qo'shadi.", ru:"Из натуральной кожи с прочным швом. Добавляет современному интерьеру строгий стиль."},
+  36:{uz:"Tabiiy marmar servirovka taxtalari pishloq, mevalar va shirinliklarni chiroyli taqdim etadi.", ru:"Сервировочные доски из натурального мрамора красиво подают сыры, фрукты и десерты."},
+  37:{uz:"Suv o'tkazmaydigan rezina gilamchalar salonni changdan va namlikdan himoya qiladi, oson yuviladi.", ru:"Водонепроницаемые резиновые коврики защищают салон от грязи и влаги, легко моются."},
+  38:{uz:"1080p Full HD yozuv, tungi ko'rish va G-sensor. 128 GB gacha microSD karta qo'llab-quvvatlanadi.", ru:"Запись 1080p Full HD, ночной режим и G-сенсор. Поддерживаются карты microSD до 128 GB."},
+  39:{uz:"Qora choy va tog' o'tlari aralashmasi. Qadoqlangan holda 24 oy saqlanadi.", ru:"Смесь чёрного чая и горных трав. В закрытой упаковке хранится 24 месяца."},
+  40:{uz:"Sovuq presslangan Extra Virgin zaytun moyi salat va issiq taomlar uchun. Yaroqlilik muddati 18 oy.", ru:"Оливковое масло Extra Virgin холодного отжима для салатов и горячих блюд. Срок годности 18 месяцев."},
+  41:{uz:"Suv o'tkazmaydigan matodan, poyabzal uchun alohida bo'limli sumka. Mashg'ulot va safar uchun.", ru:"Сумка из водоотталкивающей ткани с отдельным отсеком для обуви. Для тренировок и поездок."},
+  42:{uz:"Qadamlar va yurak urishini kuzatadi, IP67 himoyasi bor. Batareya 10 kungacha yetadi.", ru:"Считает шаги и пульс, защищён по стандарту IP67. Заряда хватает до 10 дней."},
+  43:{uz:"585 sinovli oltin bilaguzuk nafis zanjir bilan — kundalik va bayram uchun.", ru:"Золотой браслет 585 пробы с изящной цепочкой — на каждый день и на праздник."},
+  44:{uz:"18K oltin asosidagi kulon brilliant bilan bezatilgan, zanjir bilan birga.", ru:"Кулон на основе золота 18K с бриллиантом, цепочка в комплекте."},
+  45:{uz:"Hujjatlar uchun tabiiy charm papkalar — ofis uchun ham, sovg'a uchun ham.", ru:"Папки из натуральной кожи для документов — и для офиса, и в подарок."},
+  46:{uz:"Oltin qirrali 192 betli A5 kundalik rejalashtirish va maqsadlarni yozish uchun.", ru:"Ежедневник A5 на 192 страницы с золотым обрезом для планирования и записи целей."},
+  47:{uz:"Paxta va elastandan, har mavsumga mos klassik kesim. Qulay o'tiradi va shaklini yo'qotmaydi.", ru:"Из хлопка и эластана, классический крой на любой сезон. Удобно сидит и не теряет форму."},
+  48:{uz:"Tabiiy charm kurtka bahor va kuz uchun. Maxsus charm vositasi bilan parvarish qilinsa, yillar xizmat qiladi.", ru:"Куртка из натуральной кожи для весны и осени. При уходе специальным средством служит годами."},
+  49:{uz:"8 ta karta uchun joyi va tanga bo'limi bor ixcham hamyon. Qora va jigarrang ranglarda.", ru:"Компактный кошелёк на 8 карт с отделением для монет. В чёрном и коричневом цветах."},
+  50:{uz:"Gialuron kislotasi va aloe bilan to'yingan mato niqoblar. Haftada 2–3 marta qo'llash tavsiya etiladi.", ru:"Тканевые маски с гиалуроновой кислотой и алоэ. Рекомендуется использовать 2–3 раза в неделю."},
+  51:{uz:"Argan moyi va keratinli shampun va konditsioner to'plami barcha soch turlariga mos.", ru:"Набор шампуня и кондиционера с аргановым маслом и кератином подходит для всех типов волос."},
+  52:{uz:"Bluetooth 5.3, IPX6 suvdan himoya va 12 soatgacha ishlash. Tabiatda va uyda musiqa uchun.", ru:"Bluetooth 5.3, защита от воды IPX6 и до 12 часов работы. Для музыки на природе и дома."},
+  53:{uz:"Metall ramkali, oltin rangli devor ko'zgusi. Yo'lak va yotoqxona interyerini yangilaydi.", ru:"Настенное зеркало в золотистой металлической раме. Освежает интерьер прихожей и спальни."},
+  54:{uz:"Sateen paxtadan choyshab, ko'rpa jildi va ikkita yostiq jildi. 40°C da yuviladi.", ru:"Хлопковый сатин: простыня, пододеяльник и две наволочки. Стирка при 40°C."},
+  55:{uz:"O'rik, mayiz, anjir va bodom assortisi tabiiy quritilgan. 12 oy saqlanadi.", ru:"Ассорти из кураги, изюма, инжира и миндаля натуральной сушки. Хранится 12 месяцев."},
+  56:{uz:"Yengil to'r mato va amortizatsiyali rezina taglik. Nafas oluvchi, har mavsumga mos.", ru:"Лёгкая сетка и амортизирующая резиновая подошва. Дышащие, подходят на любой сезон."},
+  57:{uz:"Salon uchun ixcham changyutgich, kuchli so'rish. Simsiz va 12 V variantlari bor.", ru:"Компактный пылесос для салона с мощным всасыванием. Есть беспроводной вариант и от 12 В."},
+  58:{uz:"925 sinovli kumush bilaguzuk nafis zanjir bilan. Uch xil uzunlikda.", ru:"Серебряный браслет 925 пробы с изящной цепочкой. Три варианта длины."}
+};
+function longDesc(p){
+  const d = LONG_DESC[p.id]; if(!d) return pDesc(p);
+  return currentLang === "ru" ? d.ru : (currentLang === "cyrl" ? uzToCyr(d.uz) : d.uz);
+}
+
+function starsHTML(rating){
+  let s = "";
+  for(let i=1;i<=5;i++){
+    s += `<svg class="${i<=rating?'':'empty'}" viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9.5 17,14.5 18.5,22 12,18 5.5,22 7,14.5 2,9.5 9,9"/></svg>`;
+  }
+  return s;
+}
+
+
+const REVIEWS = [
+  {name:"Malika Yusupova", cat:"Fashion buyurtmasi", cat_ru:"Заказ из категории Fashion", rating:5, text:"Ipak ko'ylak juda sifatli, rasmda ko'rsatilganidek keldi. Yetkazib berish ham tez bo'ldi, albatta yana buyurtma beraman.", text_ru:"Шёлковое платье очень качественное, пришло точно как на фото. Доставка была быстрой, обязательно закажу ещё."},
+  {name:"Dilnoza Karimova", cat:"Jewelry buyurtmasi", cat_ru:"Заказ из категории Jewelry", rating:5, text:"Oltin uzukni sovg'a sifatida oldim — qadoqlash ham juda chiroyli, sifatidan mamnunman.", text_ru:"Купила золотое кольцо в подарок — упаковка очень красивая, качеством довольна."},
+  {name:"Shahzod Rustamov", cat:"Electronics buyurtmasi", cat_ru:"Заказ из категории Electronics", rating:4, text:"Simsiz quloqchinlar narxiga nisbatan juda yaxshi ishlaydi. Faqat yetkazib berish bir kun kechikdi.", text_ru:"Беспроводные наушники отлично работают за свою цену. Только доставка задержалась на день."},
+  {name:"Nodira Aliyeva", cat:"Beauty buyurtmasi", cat_ru:"Заказ из категории Beauty", rating:5, text:"Parfyum hidi uzoq turadi, do'stlarimga ham tavsiya qildim. Xizmat ko'rsatish darajasi a'lo.", text_ru:"Парфюм держится долго, посоветовала подругам. Уровень сервиса отличный."},
+  {name:"Javlon Tursunov", cat:"Home buyurtmasi", cat_ru:"Заказ из категории Home", rating:4, text:"Interyer uchun buyumlar sifatli va nafis ko'rinishga ega. Saytda buyurtma berish ham qulay.", text_ru:"Товары для интерьера качественные и выглядят изящно. Заказывать на сайте тоже удобно."}
+];
+
+function avgRating(){
+  const sum = REVIEWS.reduce((a,r)=>a+r.rating,0);
+  return (sum/REVIEWS.length).toFixed(1);
+}
+
+
+
+/* ======================= shared logic ======================= */
+const PAGE = document.body.dataset.page || "index";
+const $ = (sel, root) => (root || document).querySelector(sel);
+const $$ = (sel, root) => [...(root || document).querySelectorAll(sel)];
+function esc(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function getParam(name){ return new URLSearchParams(location.search).get(name); }
+
+function applyStaticI18n(){
+  $$("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
+  $$("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+}
+function specOf(p, key){
+  const s = extraOf(p).specs.find(x => x.k === key);
+  return s ? specVal(s) : "";
+}
+
+/* ---------------- toast ---------------- */
+let toastTimer;
+function showToast(msg){
+  const el = $("#toast");
+  $("#toastMsg").textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2400);
+}
+
+/* ---------------- badges ---------------- */
+function syncBadges(pop){
+  const set = (id, n, doPop) => {
+    const b = $(id); if(!b) return;
+    b.textContent = n;
+    b.classList.toggle("show", n > 0);
+    if(doPop){ b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
+  };
+  set("#wishBadge", wishlist.size, pop === "wish");
+  set("#cartBadge", Object.values(cart).reduce((a, b) => a + b, 0), pop === "cart");
+}
+
+/* ---------------- header / footer ---------------- */
+const NAV = [["index.html","nav_home","index"],["products.html","nav_catalog","products"],["about.html","nav_about","about"]];
+function renderHeader(){
+  const el = $("#siteHeader"); if(!el) return;
+  const q = getParam("q") || "";
+  el.innerHTML = `
+  <header id="hdr">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="mono"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18V6l4 5 4-5 4 5 4-5v12" stroke="#E9CB82" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand-text"><span class="name">Maxi_by_MAXLIYO</span><span class="tag">SIFAT · ISHONCH · NAQISLIK</span></span>
+      </a>
+      <nav class="primary-nav">
+        ${NAV.map(n => `<a href="${n[0]}" class="${PAGE === n[2] ? 'active' : ''}">${t(n[1])}</a>`).join("")}
+      </nav>
+      <div class="header-actions">
+        <form class="search-box" id="hSearch" role="search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#2B2118" stroke-width="1.7"/><path d="M21 21l-4.3-4.3" stroke="#2B2118" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <input id="searchInput" type="text" value="${esc(q)}" placeholder="${t('search_ph')}" autocomplete="off">
+        </form>
+        <a class="icon-btn ${PAGE === 'profile' ? 'active' : ''}" href="profile.html" aria-label="${t('nav_profile')}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-3.6 4.6-5.4 7.5-5.4S17.9 16.4 19.5 20" stroke-linecap="round"/></svg>
+        </a>
+        <a class="icon-btn" href="profile.html#saved" aria-label="${t('prof_saved_title')}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9.3C.4 8 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.4C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>
+          <span class="badge" id="wishBadge">0</span>
+        </a>
+        <a class="icon-btn ${PAGE === 'cart' ? 'active' : ''}" href="cart.html" aria-label="${t('nav_cart')}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4h2l2.4 12.4a2 2 0 002 1.6h8.2a2 2 0 002-1.6L21 8H6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="21" r="1.3"/><circle cx="18" cy="21" r="1.3"/></svg>
+          <span class="badge" id="cartBadge">0</span>
+        </a>
+        <button class="burger" id="burgerBtn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+  </header>`;
+  $("#burgerBtn").onclick = () => $("#hdr").classList.toggle("nav-open");
+  $("#hSearch").onsubmit = (e) => {
+    e.preventDefault();
+    const v = $("#searchInput").value.trim();
+    if(PAGE === "products" && !getParam("id")){ if(window.onSearchInput) window.onSearchInput(v); }
+    else location.href = "products.html" + (v ? "?q=" + encodeURIComponent(v) : "");
+  };
+  $("#searchInput").oninput = (e) => { if(PAGE === "products" && !getParam("id") && window.onSearchInput) window.onSearchInput(e.target.value.trim()); };
+  syncBadges();
+}
+
+function renderFooter(){
+  const el = $("#siteFooter"); if(!el) return;
+  el.innerHTML = `
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a href="index.html" class="brand">
+            <span class="mono"><svg viewBox="0 0 24 24" fill="none"><path d="M4 18V6l4 5 4-5 4 5 4-5v12" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="brand-text"><span class="name">Maxi_by_MAXLIYO</span></span>
+          </a>
+          <p>${t('foot_desc')}</p>
+        </div>
+        <div>
+          <h4>${t('foot_col_catalog')}</h4>
+          <ul>${["Fashion","Jewelry","Electronics","Beauty"].map(c => `<li><a href="products.html?cat=${encodeURIComponent(c)}">${catLabel(c)}</a></li>`).join("")}</ul>
+        </div>
+        <div>
+          <h4>${t('foot_col_company')}</h4>
+          <ul>
+            <li><a href="about.html">${t('nav_about')}</a></li>
+            <li><a href="profile.html">${t('nav_profile')}</a></li>
+            <li><a href="cart.html">${t('nav_cart')}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>${t('foot_col_help')}</h4>
+          <ul>
+            <li><a href="about.html#faq">${t('faq_title')}</a></li>
+            <li><a href="about.html#contact">${t('nav_contact')}</a></li>
+            <li><a href="about.html#contact">+998 90 123 45 67</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom"><span>${t('foot_rights')}</span><span>${t('foot_city')}</span></div>
+    </div>
+  </footer>`;
+}
+
+/* ---------------- product cards ---------------- */
+const HEART = '<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8 2 4.5 5.6 4c2.1-.3 4 .8 6.4 3.4C14.4 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4 3.6 7.7C19.5 16.4 12 21 12 21z"/></svg>';
+function cardHTML(p){
+  const rv = reviewsFor(p), avg = avgOf(rv);
+  const dvi = defVi(p);
+  const meta = hasVariants(p) ? vLabel(extraOf(p).variants[dvi]) : specOf(p, "country");
+  return `
+  <article class="p-card" data-id="${p.id}">
+    <a class="p-media" href="products.html?id=${p.id}" aria-label="${esc(pName(p))}">
+      ${ICONS[p.icon]}
+      <span class="p-quick"><span class="qk">${t('view_product')}</span></span>
+    </a>
+    <button type="button" class="p-wish ${wishlist.has(p.id) ? 'active' : ''}" data-wish="${p.id}" aria-label="${t('wish_aria')}">${HEART}</button>
+    <div class="p-body">
+      <div class="p-cat">${esc(catLabel(p.cat).toUpperCase())}</div>
+      <a class="p-name" href="products.html?id=${p.id}">${esc(pName(p))}</a>
+      <div class="p-meta">${esc(meta)}</div>
+      <div class="p-stars">${starsHTML(Math.round(avg))}<span class="p-count">(${rv.length})</span></div>
+      <div class="p-foot">
+        <div class="p-price">${fmtPrice(unitPrice(p, dvi))}<small>UZS</small></div>
+        <button type="button" class="p-add" data-add="${p.id}" aria-label="${t('add_aria')}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+  </article>`;
+}
+
+document.addEventListener("click", (e) => {
+  const w = e.target.closest("[data-wish]");
+  if(w){
+    const id = Number(w.dataset.wish);
+    if(wishlist.has(id)) wishlist.delete(id); else wishlist.add(id);
+    $$(`[data-wish="${id}"]`).forEach(b => b.classList.toggle("active", wishlist.has(id)));
+    saveState(); syncBadges("wish");
+    if(window.onWishChange) window.onWishChange(id);
+    return;
+  }
+  const a = e.target.closest("[data-add]");
+  if(a){
+    const id = Number(a.dataset.add);
+    const p = PRODUCTS.find(x => x.id === id);
+    if(hasVariants(p)) location.href = "products.html?id=" + id;
+    else addToCart(id, 0, 1);
+  }
+});
+
+/* ---------------- cart ---------------- */
+function cartKey(id, vi){ return id + ":" + vi; }
+function addToCart(id, vi, qty, silent){
+  const p = PRODUCTS.find(x => x.id === id);
+  if(vi === null || vi === undefined) vi = defVi(p);
+  const k = cartKey(id, vi);
+  cart[k] = Math.min(99, (cart[k] || 0) + (qty || 1));
+  saveState(); syncBadges("cart");
+  if(!silent) showToast(t("toast_added"));
+}
+function setQty(key, qty){
+  if(qty <= 0) delete cart[key]; else cart[key] = Math.min(99, qty);
+  saveState(); syncBadges();
+}
+function clearCart(){ cart = {}; promo = null; saveState(); syncBadges(); }
+function cartLines(){
+  return Object.keys(cart).map(k => {
+    const parts = k.split(":").map(Number);
+    const p = PRODUCTS.find(x => x.id === parts[0]);
+    if(!p) return null;
+    const vi = parts[1] || 0, unit = unitPrice(p, vi);
+    return {key:k, p, vi, qty:cart[k], unit, sum:unit * cart[k]};
+  }).filter(Boolean);
+}
+function cartTotals(){
+  const lines = cartLines();
+  const subtotal = lines.reduce((a, l) => a + l.sum, 0);
+  const discount = promo ? Math.round(subtotal * promo.percent / 100) : 0;
+  return {lines, subtotal, discount, total: subtotal - discount, count: lines.reduce((a, l) => a + l.qty, 0)};
+}
+function lineVariant(l){
+  const v = extraOf(l.p).variants[l.vi];
+  return v ? vLabel(v) : "";
+}
+
+/* ---------------- orders → Telegram ---------------- */
+function tgEscape(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function makeOrderNo(){ return "MX-" + Date.now().toString(36).toUpperCase().slice(-6); }
+
+async function sendTelegram(text){
+  if(!TG.chatId) throw new Error("TG.chatId is empty — set your Telegram chat id in the code");
+  const r = await fetch("https://api.telegram.org/bot" + TG.token + "/sendMessage", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({chat_id: TG.chatId, text: text.slice(0, 4000), parse_mode: "HTML", disable_web_page_preview: true})
+  });
+  const j = await r.json();
+  if(!j.ok) throw new Error(j.description || "Telegram error");
+  return j.result;
+}
+
+function buildOrderMessage(o){
+  const money = n => n.toLocaleString("ru-RU") + " " + I18N.ru.currency;
+  const langName = o.lang === "ru" ? "RU" : (o.lang === "cyrl" ? "ЎЗ (кириллица)" : "UZ (латиница)");
+  const lines = o.items.map((it, i) => {
+    const p = PRODUCTS.find(x => x.id === it.id);
+    const v = p && extraOf(p).variants[it.vi];
+    return (i + 1) + ". " + tgEscape(p ? p.name_ru : "#" + it.id) + (v ? tgEscape(" (" + vLabelRu(v) + ")") : "") +
+      " — " + it.qty + " × " + money(it.unit) + " = " + money(it.unit * it.qty);
+  }).join("\n");
+  return "🛍 <b>Новый заказ " + o.no + "</b>\n\n" +
+    "👤 <b>Имя:</b> " + tgEscape(o.name) + "\n" +
+    "📞 <b>Телефон:</b> " + tgEscape(o.phone) + "\n" +
+    "📍 <b>Адрес:</b> " + tgEscape(o.address) + "\n" +
+    (o.comment ? "💬 <b>Комментарий:</b> " + tgEscape(o.comment) + "\n" : "") +
+    "💳 <b>Оплата:</b> " + (o.pay === "card" ? "Картой" : "Наличными") + "\n" +
+    "🌐 <b>Язык сайта:</b> " + langName + "\n\n" +
+    "<b>Товары:</b>\n" + lines + "\n\n" +
+    (o.promo ? "🏷 Промокод " + tgEscape(o.promo) + " (−" + o.percent + "%): −" + money(o.discount) + "\n" : "") +
+    "💰 <b>Итого: " + money(o.total) + "</b>\n" +
+    "🕒 " + new Date(o.ts).toLocaleString("ru-RU", {timeZone: "Asia/Tashkent"});
+}
+
+async function placeOrder(form){
+  const T = cartTotals();
+  if(!T.lines.length) throw new Error("empty cart");
+  const order = {
+    no: makeOrderNo(), ts: Date.now(),
+    name: form.name.trim(), phone: form.phone.trim(), address: form.address.trim(), comment: (form.comment || "").trim(), pay: form.pay,
+    lang: currentLang,
+    items: T.lines.map(l => ({id: l.p.id, vi: l.vi, qty: l.qty, unit: l.unit})),
+    subtotal: T.subtotal, discount: T.discount, total: T.total,
+    promo: promo ? promo.code : null, percent: promo ? promo.percent : 0,
+    status: "sent"
+  };
+  await sendTelegram(buildOrderMessage(order));
+  orders.unshift(order);
+  cart = {}; promo = null;
+  if(!account.name) account.name = order.name;
+  if(!account.phone) account.phone = order.phone;
+  account.address = order.address;
+  saveState(); syncBadges();
+  return order;
+}
+
+async function sendContactMessage(d){
+  const msg = "📩 <b>Сообщение с сайта</b>\n\n" +
+    "👤 <b>Имя:</b> " + tgEscape(d.name) + "\n" +
+    "📞 <b>Контакт:</b> " + tgEscape(d.contact) + "\n" +
+    "💬 <b>Сообщение:</b> " + tgEscape(d.message) + "\n" +
+    "🕒 " + new Date().toLocaleString("ru-RU", {timeZone: "Asia/Tashkent"});
+  return sendTelegram(msg);
+}
+
+/* ---------------- promo ---------------- */
+function applyPromoCode(code){
+  code = String(code || "").trim().toUpperCase();
+  if(PROMO_CODES[code]){ promo = {code, percent: PROMO_CODES[code]}; saveState(); return promo; }
+  return null;
+}
+
+/* ---------------- scroll reveal ---------------- */
+let revealObserver = null;
+function observeReveals(){
+  if(!("IntersectionObserver" in window)){ $$(".reveal").forEach(el => el.classList.add("in")); return; }
+  if(!revealObserver){
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add("in"); revealObserver.unobserve(en.target); } });
+    }, {threshold: 0.12});
+  }
+  $$(".reveal:not(.in)").forEach(el => revealObserver.observe(el));
+}
+
+/* ---------------- boot / language ---------------- */
+function boot(renderFn){
+  window.__render = () => { if(renderFn) renderFn(); applyStaticI18n(); observeReveals(); };
+  document.documentElement.lang = currentLang === "ru" ? "ru" : "uz";
+  renderHeader(); renderFooter();
+  window.__render();
+}
+function setLang(lang){
+  currentLang = lang;
+  saveState();
+  document.documentElement.lang = lang === "ru" ? "ru" : "uz";
+  renderHeader(); renderFooter();
+  window.__render();
+}
+
+
+/* ---------------- shared review card ---------------- */
+function reviewCardHTML(r){
+  const name = r.u ? r.n : nameFor(r.n);
+  const text = r.u ? r.text : (currentLang === "ru" ? r.ru : (currentLang === "cyrl" ? uzToCyr(r.uz) : r.uz));
+  const sub = r.u ? new Date(r.date).toLocaleDateString("ru-RU") : "";
+  return `<div class="review-card">
+    <div class="review-head">
+      <div class="review-avatar">${esc(name.charAt(0).toUpperCase())}</div>
+      <div><div class="review-name">${esc(name)}</div>${sub ? `<div class="review-cat">${sub}</div>` : ''}</div>
+    </div>
+    <div class="p-stars">${starsHTML(r.r)}</div>
+    <p>${esc(text)}</p>
+  </div>`;
+}
+
+</script>
+<script>
+/* ======================= about page: story, values, reviews, FAQ, contact ======================= */
+const aboutRoot = $("#aboutRoot");
+const ctDraft = {name: "", contact: "", message: ""};
+let ctBusy = false;
+
+function renderAbout(){
+  document.title = t('nav_about') + " — Maxi_by_MAXLIYO";
+  const sum = REVIEWS.reduce((a, r) => a + r.rating, 0) / REVIEWS.length;
+  aboutRoot.innerHTML = `
+    <div class="page-head">
+      <div class="crumbs"><a href="index.html">${t('nav_home')}</a><span class="sep">/</span><span>${t('nav_about')}</span></div>
+      <h1 class="page-title">${t('about_title')}</h1>
+    </div>
+
+    <section class="pd-sec about-text" style="margin-top:30px;">
+      <h2>${t('about_story_title')}</h2>
+      <p>${t('about_body')}</p>
+      <p>${t('about_extra2')}</p>
+      <div class="about-stats">
+        <div><strong>${PRODUCTS.length}+</strong><span>${t('about_stat_products')}</span></div>
+        <div><strong>${CATEGORIES.length}</strong><span>${t('about_stat_categories')}</span></div>
+        <div><strong>${sum.toFixed(1)}</strong><span>${t('about_stat_rating')}</span></div>
+      </div>
+      <p>${t('about_extra')}</p>
+    </section>
+
+    <section class="pd-sec">
+      <h2>${t('about_values_title')}</h2>
+      <div class="values">
+        ${[1,2,3].map(i => `<div class="value reveal"><h3>${t('val' + i + '_t')}</h3><p>${t('val' + i + '_d')}</p></div>`).join("")}
+      </div>
+    </section>
+
+    <section class="pd-sec">
+      <h2>${t('reviews_title')}</h2>
+      <div class="reviews-grid">
+        ${REVIEWS.map(r => `
+        <div class="review-card reveal">
+          <div class="review-head">
+            <div class="review-avatar">${esc(nameFor(r.name).charAt(0))}</div>
+            <div><div class="review-name">${esc(nameFor(r.name))}</div><div class="review-cat">${esc(reviewCat(r))}</div></div>
+          </div>
+          <div class="p-stars">${starsHTML(r.rating)}</div>
+          <p>${esc(reviewText(r))}</p>
+        </div>`).join("")}
+      </div>
+    </section>
+
+    <section class="pd-sec faq" id="faq">
+      <h2>${t('faq_title')}</h2>
+      ${[1,2,3,4].map(i => `<details><summary>${t('faq' + i + '_q')}</summary><p>${t('faq' + i + '_a')}</p></details>`).join("")}
+    </section>
+
+    <section class="pd-sec" id="contact">
+      <h2>${t('contact_title')}</h2>
+      <div class="contact-grid">
+        <div>
+          <p style="color:var(--ink-soft);margin-bottom:6px;">${t('contact_body')}</p>
+          <div class="contact-info">
+            <div class="contact-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L7.9 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span><div><small style="color:var(--ink-soft);display:block;font-size:.7rem;">${t('contact_phone_l')}</small>+998 90 123 45 67</div></div>
+            <div class="contact-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg></span><div><small style="color:var(--ink-soft);display:block;font-size:.7rem;">${t('contact_email_l')}</small>info@maxibymaxliyo.uz</div></div>
+            <div class="contact-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.3"/></svg></span><div><small style="color:var(--ink-soft);display:block;font-size:.7rem;">${t('contact_addr_l')}</small>${t('foot_city')}</div></div>
+            <div class="contact-row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><small style="color:var(--ink-soft);display:block;font-size:.7rem;">${t('contact_hours_l')}</small>${t('contact_hours_v')}</div></div>
+          </div>
+        </div>
+        <form class="contact-form card" id="contactForm" novalidate>
+          <label>${t('acc_name_ph')}</label>
+          <input type="text" id="ctName" placeholder="${t('contact_name_ph')}" value="${esc(ctDraft.name || account.name || '')}">
+          <label>${t('acc_email_ph')}</label>
+          <input type="text" id="ctContact" placeholder="${t('contact_reach_ph')}" value="${esc(ctDraft.contact || account.phone || '')}">
+          <label>${t('contact_msg_ph').replace('...', '')}</label>
+          <textarea rows="4" id="ctMsg" placeholder="${t('contact_msg_ph')}">${esc(ctDraft.message)}</textarea>
+          <div class="co-error" id="ctError"></div>
+          <button type="submit" class="btn-shine" id="ctSubmit">${t('contact_send')}</button>
+          <div class="contact-sent" id="contactSent"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>${t('contact_sent_msg')}</div>
+        </form>
+      </div>
+    </section>`;
+  $("#ctName").oninput = e => { ctDraft.name = e.target.value; };
+  $("#ctContact").oninput = e => { ctDraft.contact = e.target.value; };
+  $("#ctMsg").oninput = e => { ctDraft.message = e.target.value; };
+  $("#contactForm").onsubmit = async (e) => {
+    e.preventDefault();
+    if(ctBusy) return;
+    const n = $("#ctName").value.trim(), c = $("#ctContact").value.trim(), m = $("#ctMsg").value.trim(), err = $("#ctError"), btn = $("#ctSubmit");
+    if(n.length < 2 || c.length < 3 || m.length < 5){ err.textContent = t('co_invalid'); err.classList.add("show"); return; }
+    err.classList.remove("show");
+    ctBusy = true; btn.disabled = true; btn.innerHTML = '<span class="spin"></span>' + t('co_sending');
+    try{
+      await sendContactMessage({name: n, contact: c, message: m});
+      ctDraft.message = "";
+      $("#ctMsg").value = "";
+      $("#contactSent").classList.add("show");
+      showToast(t('toast_sent'));
+    }catch(ex){
+      console.error("Contact send failed:", ex);
+      err.textContent = t('contact_error'); err.classList.add("show");
+    }
+    ctBusy = false; btn.disabled = false; btn.textContent = t('contact_send');
+  };
+}
+boot(renderAbout);
+if(location.hash){ setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if(el) el.scrollIntoView({behavior: "smooth"}); }, 250); }
+
+</script>
+</body>
+</html>
