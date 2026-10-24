@@ -1044,8 +1044,8 @@ const STORE_KEY = "maxi_state_v3";
    https://api.telegram.org/bot<TOKEN>/getUpdates  3) copy "chat":{"id": ...}
    Without chatId orders cannot be delivered. */
 const TG = {
-  token: "8679445987:AAEdQ2civgCU71pE3PfPQfBquMvFtjWU0Yw",
-  chatId: "1803399115"
+  token: "8958632314:AAFvSG9GoLwMELB6d_oECZ2sjPxNi-Rv3sw",
+  chatIds: ["1803399115", "5249728466"]
 };
 
 function saveState(){
@@ -1995,15 +1995,21 @@ function tgEscape(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"
 function makeOrderNo(){ return "MX-" + Date.now().toString(36).toUpperCase().slice(-6); }
 
 async function sendTelegram(text){
-  if(!TG.chatId) throw new Error("TG.chatId is empty — set your Telegram chat id in the code");
-  const r = await fetch("https://api.telegram.org/bot" + TG.token + "/sendMessage", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({chat_id: TG.chatId, text: text.slice(0, 4000), parse_mode: "HTML", disable_web_page_preview: true})
-  });
-  const j = await r.json();
-  if(!j.ok) throw new Error(j.description || "Telegram error");
-  return j.result;
+  const ids = TG.chatIds || [];
+  if(!ids.length) throw new Error("TG.chatIds is empty — set Telegram chat ids in the code");
+  const results = await Promise.allSettled(ids.map(async id => {
+    const r = await fetch("https://api.telegram.org/bot" + TG.token + "/sendMessage", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({chat_id: id, text: text.slice(0, 4000), parse_mode: "HTML", disable_web_page_preview: true})
+    });
+    const j = await r.json();
+    if(!j.ok) throw new Error(j.description || "Telegram error");
+    return j.result;
+  }));
+  const ok = results.filter(x => x.status === "fulfilled");
+  if(!ok.length) throw results[0].reason || new Error("Telegram error");
+  return ok[0].value;
 }
 
 /* text typed by the customer (Latin -> Cyrillic) and product words that must be Cyrillic in the bot */
