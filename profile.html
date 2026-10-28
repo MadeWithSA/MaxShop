@@ -1002,6 +1002,29 @@ header.nav-open .burger span:nth-child(3){top:19px;transform:rotate(-45deg);}
 .pd-wish svg{width:18px;height:18px;stroke:var(--gold-deep);fill:none;stroke-width:1.8;transition:fill .25s;}
 .pd-wish.active svg{fill:var(--gold-deep);}
 
+
+/* ---- seller photos in cards / product page ---- */
+.p-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.8,.2,1);}
+.p-card:hover .p-media img{transform:scale(1.06);}
+.pd-media{overflow:hidden;}
+.pd-media .pd-main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.pd-thumbs{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:8px;z-index:2;}
+.pd-thumbs img{width:54px;height:54px;object-fit:cover;border-radius:10px;border:2px solid #fff;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);}
+
+.adm-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.adm-row{display:grid;grid-template-columns:1fr 1fr 110px 40px;gap:8px;margin-bottom:8px;}
+.adm-spec{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 40px;gap:8px;margin-bottom:8px;}
+.adm-row input,.adm-spec input,#admForm select,#admForm .adm-2>input,.card select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff;}
+.adm-photos{display:flex;flex-wrap:wrap;gap:10px;}
+.adm-ph{position:relative;width:84px;height:84px;border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+.adm-ph img{width:100%;height:100%;object-fit:cover;}
+.adm-ph button{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;}
+.adm-add{width:84px;height:84px;border:1.5px dashed var(--gold-deep);border-radius:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gold-deep);font-size:1.8rem;}
+.adm-tools{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px;}
+.adm-item{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line);}
+.adm-item img,.adm-item .nt{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--blush-soft);flex:none;}
+.adm-msg{font-size:.86rem;margin:8px 0;min-height:1.2em;}
+@media(max-width:640px){.adm-2{grid-template-columns:1fr;}.adm-row{grid-template-columns:1fr 1fr;}.adm-spec{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body data-page="profile">
@@ -1096,66 +1119,7 @@ const CATEGORIES = [
   {id:"Books & Stationery", uz:"Kitob va kantselyariya", ru:"Книги и канцелярия", icon:"books", size:"reg"},
 ];
 
-const PRODUCTS = [
-  {id:1, cat:"Fashion", icon:"fashion", name:"Ipak ko'ylak", desc:"Tabiiy ipakdan tikilgan, yumshoq tushish bilan nafis kesim.", name_ru:"Шёлковое платье", desc_ru:"Из натурального шёлка, изящный крой и мягкая драпировка.", price:680000, rating:5},
-  {id:2, cat:"Fashion", icon:"fashion", name:"Kashmir palto", desc:"Qishki mavsum uchun issiq va yengil kashmir palto.", name_ru:"Пальто из кашемира", desc_ru:"Тёплое и лёгкое пальто для зимнего сезона.", price:1450000, rating:4},
-  {id:3, cat:"Fashion", icon:"fashion", name:"Lyuks trenchkot", desc:"Klassik kesim, har qanday obrazga mos keladi.", name_ru:"Люкс-тренчкот", desc_ru:"Классический крой, подходит к любому образу.", price:920000, rating:5},
-  {id:4, cat:"Accessories", icon:"accessories", name:"Charm qo'l sumkasi", desc:"Tabiiy charmdan, oltin dekor bilan bezatilgan.", name_ru:"Кожаная сумка", desc_ru:"Натуральная кожа, украшена золотистым декором.", price:1250000, rating:5},
-  {id:5, cat:"Accessories", icon:"accessories", name:"Ipak ro'mol", desc:"Qo'lda chizilgan naqshli premium ipak ro'mol.", name_ru:"Шёлковый платок", desc_ru:"Премиальный шёлк с узором ручной росписи.", price:320000, rating:4},
-  {id:6, cat:"Accessories", icon:"accessories", name:"Oftob ko'zoynak", desc:"UV himoyali, oltin ramkali dizayn.", name_ru:"Солнцезащитные очки", desc_ru:"UV-защита, дизайн в золотистой оправе.", price:410000, rating:4},
-  {id:7, cat:"Beauty", icon:"beauty", name:"Rose Gold parfyum", desc:"Uzoq davom etadigan, nafis gullar aromati.", name_ru:"Парфюм Rose Gold", desc_ru:"Стойкий аромат с нотами нежных цветов.", price:390000, rating:5},
-  {id:8, cat:"Beauty", icon:"beauty", name:"Atir to'plami", desc:"3 xil xushbo'ylikdan iborat sovg'a to'plami.", name_ru:"Набор ароматов", desc_ru:"Подарочный набор из трёх ароматов.", price:560000, rating:5},
-  {id:9, cat:"Beauty", icon:"beauty", name:"Yuz parvarishi seti", desc:"Tabiiy tarkibli, barcha teri turlariga mos.", name_ru:"Набор для ухода за лицом", desc_ru:"Натуральный состав, подходит для всех типов кожи.", price:275000, rating:4},
-  {id:10, cat:"Electronics", icon:"electronics", name:"Simsiz quloqchinlar", desc:"Faol shovqin bosish funksiyasi bilan.", name_ru:"Беспроводные наушники", desc_ru:"С функцией активного шумоподавления.", price:890000, rating:5},
-  {id:11, cat:"Electronics", icon:"electronics", name:"Premium smartfon", desc:"Yuqori aniqlikdagi kamera va tezkor protsessor.", name_ru:"Премиум-смартфон", desc_ru:"Камера высокого разрешения и быстрый процессор.", price:9800000, rating:5},
-  {id:12, cat:"Electronics", icon:"electronics", name:"Aqlli soat", desc:"Sog'liq monitoringi va uzoq batareya resursi.", name_ru:"Умные часы", desc_ru:"Мониторинг здоровья и долгий заряд батареи.", price:1180000, rating:4},
-  {id:13, cat:"Home", icon:"home", name:"Baxmal yostiqchalar seti", desc:"Zamonaviy interyer uchun yumshoq baxmal dizayn.", name_ru:"Набор бархатных подушек", desc_ru:"Мягкий бархатный дизайн для современного интерьера.", price:245000, rating:4},
-  {id:14, cat:"Home", icon:"home", name:"Dekorativ shamdon", desc:"Oltin rangli metall, mehmonxona uchun ideal.", name_ru:"Декоративный подсвечник", desc_ru:"Металл золотистого цвета, идеален для гостиной.", price:180000, rating:4},
-  {id:15, cat:"Home", icon:"home", name:"Aromaterapiya sham to'plami", desc:"Tabiiy mum asosida, uzoq yonuvchi.", name_ru:"Набор ароматических свечей", desc_ru:"На основе натурального воска, долго горят.", price:210000, rating:5},
-  {id:16, cat:"Automotive", icon:"automotive", name:"Avtomobil parfyumi", desc:"Salon uchun nafis va uzoq davom etuvchi hid.", name_ru:"Автомобильный ароматизатор", desc_ru:"Нежный и стойкий аромат для салона.", price:95000, rating:4},
-  {id:17, cat:"Automotive", icon:"automotive", name:"Charm rul qopqog'i", desc:"Premium charmdan, qo'lga qulay ushlash.", name_ru:"Кожаный чехол на руль", desc_ru:"Премиальная кожа, удобный хват.", price:165000, rating:4},
-  {id:18, cat:"Food & Drink", icon:"food", name:"Premium shokolad to'plami", desc:"Belgiya shokoladidan tayyorlangan sovg'a qutisi.", name_ru:"Набор премиального шоколада", desc_ru:"Подарочная коробка бельгийского шоколада.", price:230000, rating:5},
-  {id:19, cat:"Food & Drink", icon:"food", name:"Tabiiy tog' asali", desc:"Ekologik toza, 100% tabiiy mahsulot.", name_ru:"Натуральный горный мёд", desc_ru:"Экологически чистый, 100% натуральный продукт.", price:140000, rating:5},
-  {id:20, cat:"Sport", icon:"sport", name:"Gantel to'plami", desc:"Uy mashg'ulotlari uchun sozlanuvchi og'irlik.", name_ru:"Набор гантелей", desc_ru:"Регулируемый вес для домашних тренировок.", price:480000, rating:4},
-  {id:21, cat:"Sport", icon:"sport", name:"Yoga kilimchasi", desc:"Kaymaydigan, ekologik toza material.", name_ru:"Коврик для йоги", desc_ru:"Нескользящий, экологически чистый материал.", price:165000, rating:5},
-  {id:22, cat:"Jewelry", icon:"jewelry", name:"Marvarid sirg'alar", desc:"Tabiiy marvarid, 18 karat oltin qoplama.", name_ru:"Жемчужные серьги", desc_ru:"Натуральный жемчуг, покрытие золотом 18 карат.", price:540000, rating:5},
-  {id:23, cat:"Jewelry", icon:"jewelry", name:"Oltin uzuk", desc:"Nafis dizaynli, mayda toshlar bilan bezatilgan.", name_ru:"Золотое кольцо", desc_ru:"Изящный дизайн, украшено мелкими камнями.", price:2100000, rating:5},
-  {id:24, cat:"Jewelry", icon:"jewelry", name:"Zargarlik soat", desc:"Klassik uslub, kunlik va bayram uchun mos.", name_ru:"Ювелирные часы", desc_ru:"Классический стиль для будней и праздников.", price:1650000, rating:4},
-  {id:25, cat:"Books & Stationery", icon:"books", name:"Charm bloknot", desc:"Qo'lda tikilgan, oltin qirrali sahifalar.", name_ru:"Кожаный блокнот", desc_ru:"Ручной пошив, страницы с золотым обрезом.", price:120000, rating:4},
-  {id:26, cat:"Books & Stationery", icon:"books", name:"Premium qalam to'plami", desc:"Sovg'a qutisida, oltin dekorli qalamlar.", name_ru:"Набор премиальных ручек", desc_ru:"В подарочной коробке, ручки с золотистым декором.", price:95000, rating:4},
-  {id:27, cat:"Fashion", icon:"fashion", name:"Kashtali ko'ylak", desc:"Qo'lda kashta tikilgan, mavsumiy kolleksiya.", name_ru:"Платье с вышивкой", desc_ru:"Ручная вышивка, сезонная коллекция.", price:540000, rating:4},
-  {id:28, cat:"Fashion", icon:"fashion", name:"Yengil trikotaj sviter", desc:"Yumshoq ip aralashmasi, kundalik kiyim uchun.", name_ru:"Лёгкий трикотажный свитер", desc_ru:"Мягкая пряжа, для повседневной носки.", price:310000, rating:4},
-  {id:29, cat:"Accessories", icon:"accessories", name:"Charm belbog'", desc:"Oltin tokali, klassik va zamonaviy uslubda.", name_ru:"Кожаный ремень", desc_ru:"Золотистая пряжка, классический и современный стиль.", price:280000, rating:4},
-  {id:30, cat:"Accessories", icon:"accessories", name:"Kechki klatch sumka", desc:"Marvarid dekorli, tantanali tadbirlar uchun.", name_ru:"Вечерний клатч", desc_ru:"Декор из жемчуга, для торжественных случаев.", price:640000, rating:5},
-  {id:31, cat:"Beauty", icon:"beauty", name:"Oltin seramid kremi", desc:"Terini qayta tiklovchi tungi parvarish kremi.", name_ru:"Крем с золотыми керамидами", desc_ru:"Восстанавливающий ночной крем для кожи.", price:340000, rating:5},
-  {id:32, cat:"Beauty", icon:"beauty", name:"Lab bo'yog'i to'plami", desc:"5 xil tabiiy tusda, uzoq turuvchi formula.", name_ru:"Набор помад", desc_ru:"5 натуральных оттенков, стойкая формула.", price:225000, rating:4},
-  {id:33, cat:"Electronics", icon:"electronics", name:"Planshet Pro", desc:"Ishlash va ijodkorlik uchun kuchli protsessor.", name_ru:"Планшет Pro", desc_ru:"Мощный процессор для работы и творчества.", price:6200000, rating:5},
-  {id:34, cat:"Electronics", icon:"electronics", name:"Portativ zaryadlovchi", desc:"Tezkor quvvatlash, safarlar uchun ixcham.", name_ru:"Портативное зарядное устройство", desc_ru:"Быстрая зарядка, компактно для поездок.", price:260000, rating:4},
-  {id:35, cat:"Home", icon:"home", name:"Charm divan yostig'i", desc:"Zamonaviy interyerga mos, mustahkam tikuv.", name_ru:"Кожаная диванная подушка", desc_ru:"Подходит для современного интерьера, прочный пошив.", price:195000, rating:4},
-  {id:36, cat:"Home", icon:"home", name:"Marmar taxta to'plami", desc:"Oshxona uchun servirovka taxtalari seti.", name_ru:"Набор мраморных досок", desc_ru:"Сервировочные доски для кухни.", price:310000, rating:4},
-  {id:37, cat:"Automotive", icon:"automotive", name:"Avtomobil oyoq gilamchasi", desc:"Suv o'tkazmaydigan, oson tozalanadigan material.", name_ru:"Автомобильные коврики", desc_ru:"Водонепроницаемый, легко чистится.", price:150000, rating:4},
-  {id:38, cat:"Automotive", icon:"automotive", name:"Video registrator", desc:"To'liq HD sifat, tungi ko'rish rejimi.", name_ru:"Видеорегистратор", desc_ru:"Качество Full HD, режим ночной съёмки.", price:720000, rating:4},
-  {id:39, cat:"Food & Drink", icon:"food", name:"Qora choy to'plami", desc:"Tog' o'tlari qo'shilgan premium choy kolleksiyasi.", name_ru:"Набор чёрного чая", desc_ru:"Премиальная коллекция чая с горными травами.", price:110000, rating:4},
-  {id:40, cat:"Food & Drink", icon:"food", name:"Zaytun moyi seti", desc:"Sovuq presslangan, birinchi siqim zaytun moyi.", name_ru:"Набор оливкового масла", desc_ru:"Холодный отжим, масло первого отжима.", price:175000, rating:5},
-  {id:41, cat:"Sport", icon:"sport", name:"Sport sumkasi", desc:"Keng hajmli, mashg'ulot va safar uchun qulay.", name_ru:"Спортивная сумка", desc_ru:"Вместительная, удобна для тренировок и поездок.", price:220000, rating:4},
-  {id:42, cat:"Sport", icon:"sport", name:"Fitnes trekker", desc:"Yurgan qadamlar va yurak urishini kuzatadi.", name_ru:"Фитнес-трекер", desc_ru:"Отслеживает шаги и пульс.", price:390000, rating:4},
-  {id:43, cat:"Jewelry", icon:"jewelry", name:"Oltin bilaguzuk", desc:"Nafis zanjir bilan, kundalik va bayram uchun.", name_ru:"Золотой браслет", desc_ru:"Изящная цепочка для будней и праздников.", price:980000, rating:5},
-  {id:44, cat:"Jewelry", icon:"jewelry", name:"Brilliant kulon", desc:"Zamonaviy dizayn, 18 karat oltin asosida.", name_ru:"Кулон с бриллиантом", desc_ru:"Современный дизайн на основе золота 18 карат.", price:2450000, rating:5},
-  {id:45, cat:"Books & Stationery", icon:"books", name:"Charm papka to'plami", desc:"Hujjatlar uchun ofis va sovg'a uchun mos.", name_ru:"Набор кожаных папок", desc_ru:"Для документов, подходит для офиса и подарка.", price:210000, rating:4},
-  {id:46, cat:"Books & Stationery", icon:"books", name:"Motivatsion kundalik", desc:"Yillik rejalashtirish uchun oltin qirrali kundalik.", name_ru:"Мотивационный ежедневник", desc_ru:"Ежедневник с золотым обрезом для планирования на год.", price:135000, rating:4},
-  {id:47, cat:"Fashion", icon:"fashion", name:"Klassik jins shim", desc:"Paxta va elastandan, har mavsumga mos klassik kesim.", name_ru:"Классические джинсы", desc_ru:"Из хлопка и эластана, классический крой на любой сезон.", price:420000, rating:4},
-  {id:48, cat:"Fashion", icon:"fashion", name:"Charm kurtka", desc:"Tabiiy charm kurtka bahor va kuz uchun.", name_ru:"Кожаная куртка", desc_ru:"Куртка из натуральной кожи для весны и осени.", price:2100000, rating:5},
-  {id:49, cat:"Accessories", icon:"accessories", name:"Charm hamyon", desc:"8 ta karta uchun joyi bor ixcham hamyon.", name_ru:"Кожаный кошелёк", desc_ru:"Компактный кошелёк на 8 карт.", price:260000, rating:4},
-  {id:50, cat:"Beauty", icon:"beauty", name:"Yuz niqoblari to'plami", desc:"Gialuron kislotali mato niqoblar.", name_ru:"Набор тканевых масок", desc_ru:"Тканевые маски с гиалуроновой кислотой.", price:150000, rating:4},
-  {id:51, cat:"Beauty", icon:"beauty", name:"Soch parvarishi seti", desc:"Argan moyli shampun va konditsioner.", name_ru:"Набор для ухода за волосами", desc_ru:"Шампунь и кондиционер с аргановым маслом.", price:330000, rating:5},
-  {id:52, cat:"Electronics", icon:"electronics", name:"Bluetooth karnay", desc:"Suvdan himoyalangan portativ karnay.", name_ru:"Bluetooth-колонка", desc_ru:"Портативная колонка с защитой от воды.", price:540000, rating:4},
-  {id:53, cat:"Home", icon:"home", name:"Dekorativ ko'zgu", desc:"Oltin rangli ramkali devor ko'zgusi.", name_ru:"Декоративное зеркало", desc_ru:"Настенное зеркало в золотистой раме.", price:480000, rating:4},
-  {id:54, cat:"Home", icon:"home", name:"Choyshab to'plami", desc:"Sateen paxtadan to'liq yotoq to'plami.", name_ru:"Комплект постельного белья", desc_ru:"Полный комплект из хлопкового сатина.", price:690000, rating:5},
-  {id:55, cat:"Food & Drink", icon:"food", name:"Quritilgan mevalar assorti", desc:"Tabiiy quritilgan mevalar va yong'oqlar.", name_ru:"Ассорти сухофруктов", desc_ru:"Натуральные сухофрукты и орехи.", price:120000, rating:5},
-  {id:56, cat:"Sport", icon:"sport", name:"Yugurish krossovkalari", desc:"Yengil va amortizatsiyali krossovkalar.", name_ru:"Беговые кроссовки", desc_ru:"Лёгкие кроссовки с амортизацией.", price:760000, rating:4},
-  {id:57, cat:"Automotive", icon:"automotive", name:"Avto changyutgich", desc:"Salon uchun ixcham changyutgich.", name_ru:"Автомобильный пылесос", desc_ru:"Компактный пылесос для салона.", price:380000, rating:4},
-  {id:58, cat:"Jewelry", icon:"jewelry", name:"Kumush bilaguzuk", desc:"925 sinovli nafis kumush bilaguzuk.", name_ru:"Серебряный браслет", desc_ru:"Изящный браслет из серебра 925 пробы.", price:450000, rating:4},
-];
+const PRODUCTS = [];
 
 /* ---------------- I18N ---------------- */
 const I18N = {
@@ -1540,66 +1504,7 @@ const SPEC_LABELS = {
 };
 
 /* id | variantKey | variants (label:multiplier:ruLabel) | defaultIndex | specs (key=uz~ru) */
-const EXTRA_DSL = `
-1|size|S,M,L,XL|1|material=100% tabiiy ipak~100% натуральный шёлк;season=Bahor va yoz~Весна и лето;care=Qo'lda yuvish, 30°C~Ручная стирка, 30°C;country=Turkiya~Турция;quality=Yuqori sifat~Высокое качество
-2|size|S,M,L,XL|1|material=Kashmir va jun aralashmasi~Кашемир с шерстью;season=Kuz va qish~Осень и зима;care=Quruq tozalash~Химчистка;country=Italiya~Италия;quality=Yuqori sifat~Высокое качество
-3|size|S,M,L,XL|1|material=Suv o'tkazmaydigan gabardin~Водоотталкивающая габардин;season=Bahor va kuz~Весна и осень;features=Kamar bilan, ikki qatorli tugmalar~С поясом, двубортный;country=Fransiya~Франция;quality=Yuqori sifat~Высокое качество
-4||||material=Tabiiy charm~Натуральная кожа;color=Qora, bej~Чёрный, бежевый;features=Oltin rangli furnitura, ichki cho'ntak~Золотистая фурнитура, внутренний карман;country=Italiya~Италия;quality=Premium sinf~Премиум-класс
-5||||material=Ipak~Шёлк;size=90 × 90 sm~90 × 90 см;care=Quruq tozalash~Химчистка;country=Turkiya~Турция;quality=Premium sinf~Премиум-класс
-6||||features=UV400 himoya~Защита UV400;material=Metall ramka~Металлическая оправа;color=Oltin / qora~Золото / чёрный;country=Italiya~Италия;quality=Premium sinf~Премиум-класс
-7|volume|30 ml:0.6,50 ml:1,100 ml:1.65|1|type=Eau de Parfum;notes=Atirgul, pion, oq mushk~Роза, пион, белый мускус;longevity=8–10 soat~8–10 часов;gender=Ayollar uchun~Для женщин;country=Fransiya~Франция;quality=Original mahsulot~Оригинальный продукт
-8|volume|3 × 15 ml:0.75,3 × 30 ml:1|1|type=Parfyum to'plami~Парфюмерный набор;notes=Gulli, shirin, yog'ochli~Цветочный, сладкий, древесный;features=Sovg'a qutisida~В подарочной коробке;country=BAA~ОАЭ;quality=Original mahsulot~Оригинальный продукт
-9|volume|50 ml × 3:1,100 ml × 3:1.7|0|contents=Ko'pik, tonik, krem~Пенка, тоник, крем;ingredients=Aloe vera, gialuron kislotasi, vitamin E~Алоэ вера, гиалуроновая кислота, витамин E;skin=Barcha teri turlari~Все типы кожи;country=Koreya~Южная Корея;quality=Original mahsulot~Оригинальный продукт
-10||||battery=6 soat (g'ilof bilan 24 soat)~6 ч (с кейсом 24 ч);features=Faol shovqin bosish, Bluetooth 5.3~Активное шумоподавление, Bluetooth 5.3;warranty=12 oy~12 месяцев;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
-11|storage|128 GB:1,256 GB:1.15,512 GB:1.4|0|display=6.7″ OLED;battery=5000 mAh;warranty=12 oy~12 месяцев;country=Koreya~Южная Корея;quality=Rasmiy kafolat bilan~С официальной гарантией
-12|size|40 mm:1,44 mm:1.1|0|battery=7 kungacha~До 7 дней;features=Yurak urishi, uyqu, SpO₂~Пульс, сон, SpO₂;water=IP68;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
-13|size|40 × 40 sm:1,50 × 50 sm:1.25|0|material=Baxmal~Бархат;contents=2 dona~2 шт.;color=Pushti va oltin~Розовый и золотистый;country=Turkiya~Турция;quality=Sinovdan o'tgan materiallar~Проверенные материалы
-14|size|20 sm:1,30 sm:1.4|0|material=Metall, oltin rangli qoplama~Металл с золотистым покрытием;features=Mehmonxona va yotoqxona uchun~Для гостиной и спальни;country=Turkiya~Турция;quality=Sinovdan o'tgan materiallar~Проверенные материалы
-15|weight|150 g:1,300 g:1.7|0|ingredients=Tabiiy mum, efir moylari~Натуральный воск, эфирные масла;burn=40 soatgacha~До 40 часов;country=O'zbekiston~Узбекистан;quality=Sinovdan o'tgan materiallar~Проверенные материалы
-16|scent|Vanil:1:Ваниль,Okean:1:Океан,Sandal:1:Сандал|0|volume=8 ml~8 мл;longevity=30 kungacha~До 30 дней;country=Germaniya~Германия;quality=Chidamli materiallar~Прочные материалы
-17|size|M (37 sm):1:M (37 см),L (39 sm):1.05:L (39 см)|0|material=Tabiiy charm~Натуральная кожа;color=Qora~Чёрный;fit=Ko'pchilik avtomobillar uchun~Подходит для большинства авто;country=Italiya~Италия;quality=Chidamli materiallar~Прочные материалы
-18|weight|200 g:0.55,400 g:1,800 g:1.8|1|ingredients=Kakao 55%, kakao yog'i, shakar~Какао 55%, масло какао, сахар;shelf=12 oy~12 месяцев;country=Belgiya~Бельгия;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
-19|weight|250 g:0.55,500 g:1,1 kg:1.85|1|ingredients=100% tabiiy asal~100% натуральный мёд;shelf=24 oy~24 месяца;origin=Tog' hududlari~Горные районы;country=O'zbekiston~Узбекистан;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
-20|weight|2 × 3 kg:0.7,2 × 5 kg:1,2 × 8 kg:1.5|1|material=Po'lat, neopren qoplama~Сталь с неопреновым покрытием;features=Sozlanuvchi og'irlik~Регулируемый вес;country=Germaniya~Германия;quality=Mustahkam va chidamli~Прочный и износостойкий
-21|thickness|6 mm:1,8 mm:1.15|0|material=TPE (ekologik)~TPE (экологичный);size=183 × 61 sm~183 × 61 см;features=Kaymaydigan sirt~Нескользящая поверхность;country=Xitoy~Китай;quality=Mustahkam va chidamli~Прочный и износостойкий
-22||||material=Tabiiy marvarid, 18K oltin qoplama~Натуральный жемчуг, золотое покрытие 18K;features=Sovg'a qutisida~В подарочной коробке;weight=Taxminan 6 g~Примерно 6 г;country=Turkiya~Турция;quality=Sinov belgisi bilan~С пробирным клеймом
-23|size|16,17,18,19|1|material=Oltin 585 sinov~Золото 585 пробы;stones=Mayda toshlar~Мелкие камни;weight=Taxminan 3.2 g~Примерно 3.2 г;country=Italiya~Италия;quality=Sinov belgisi bilan~С пробирным клеймом
-24||||mechanism=Kvars~Кварцевый;strap=Zanglamaydigan po'lat~Нержавеющая сталь;water=3 ATM;country=Yaponiya~Япония;quality=Sinov belgisi bilan~С пробирным клеймом
-25|size|A6:0.8,A5:1|1|pages=192 bet~192 страницы;material=Charm muqova~Кожаная обложка;paper=100 g/m²~100 г/м²;country=Italiya~Италия;quality=Sifatli materiallar~Качественные материалы
-26|kit|3 ta:0.7:3 шт.,5 ta:1:5 шт.|1|material=Metall korpus~Металлический корпус;ink=Qora va ko'k~Чёрные и синие;features=Sovg'a qutisida~В подарочной коробке;country=Germaniya~Германия;quality=Sifatli materiallar~Качественные материалы
-27|size|S,M,L,XL|1|material=Paxta va viskoza~Хлопок и вискоза;features=Qo'lda kashta~Ручная вышивка;season=Mavsumiy kolleksiya~Сезонная коллекция;country=O'zbekiston~Узбекистан;quality=Yuqori sifat~Высокое качество
-28|size|S,M,L,XL|1|material=Yumshoq trikotaj ip~Мягкая трикотажная пряжа;season=Kuz va bahor~Осень и весна;care=30°C da yuvish~Стирка при 30°C;country=Turkiya~Турция;quality=Yuqori sifat~Высокое качество
-29|size|85 sm:1,95 sm:1,105 sm:1|1|material=Tabiiy charm~Натуральная кожа;features=Oltin rangli toka~Золотистая пряжка;country=Italiya~Италия;quality=Premium sinf~Премиум-класс
-30|color|Oltin:1:Золотой,Qora:1:Чёрный,Pushti:1:Розовый|0|material=Atlas va marvarid dekor~Атлас, декор из жемчуга;features=Olinadigan zanjirli tasma~Съёмная цепочка;country=Turkiya~Турция;quality=Premium sinf~Премиум-класс
-31|volume|30 ml:0.65,50 ml:1|1|ingredients=Seramidlar, peptidlar~Керамиды, пептиды;usage=Kechqurun, toza teriga~Вечером, на очищенную кожу;skin=Barcha teri turlari~Все типы кожи;country=Koreya~Южная Корея;quality=Original mahsulot~Оригинальный продукт
-32|shade|Nude:1:Нюд,Atirgul:1:Розовый,Marjon:1:Коралловый,Qizil:1:Красный,Bordo:1:Бордовый|0|features=Uzoq turuvchi formula~Стойкая формула;country=Fransiya~Франция;quality=Original mahsulot~Оригинальный продукт
-33|storage|128 GB:1,256 GB:1.2|0|display=11″;battery=10 soatgacha~До 10 часов;warranty=12 oy~12 месяцев;country=Koreya~Южная Корея;quality=Rasmiy kafolat bilan~С официальной гарантией
-34|capacity|10 000 mAh:0.75,20 000 mAh:1|1|features=Tez zaryadlash 22.5 W~Быстрая зарядка 22.5 Вт;ports=USB-C, USB-A;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
-35|size|40 × 40 sm:1,50 × 50 sm:1.2|0|material=Tabiiy charm~Натуральная кожа;features=Mustahkam tikuv~Прочный пошив;country=O'zbekiston~Узбекистан;quality=Sinovdan o'tgan materiallar~Проверенные материалы
-36|kit|3 dona:0.75,5 dona:1|1|material=Tabiiy marmar~Натуральный мрамор;features=Servirovka uchun~Для сервировки;country=Italiya~Италия;quality=Sinovdan o'tgan materiallar~Проверенные материалы
-37|compat|Sedan:0.9:Седан,Krossover:1:Кроссовер,Minivan:1.2:Минивэн|1|material=Suv o'tkazmaydigan rezina~Водонепроницаемая резина;features=Oson tozalanadi~Легко моется;country=Germaniya~Германия;quality=Chidamli materiallar~Прочные материалы
-38|kit|1 kamera:1:1 камера,2 kamera:1.4:2 камеры|0|resolution=1080p Full HD;features=Tungi ko'rish, G-sensor~Ночной режим, G-сенсор;memory=microSD 128 GB gacha~microSD до 128 GB;country=Koreya~Южная Корея;quality=Chidamli materiallar~Прочные материалы
-39|weight|100 g:0.5,250 g:1|1|contents=Qora choy va tog' o'tlari~Чёрный чай с горными травами;shelf=24 oy~24 месяца;country=Hindiston~Индия;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
-40|volume|250 ml:0.55,500 ml:1,1 l:1.8|1|features=Sovuq presslangan~Холодный отжим;shelf=18 oy~18 месяцев;type=Extra Virgin;country=Ispaniya~Испания;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
-41|capacity|30 l:1,45 l:1.2|0|material=Suv o'tkazmaydigan mato~Водоотталкивающая ткань;features=Poyabzal uchun alohida bo'lim~Отдельный отсек для обуви;country=Turkiya~Турция;quality=Mustahkam va chidamli~Прочный и износостойкий
-42|color|Qora:1:Чёрный,Pushti:1:Розовый|0|battery=10 kungacha~До 10 дней;features=Qadamlar, yurak urishi~Шаги, пульс;water=IP67;country=Xitoy~Китай;quality=Mustahkam va chidamli~Прочный и износостойкий
-43|size|17 sm:1,19 sm:1.05|0|material=Oltin 585 sinov~Золото 585 пробы;features=Nafis zanjir~Изящная цепочка;country=Turkiya~Турция;quality=Sinov belgisi bilan~С пробирным клеймом
-44|size|45 sm:1,50 sm:1.04|0|material=18K oltin asosida~Основа золото 18K;stones=Brilliant~Бриллиант;features=Zanjir bilan birga~Цепочка в комплекте;country=BAA~ОАЭ;quality=Sinov belgisi bilan~С пробирным клеймом
-45|size|A4:1,A5:0.8|0|material=Tabiiy charm~Натуральная кожа;features=Hujjatlar uchun~Для документов;country=Italiya~Италия;quality=Sifatli materiallar~Качественные материалы
-46|color|Oltin:1:Золотой,Pushti:1:Розовый|0|pages=192 bet~192 страницы;size=A5;features=Oltin qirrali sahifalar~Страницы с золотым обрезом;country=Turkiya~Турция;quality=Sifatli materiallar~Качественные материалы
-47|size|28,30,32,34,36|2|material=Paxta va elastan~Хлопок и эластан;season=Barcha mavsumlar~Всесезонные;care=30°C da yuvish~Стирка при 30°C;country=Turkiya~Турция;quality=Yuqori sifat~Высокое качество
-48|size|S,M,L,XL|1|material=Tabiiy charm~Натуральная кожа;season=Bahor va kuz~Весна и осень;care=Maxsus charm vositasi bilan~Специальным средством для кожи;country=Italiya~Италия;quality=Yuqori sifat~Высокое качество
-49||||material=Tabiiy charm~Натуральная кожа;color=Qora, jigarrang~Чёрный, коричневый;features=8 ta karta uchun joy, tanga bo'limi~8 отделений для карт, монетница;country=Turkiya~Турция;quality=Premium sinf~Премиум-класс
-50|kit|5 dona:0.55,10 dona:1,20 dona:1.8|1|ingredients=Gialuron kislotasi, aloe~Гиалуроновая кислота, алоэ;usage=Haftada 2–3 marta~2–3 раза в неделю;skin=Barcha teri turlari~Все типы кожи;country=Koreya~Южная Корея;quality=Original mahsulot~Оригинальный продукт
-51|volume|2 × 150 ml:0.8,2 × 250 ml:1|1|contents=Shampun va konditsioner~Шампунь и кондиционер;ingredients=Argan moyi, keratin~Аргановое масло, кератин;type=Barcha soch turlari~Все типы волос;country=Fransiya~Франция;quality=Original mahsulot~Оригинальный продукт
-52|color|Qora:1:Чёрный,Pushti:1:Розовый|0|battery=12 soatgacha~До 12 часов;features=Bluetooth 5.3, suvdan himoya~Bluetooth 5.3, защита от воды;water=IPX6;country=Xitoy~Китай;quality=Rasmiy kafolat bilan~С официальной гарантией
-53|size|50 × 70 sm:1,70 × 100 sm:1.6|0|material=Metall ramka, shisha~Металлическая рама, стекло;features=Devorga osiladi~Настенное крепление;color=Oltin~Золотистый;country=Italiya~Италия;quality=Sinovdan o'tgan materiallar~Проверенные материалы
-54|size|1.5 kishilik:0.85:1.5-спальный,2 kishilik:1:2-спальный,Evro:1.2:Евро|1|material=Sateen paxta~Хлопковый сатин;contents=Choyshab, jild, 2 ta yostiq jildi~Простыня, пододеяльник, 2 наволочки;care=40°C da yuvish~Стирка при 40°C;country=O'zbekiston~Узбекистан;quality=Sinovdan o'tgan materiallar~Проверенные материалы
-55|weight|250 g:0.55,500 g:1,1 kg:1.8|1|contents=O'rik, mayiz, anjir, bodom~Курага, изюм, инжир, миндаль;shelf=12 oy~12 месяцев;origin=Tabiiy quritilgan~Натуральная сушка;country=O'zbekiston~Узбекистан;quality=Tabiiy, sifat nazoratidan o'tgan~Натуральный, прошёл контроль качества
-56|size|38,39,40,41,42,43,44|3|material=Yengil to'r mato, rezina taglik~Лёгкая сетка, резиновая подошва;features=Amortizatsiya, nafas oluvchi~Амортизация, дышащий материал;season=Barcha mavsumlar~Всесезонные;country=Vetnam~Вьетнам;quality=Mustahkam va chidamli~Прочный и износостойкий
-57|compat|12 V avtomobil:1:12 В автомобиль,Simsiz:1.3:Беспроводной|0|features=Kuchli so'rish~Мощное всасывание;material=ABS plastik~ABS-пластик;country=Xitoy~Китай;quality=Chidamli materiallar~Прочные материалы
-58|size|17 sm:1,19 sm:1.05,21 sm:1.1|1|material=925 kumush~Серебро 925 пробы;features=Nafis zanjir~Изящная цепочка;weight=Taxminan 8 g~Примерно 8 г;country=Italiya~Италия;quality=Sinov belgisi bilan~С пробирным клеймом
-`;
+const EXTRA_DSL = ``;
 
 const CAT_ABOUT = {
   "Fashion":{uz:"Kolleksiyadagi kiyimlar sifatli matolardan tikilgan va har kuni kiyish uchun qulay. O'lchamni tanlashda yordam kerak bo'lsa, menejerlarimizga yozing.", ru:"Одежда из коллекции сшита из качественных тканей и удобна в ежедневной носке. Если нужна помощь с размером, напишите нашим менеджерам."},
@@ -1644,11 +1549,70 @@ EXTRA_DSL.trim().split("\n").forEach(line=>{
   EXTRA[id] = e;
 });
 
+/* ===== seller products: published list (products.json) + seller working copy ===== */
+const ADMIN_PHONE = "998955557343", ADMIN_PASS = "16.12.2010";
+const WORK_KEY = "maxi_work_products_v1", ADMIN_KEY = "maxi_admin_v1";
+function isAdmin(){ try{ return localStorage.getItem(ADMIN_KEY) === "1"; }catch(e){ return false; } }
+function registerProduct(p){
+  if(PRODUCTS.some(x => x.id === p.id)) return;
+  const c = CATEGORIES.find(c => c.id === p.cat);
+  p.icon = p.icon || (c ? c.icon : "home");
+  PRODUCTS.push(p);
+  const e = {vkey:"", variants:[], def:0, specs:[]};
+  if(p.variants && p.variants.length){
+    e.vkey = "v_" + p.id;
+    SPEC_LABELS.uz[e.vkey] = p.vTitle || "Variant";
+    SPEC_LABELS.ru[e.vkey] = p.vTitle_ru || p.vTitle || "Вариант";
+    p.variants.forEach(v => e.variants.push({l:v.l, r:v.r || v.l, m:1, abs:Number(v.price) || p.price}));
+  }
+  (p.specs || []).forEach((s, i) => {
+    const k = "s_" + p.id + "_" + i;
+    SPEC_LABELS.uz[k] = s.tu || s.tr; SPEC_LABELS.ru[k] = s.tr || s.tu;
+    e.specs.push({k, uz:s.vu || s.vr, ru:s.vr || s.vu});
+  });
+  EXTRA[p.id] = e;
+}
+function applyProducts(list){
+  PRODUCTS.length = 0;
+  Object.keys(EXTRA).forEach(k => delete EXTRA[k]);
+  list.forEach(p => registerProduct(JSON.parse(JSON.stringify(p))));
+}
+function readWork(){ try{ const s = localStorage.getItem(WORK_KEY); return s ? JSON.parse(s) : null; }catch(e){ return null; } }
+function mediaHTML(p){ return p.imgs && p.imgs.length ? `<img src="${p.imgs[0]}" alt="" loading="lazy">` : ICONS[p.icon]; }
+function galleryHTML(p){
+  if(!(p.imgs && p.imgs.length)) return ICONS[p.icon];
+  return `<img id="pdMain" class="pd-main" src="${p.imgs[0]}" alt="">` + (p.imgs.length > 1
+    ? `<div class="pd-thumbs">${p.imgs.map(s => `<img src="${s}" alt="" onclick="document.getElementById('pdMain').src=this.src">`).join("")}</div>` : "");
+}
+let PUBLISHED = [], PUB_OK = false;
+async function loadProducts(){
+  try{
+    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 4000);
+    const r = await fetch("products.json?v=" + Date.now(), {signal:ctl.signal, cache:"no-store"});
+    clearTimeout(to);
+    if(r.ok){ const j = await r.json(); PUBLISHED = Array.isArray(j) ? j : (j.products || []); PUB_OK = true; }
+    else if(r.status === 404){ PUBLISHED = []; PUB_OK = true; }
+  }catch(e){}
+  const work = isAdmin() ? readWork() : null;
+  applyProducts(work || PUBLISHED);
+  if(PUB_OK || work){
+    let ch = false;
+    Object.keys(cart).forEach(k => { if(!PRODUCTS.some(p => p.id === Number(k.split(":")[0]))){ delete cart[k]; ch = true; } });
+    [...wishlist].forEach(id => { if(!PRODUCTS.some(p => p.id === id)){ wishlist.delete(id); ch = true; } });
+    if(ch) saveState();
+  }
+}
+function emptyText(){
+  const s = currentLang === "ru" ? "Скоро здесь появятся товары" : "Tez orada bu yerda mahsulotlar paydo bo'ladi";
+  return currentLang === "cyrl" ? uzToCyr(s) : s;
+}
+
 function extraOf(p){ return EXTRA[p.id] || {vkey:"", variants:[], def:0, specs:[]}; }
 function defVi(p){ return extraOf(p).def || 0; }
 function hasVariants(p){ return extraOf(p).variants.length > 0; }
 function unitPrice(p, vi){
   const v = extraOf(p).variants[vi];
+  if(v && v.abs !== undefined) return v.abs;
   const m = v ? v.m : 1;
   return m === 1 ? p.price : Math.round(p.price * m / 1000) * 1000;
 }
@@ -1677,6 +1641,7 @@ function catAbout(cat){
 }
 function nameFor(n){ return currentLang === "uz" ? n : uzToCyr(n); }
 function reviewsFor(p){
+  if(p.custom) return (userReviews[p.id] || []);
   const fives = REVIEW_POOL.filter(r=>r.r===5), fours = REVIEW_POOL.filter(r=>r.r===4);
   const pick = (arr, n, seed)=>{ const out=[]; for(let i=0;i<n;i++) out.push(arr[(seed+i*2)%arr.length]); return out; };
   const base = p.rating >= 5 ? pick(fives,3,p.id).concat(pick(fours,1,p.id+1)) : pick(fours,2,p.id).concat(pick(fives,1,p.id+3));
@@ -1684,66 +1649,7 @@ function reviewsFor(p){
 }
 function avgOf(revs){ return revs.length ? revs.reduce((a,r)=>a+r.r,0)/revs.length : 0; }
 
-const LONG_DESC = {
-  1:{uz:"Tabiiy ipakdan tikilgan bu ko'ylak tanaga yengil yopishadi va nafis tushadi. Kundalik kiyim ham, bayram obrazi ham uchun mos keladi.", ru:"Платье из натурального шёлка легко ложится по фигуре и красиво драпируется. Подойдёт и на каждый день, и для праздничного образа."},
-  2:{uz:"Kashmir va jun aralashmasi sovuq kunlarda issiq saqlaydi, ammo og'ir emas. Klassik siluet bir necha mavsum modadan chiqmaydi.", ru:"Смесь кашемира и шерсти согревает в холода и при этом не тяжёлая. Классический силуэт не выйдет из моды ещё не один сезон."},
-  3:{uz:"Suvni o'tkazmaydigan mato va kamarli klassik kesim — bahor va kuz yomg'irlarida ishonchli himoya va chiroyli ko'rinish.", ru:"Водоотталкивающая ткань и классический крой с поясом — надёжная защита и стильный вид в весенние и осенние дожди."},
-  4:{uz:"Tabiiy charmdan tikilgan, oltin rangli furnitura bilan bezatilgan keng sumka. Ichki cho'ntaklari kundalik narsalarni tartibda saqlaydi.", ru:"Просторная сумка из натуральной кожи с золотистой фурнитурой. Внутренние карманы помогают держать повседневные вещи в порядке."},
-  5:{uz:"Qo'lda chizilgan naqshli ipak ro'mol bo'yin, bosh yoki sumka bezagi sifatida ishlatiladi. Teriga yoqimli va yengil.", ru:"Шёлковый платок с узором ручной росписи можно носить на шее, на голове или повязать на сумку. Лёгкий и приятный к коже."},
-  6:{uz:"UV400 himoyali linzalar ko'zni quyoshdan asraydi. Oltin rangli ramka har qanday yuz shakliga uyg'unlashadi.", ru:"Линзы с защитой UV400 оберегают глаза от солнца. Золотистая оправа сочетается с любой формой лица."},
-  7:{uz:"Atirgul, pion va oq mushk notalari nafis va iliq aromat yaratadi. Eau de Parfum konsentratsiyasi 8–10 soat turg'unlikni ta'minlaydi.", ru:"Ноты розы, пиона и белого мускуса создают нежный и тёплый аромат. Концентрация Eau de Parfum обеспечивает стойкость 8–10 часов."},
-  8:{uz:"Uch xil xushbo'ylikdan iborat to'plam — gulli, shirin va yog'ochli. Sovg'a qutisida beriladi, bayramga tayyor sovg'a.", ru:"Набор из трёх ароматов — цветочного, сладкого и древесного. Поставляется в подарочной коробке — готовый подарок к празднику."},
-  9:{uz:"Ko'pik, tonik va krem — kundalik parvarishning uch bosqichi. Aloe vera va gialuron kislotasi terini namlaydi.", ru:"Пенка, тоник и крем — три шага ежедневного ухода. Алоэ вера и гиалуроновая кислота увлажняют кожу."},
-  10:{uz:"Faol shovqin bosish tashqi tovushlarni kamaytiradi, Bluetooth 5.3 esa barqaror ulanishni beradi. Quti bilan 24 soatgacha ishlaydi.", ru:"Активное шумоподавление приглушает посторонние звуки, а Bluetooth 5.3 даёт стабильное соединение. С кейсом работают до 24 часов."},
-  11:{uz:"Yuqori aniqlikdagi kamera, 6.7″ OLED ekran va tezkor protsessor. 5000 mAh batareya kun bo'yi yetadi.", ru:"Камера высокого разрешения, экран 6.7″ OLED и быстрый процессор. Аккумулятора 5000 mAh хватает на целый день."},
-  12:{uz:"Yurak urishi, uyqu va SpO₂ ni kuzatadi, IP68 himoyasi bor. Batareya 7 kungacha yetadi.", ru:"Следит за пульсом, сном и SpO₂, имеет защиту IP68. Заряда батареи хватает до 7 дней."},
-  13:{uz:"Yumshoq baxmal qoplamali ikki yostiqcha divan va yotoqxonaga iliq kayfiyat beradi. Pushti va oltin ranglar uyg'unligi.", ru:"Две подушки с мягким бархатным чехлом добавят дивану и спальне уюта. Сочетание розового и золотистого цветов."},
-  14:{uz:"Oltin rangli metall shamdon stol yoki javonni bezaydi. Kechki ovqat va dam olish onlarida alohida muhit yaratadi.", ru:"Золотистый металлический подсвечник украсит стол или полку. Создаёт особую атмосферу за ужином и во время отдыха."},
-  15:{uz:"Tabiiy mum va efir moylaridan quyilgan shamlar 40 soatgacha tekis yonadi va xonani yumshoq hid bilan to'ldiradi.", ru:"Свечи из натурального воска и эфирных масел горят ровно до 40 часов и наполняют комнату мягким ароматом."},
-  16:{uz:"Salon uchun ixcham xushbo'ylagich: vanil, okean yoki sandal hidi. Taxminan 30 kun davomida yoqimli hid saqlanadi.", ru:"Компактный ароматизатор для салона: ваниль, океан или сандал. Приятный запах сохраняется около 30 дней."},
-  17:{uz:"Tabiiy charm rul qopqog'i qo'lga qulay ushlanadi va sirpanmaydi. Ko'pchilik avtomobillarga mos keladi.", ru:"Чехол на руль из натуральной кожи удобно лежит в руках и не скользит. Подходит для большинства автомобилей."},
-  18:{uz:"Belgiya shokoladidan tayyorlangan to'plam, tarkibida 55% kakao. Chiroyli qutida — sovg'a uchun ideal.", ru:"Набор из бельгийского шоколада с содержанием какао 55%. В красивой коробке — идеальный подарок."},
-  19:{uz:"Tog' hududlarida yig'ilgan 100% tabiiy asal. Qo'shimchalarsiz, xona haroratida 24 oy saqlanadi.", ru:"100% натуральный мёд, собранный в горных районах. Без добавок, хранится при комнатной температуре до 24 месяцев."},
-  20:{uz:"Po'lat o'zakli, neopren qoplamali gantellar qo'lda sirpanmaydi. Uy mashg'ulotlari uchun og'irlikni tanlang.", ru:"Гантели со стальным сердечником и неопреновым покрытием не скользят в руке. Выберите вес для домашних тренировок."},
-  21:{uz:"Ekologik TPE materialdan, kaymaydigan sirt bilan. 183×61 sm o'lchami yoga va cho'zilish mashqlariga qulay.", ru:"Из экологичного материала TPE с нескользящей поверхностью. Размер 183×61 см удобен для йоги и растяжки."},
-  22:{uz:"Tabiiy marvarid va 18K oltin qoplama — klassik va nafis. Sovg'a qutisida beriladi.", ru:"Натуральный жемчуг и золотое покрытие 18K — классика и изящество. Поставляются в подарочной коробке."},
-  23:{uz:"585 sinovli oltin uzuk mayda toshlar bilan bezatilgan. O'lchamni tanlang va sovg'a qutisida oling.", ru:"Золотое кольцо 585 пробы, украшенное мелкими камнями. Выберите размер — доставим в подарочной коробке."},
-  24:{uz:"Kvars mexanizmi aniq vaqtni ko'rsatadi, zanglamaydigan po'lat tasma uzoq xizmat qiladi. 3 ATM suvdan himoya.", ru:"Кварцевый механизм точно показывает время, ремешок из нержавеющей стали служит долго. Защита от воды 3 ATM."},
-  25:{uz:"Charm muqovali, 192 betli bloknot. Oltin qirrali sahifalar va 100 g/m² qog'oz yozishni yoqimli qiladi.", ru:"Блокнот в кожаной обложке на 192 страницы. Страницы с золотым обрезом и бумага 100 г/м² делают письмо приятным."},
-  26:{uz:"Metall korpusli qora va ko'k siyohli qalamlar sovg'a qutisida. Ish stoli va sovg'a uchun nafis tanlov.", ru:"Ручки в металлическом корпусе с чёрными и синими чернилами в подарочной коробке. Элегантный выбор для рабочего стола и в подарок."},
-  27:{uz:"Paxta va viskozadan tikilgan, qo'lda kashta bilan bezatilgan ko'ylak. Mavsumiy kolleksiyaning noyob modeli.", ru:"Платье из хлопка и вискозы с ручной вышивкой. Уникальная модель сезонной коллекции."},
-  28:{uz:"Yumshoq ipdan to'qilgan yengil sviter kuz va bahor uchun. 30°C da yuvish mumkin.", ru:"Лёгкий свитер из мягкой пряжи для осени и весны. Можно стирать при 30°C."},
-  29:{uz:"Tabiiy charm belbog' oltin rangli toka bilan — klassik va zamonaviy kiyimga mos.", ru:"Ремень из натуральной кожи с золотистой пряжкой — подходит и к классической, и к современной одежде."},
-  30:{uz:"Atlas va marvarid dekorli kechki klatch, olinadigan zanjirli tasma bilan. Tantanali tadbirlar uchun.", ru:"Вечерний клатч из атласа с декором из жемчуга и съёмной цепочкой. Для торжественных мероприятий."},
-  31:{uz:"Seramidlar va peptidlar tungi vaqtda terini qayta tiklaydi. Toza teriga kechqurun suring.", ru:"Керамиды и пептиды восстанавливают кожу в ночное время. Наносите вечером на очищенную кожу."},
-  32:{uz:"Beshta tabiiy tus va uzoq turuvchi formula. Rangni o'zingizga mos tanlang.", ru:"Пять натуральных оттенков и стойкая формула. Выберите цвет под свой образ."},
-  33:{uz:"11″ ekran va kuchli protsessor ish, o'qish va ijod uchun. Batareya 10 soatgacha ishlaydi.", ru:"Экран 11″ и мощный процессор для работы, учёбы и творчества. Батарея работает до 10 часов."},
-  34:{uz:"22.5 W tez zaryad va USB-C/USB-A portlari. Safarlarda telefon va quloqchinlarni quvvatlaydi.", ru:"Быстрая зарядка 22.5 Вт и порты USB-C/USB-A. В поездках заряжает телефон и наушники."},
-  35:{uz:"Tabiiy charmdan, mustahkam tikuv bilan. Zamonaviy interyerga qat'iy uslub qo'shadi.", ru:"Из натуральной кожи с прочным швом. Добавляет современному интерьеру строгий стиль."},
-  36:{uz:"Tabiiy marmar servirovka taxtalari pishloq, mevalar va shirinliklarni chiroyli taqdim etadi.", ru:"Сервировочные доски из натурального мрамора красиво подают сыры, фрукты и десерты."},
-  37:{uz:"Suv o'tkazmaydigan rezina gilamchalar salonni changdan va namlikdan himoya qiladi, oson yuviladi.", ru:"Водонепроницаемые резиновые коврики защищают салон от грязи и влаги, легко моются."},
-  38:{uz:"1080p Full HD yozuv, tungi ko'rish va G-sensor. 128 GB gacha microSD karta qo'llab-quvvatlanadi.", ru:"Запись 1080p Full HD, ночной режим и G-сенсор. Поддерживаются карты microSD до 128 GB."},
-  39:{uz:"Qora choy va tog' o'tlari aralashmasi. Qadoqlangan holda 24 oy saqlanadi.", ru:"Смесь чёрного чая и горных трав. В закрытой упаковке хранится 24 месяца."},
-  40:{uz:"Sovuq presslangan Extra Virgin zaytun moyi salat va issiq taomlar uchun. Yaroqlilik muddati 18 oy.", ru:"Оливковое масло Extra Virgin холодного отжима для салатов и горячих блюд. Срок годности 18 месяцев."},
-  41:{uz:"Suv o'tkazmaydigan matodan, poyabzal uchun alohida bo'limli sumka. Mashg'ulot va safar uchun.", ru:"Сумка из водоотталкивающей ткани с отдельным отсеком для обуви. Для тренировок и поездок."},
-  42:{uz:"Qadamlar va yurak urishini kuzatadi, IP67 himoyasi bor. Batareya 10 kungacha yetadi.", ru:"Считает шаги и пульс, защищён по стандарту IP67. Заряда хватает до 10 дней."},
-  43:{uz:"585 sinovli oltin bilaguzuk nafis zanjir bilan — kundalik va bayram uchun.", ru:"Золотой браслет 585 пробы с изящной цепочкой — на каждый день и на праздник."},
-  44:{uz:"18K oltin asosidagi kulon brilliant bilan bezatilgan, zanjir bilan birga.", ru:"Кулон на основе золота 18K с бриллиантом, цепочка в комплекте."},
-  45:{uz:"Hujjatlar uchun tabiiy charm papkalar — ofis uchun ham, sovg'a uchun ham.", ru:"Папки из натуральной кожи для документов — и для офиса, и в подарок."},
-  46:{uz:"Oltin qirrali 192 betli A5 kundalik rejalashtirish va maqsadlarni yozish uchun.", ru:"Ежедневник A5 на 192 страницы с золотым обрезом для планирования и записи целей."},
-  47:{uz:"Paxta va elastandan, har mavsumga mos klassik kesim. Qulay o'tiradi va shaklini yo'qotmaydi.", ru:"Из хлопка и эластана, классический крой на любой сезон. Удобно сидит и не теряет форму."},
-  48:{uz:"Tabiiy charm kurtka bahor va kuz uchun. Maxsus charm vositasi bilan parvarish qilinsa, yillar xizmat qiladi.", ru:"Куртка из натуральной кожи для весны и осени. При уходе специальным средством служит годами."},
-  49:{uz:"8 ta karta uchun joyi va tanga bo'limi bor ixcham hamyon. Qora va jigarrang ranglarda.", ru:"Компактный кошелёк на 8 карт с отделением для монет. В чёрном и коричневом цветах."},
-  50:{uz:"Gialuron kislotasi va aloe bilan to'yingan mato niqoblar. Haftada 2–3 marta qo'llash tavsiya etiladi.", ru:"Тканевые маски с гиалуроновой кислотой и алоэ. Рекомендуется использовать 2–3 раза в неделю."},
-  51:{uz:"Argan moyi va keratinli shampun va konditsioner to'plami barcha soch turlariga mos.", ru:"Набор шампуня и кондиционера с аргановым маслом и кератином подходит для всех типов волос."},
-  52:{uz:"Bluetooth 5.3, IPX6 suvdan himoya va 12 soatgacha ishlash. Tabiatda va uyda musiqa uchun.", ru:"Bluetooth 5.3, защита от воды IPX6 и до 12 часов работы. Для музыки на природе и дома."},
-  53:{uz:"Metall ramkali, oltin rangli devor ko'zgusi. Yo'lak va yotoqxona interyerini yangilaydi.", ru:"Настенное зеркало в золотистой металлической раме. Освежает интерьер прихожей и спальни."},
-  54:{uz:"Sateen paxtadan choyshab, ko'rpa jildi va ikkita yostiq jildi. 40°C da yuviladi.", ru:"Хлопковый сатин: простыня, пододеяльник и две наволочки. Стирка при 40°C."},
-  55:{uz:"O'rik, mayiz, anjir va bodom assortisi tabiiy quritilgan. 12 oy saqlanadi.", ru:"Ассорти из кураги, изюма, инжира и миндаля натуральной сушки. Хранится 12 месяцев."},
-  56:{uz:"Yengil to'r mato va amortizatsiyali rezina taglik. Nafas oluvchi, har mavsumga mos.", ru:"Лёгкая сетка и амортизирующая резиновая подошва. Дышащие, подходят на любой сезон."},
-  57:{uz:"Salon uchun ixcham changyutgich, kuchli so'rish. Simsiz va 12 V variantlari bor.", ru:"Компактный пылесос для салона с мощным всасыванием. Есть беспроводной вариант и от 12 В."},
-  58:{uz:"925 sinovli kumush bilaguzuk nafis zanjir bilan. Uch xil uzunlikda.", ru:"Серебряный браслет 925 пробы с изящной цепочкой. Три варианта длины."}
-};
+const LONG_DESC = {};
 function longDesc(p){
   const d = LONG_DESC[p.id]; if(!d) return pDesc(p);
   return currentLang === "ru" ? d.ru : (currentLang === "cyrl" ? uzToCyr(d.uz) : d.uz);
@@ -1919,7 +1825,7 @@ function cardHTML(p, i){
   return `
   <article class="p-card reveal" data-id="${p.id}" style="--d:${((i || 0) % 4) * 70}ms">
     <a class="p-media" href="products.html?id=${p.id}" aria-label="${esc(pName(p))}">
-      ${ICONS[p.icon]}
+      ${mediaHTML(p)}
       <span class="p-quick"><span class="qk">${t('view_product')}</span></span>
     </a>
     <button type="button" class="p-wish ${wishlist.has(p.id) ? 'active' : ''}" data-wish="${p.id}" aria-label="${t('wish_aria')}">${HEART}</button>
@@ -2117,7 +2023,7 @@ function boot(renderFn){
   window.__render = () => { if(renderFn) renderFn(); applyStaticI18n(); observeReveals(); };
   document.documentElement.lang = currentLang === "ru" ? "ru" : "uz";
   renderHeader(); renderFooter();
-  window.__render();
+  loadProducts().then(() => { renderHeader(); window.__render(); });
 }
 function setLang(lang){
   currentLang = lang;
@@ -2226,6 +2132,7 @@ function renderProfile(){
         </div>
       </aside>
       <div class="prof-main">
+        <div id="admRoot"></div>
         <section class="prof-sec" id="orders">
           <h2 class="sec-title">${t('prof_orders_title')}</h2>
           ${orders.length ? orders.map(orderHTML).join("") : `<div class="card"><p class="page-sub" style="margin:0;">${t('prof_no_orders')}</p><a href="products.html" class="btn-line" style="margin-top:16px;">${t('cart_go_catalog')}</a></div>`}
@@ -2237,6 +2144,7 @@ function renderProfile(){
       </div>
     </div>`;
   wireProfile();
+  renderAdmin();
 }
 
 function wireProfile(){
@@ -2267,6 +2175,238 @@ function wireProfile(){
     showToast(t('prof_repeat_ok'));
     setTimeout(() => { location.href = "cart.html"; }, 700);
   });
+}
+
+
+/* ======================= seller panel (phone + password) ======================= */
+const adm = {id:null, imgs:[]};
+const GH_KEY = "maxi_gh_v1";
+function ghCfg(){ try{ return JSON.parse(localStorage.getItem(GH_KEY) || "{}"); }catch(e){ return {}; } }
+const gv = id => document.getElementById(id).value.trim();
+function admMsg(s, bad){ const m = $("#admMsg"); if(m){ m.textContent = s; m.style.color = bad ? "#b3261e" : "var(--gold-deep)"; } }
+function decodeEnt(s){ const t = document.createElement("textarea"); t.innerHTML = s; return t.value; }
+async function mmTr(text, from, to){
+  text = (text || "").trim(); if(!text) return "";
+  const parts = text.match(/[^.!?\n]+[.!?]*\s*/g) || [text], chunks = []; let cur = "";
+  parts.forEach(s => { if((cur + s).length > 420){ if(cur) chunks.push(cur); cur = s; } else cur += s; });
+  if(cur) chunks.push(cur);
+  const out = [];
+  for(const c of chunks){
+    const r = await fetch("https://api.mymemory.translated.net/get?q=" + encodeURIComponent(c) + "&langpair=" + from + "|" + to);
+    const j = await r.json();
+    if(!j.responseData || (j.responseStatus && Number(j.responseStatus) !== 200)) throw new Error(j.responseDetails || "translate");
+    out.push(decodeEnt(j.responseData.translatedText));
+  }
+  return out.join("").trim();
+}
+function tidy(s){
+  return s.replace(/[ʻʼ’‘`´]/g, "'").replace(/[ \t]+/g, " ").replace(/ +([,.!?;:])/g, "$1")
+    .replace(/(^|[.!?]\s+)(\p{Ll})/gu, (m, a, b) => a + b.toUpperCase()).trim();
+}
+async function fixText(s, lang){
+  if(!s.trim()) return s;
+  let out = s;
+  if(lang === "ru"){
+    try{
+      const r = await fetch("https://api.languagetool.org/v2/check", {method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded"}, body:new URLSearchParams({text:s, language:"ru-RU"})});
+      const j = await r.json(); let n = 0;
+      j.matches.slice().sort((a, b) => b.offset - a.offset).forEach(m => {
+        if(m.replacements && m.replacements[0]){ out = out.slice(0, m.offset) + m.replacements[0].value + out.slice(m.offset + m.length); n++; }
+      });
+      admMsg(n ? "Исправлено ошибок: " + n : "Ошибок не найдено ✓");
+    }catch(e){ admMsg("Проверка орфографии недоступна (нет интернета?) — поправил только оформление.", 1); }
+  }else{
+    admMsg("Для узбекского поправил оформление (апострофы, пробелы, заглавные). Для проверки слов напишите текст по-русски и нажмите «→ UZ».");
+  }
+  return tidy(out);
+}
+function compressImage(file){
+  return new Promise((res, rej) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const im = new Image();
+      im.onload = () => {
+        const k = Math.min(1, 800 / Math.max(im.width, im.height)), c = document.createElement("canvas");
+        c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+        c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+        res(c.toDataURL("image/jpeg", 0.68));
+      };
+      im.onerror = rej; im.src = fr.result;
+    };
+    fr.onerror = rej; fr.readAsDataURL(file);
+  });
+}
+const varRowHTML = v => { v = v || {}; return `<div class="adm-row"><input data-f="l" placeholder="Вариация (UZ)" value="${esc(v.l || "")}"><input data-f="r" placeholder="Вариация (RU)" value="${esc(v.r || "")}"><input data-f="p" type="number" min="0" placeholder="Цена" value="${v.price || ""}"><button type="button" class="btn-sm" data-del>×</button></div>`; };
+const specRowHTML = s => { s = s || {}; return `<div class="adm-spec"><input data-f="tu" placeholder="Название (UZ)" value="${esc(s.tu || "")}"><input data-f="tr" placeholder="Название (RU)" value="${esc(s.tr || "")}"><input data-f="vu" placeholder="Значение (UZ)" value="${esc(s.vu || "")}"><input data-f="vr" placeholder="Значение (RU)" value="${esc(s.vr || "")}"><button type="button" class="btn-sm" data-del>×</button></div>`; };
+function renderPhotos(){
+  $("#admPhotos").innerHTML = adm.imgs.map((s, i) => `<div class="adm-ph"><img src="${s}" alt=""><button type="button" data-ph="${i}">×</button></div>`).join("")
+    + (adm.imgs.length < 4 ? `<label class="adm-add">+<input type="file" id="admFile" accept="image/*" multiple hidden></label>` : "");
+  const f = $("#admFile");
+  if(f) f.onchange = async () => {
+    for(const file of [...f.files].slice(0, 4 - adm.imgs.length)){ try{ adm.imgs.push(await compressImage(file)); }catch(e){} }
+    renderPhotos();
+  };
+}
+function resetForm(){
+  adm.id = null; adm.imgs = [];
+  ["admName","admNameRu","admDesc","admDescRu","admPrice","admVT","admVTRu"].forEach(i => document.getElementById(i).value = "");
+  $("#admVars").innerHTML = ""; $("#admSpecs").innerHTML = "";
+  $("#admTitle").textContent = "Новый товар"; renderPhotos();
+}
+function fillForm(p){
+  adm.id = p.id; adm.imgs = (p.imgs || []).slice();
+  const set = (i, v) => document.getElementById(i).value = v || "";
+  set("admName", p.name); set("admNameRu", p.name_ru); set("admDesc", p.desc); set("admDescRu", p.desc_ru);
+  set("admCat", p.cat); set("admPrice", p.price); set("admVT", p.vTitle); set("admVTRu", p.vTitle_ru);
+  $("#admVars").innerHTML = (p.variants || []).map(varRowHTML).join("");
+  $("#admSpecs").innerHTML = (p.specs || []).map(specRowHTML).join("");
+  $("#admTitle").textContent = "Редактирование товара"; renderPhotos();
+  $("#admForm").scrollIntoView({behavior:"smooth"});
+}
+async function fillPair(a, b){
+  const x = document.getElementById(a), y = document.getElementById(b);
+  await fillEls(x, y);
+}
+async function fillEls(x, y){
+  const u = x.value.trim(), r = y.value.trim();
+  try{
+    if(u && !r) y.value = await mmTr(u, "uz", "ru");
+    else if(r && !u) x.value = await mmTr(r, "ru", "uz");
+  }catch(e){ if(u && !r) y.value = u; else if(r && !u) x.value = r; }
+}
+async function fillMissing(){
+  admMsg("Перевожу пустые поля…");
+  await fillPair("admName", "admNameRu"); await fillPair("admDesc", "admDescRu"); await fillPair("admVT", "admVTRu");
+  for(const row of $$("#admVars .adm-row")) await fillEls(row.querySelector('[data-f=l]'), row.querySelector('[data-f=r]'));
+  for(const row of $$("#admSpecs .adm-spec")){
+    await fillEls(row.querySelector('[data-f=tu]'), row.querySelector('[data-f=tr]'));
+    await fillEls(row.querySelector('[data-f=vu]'), row.querySelector('[data-f=vr]'));
+  }
+  admMsg("Готово ✓ Проверьте переводы и поправьте при необходимости.");
+}
+function saveWork(list){
+  try{ localStorage.setItem(WORK_KEY, JSON.stringify(list)); return true; }
+  catch(e){ admMsg("Память браузера заполнена — удалите лишние фото или товары.", 1); return false; }
+}
+function workList(){ return PRODUCTS.map(x => JSON.parse(JSON.stringify(x))); }
+function renderAdminList(){
+  const box = $("#admList"); if(!box) return;
+  box.innerHTML = PRODUCTS.length ? PRODUCTS.slice().reverse().map(p => `<div class="adm-item">
+    ${p.imgs && p.imgs[0] ? `<img src="${p.imgs[0]}" alt="">` : `<span class="nt"></span>`}
+    <div style="flex:1;min-width:0"><b>${esc(p.name_ru || p.name)}</b><div style="font-size:.84rem;opacity:.7">${fmtPrice(p.price)} · ${esc(catLabel(p.cat))}</div></div>
+    <button type="button" class="btn-sm" data-edit="${p.id}">Изменить</button><button type="button" class="btn-sm" data-rm="${p.id}">Удалить</button></div>`).join("")
+    : `<p class="page-sub" style="margin:0">Товаров пока нет. Добавьте первый выше.</p>`;
+}
+async function publishProducts(){
+  const json = JSON.stringify(workList()), g = ghCfg();
+  if(!g.repo || !g.token){
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([json], {type:"application/json"})); a.download = "products.json"; a.click();
+    admMsg("Файл products.json скачан. Положите его рядом с index.html и сделайте git push. Или укажите репозиторий и токен GitHub ниже — тогда публикация будет в один клик."); return;
+  }
+  admMsg("Публикую…");
+  try{
+    const api = "https://api.github.com/repos/" + g.repo + "/contents/products.json", br = g.branch || "main";
+    const H = {Authorization:"Bearer " + g.token, Accept:"application/vnd.github+json"};
+    let sha; const r0 = await fetch(api + "?ref=" + encodeURIComponent(br), {headers:H});
+    if(r0.ok) sha = (await r0.json()).sha;
+    const content = await new Promise(ok => { const fr = new FileReader(); fr.onload = () => ok(fr.result.split(",")[1]); fr.readAsDataURL(new Blob([json])); });
+    const r = await fetch(api, {method:"PUT", headers:H, body:JSON.stringify({message:"Update products", content, branch:br, sha})});
+    if(!r.ok) throw new Error((await r.json()).message || r.status);
+    admMsg("Опубликовано ✓ Сайт обновится через 1–2 минуты.");
+  }catch(e){ admMsg("Не удалось опубликовать: " + e.message, 1); }
+}
+function renderAdmin(){
+  const box = $("#admRoot"); if(!box) return;
+  if(!isAdmin()){
+    box.innerHTML = `<section class="prof-sec"><div class="card"><h3>Вход для продавца</h3>
+      <form id="admLogin" novalidate><div class="field"><label>Телефон</label><input id="alPhone" type="tel" autocomplete="tel" placeholder="+998 95 555 73 43"></div>
+      <div class="field"><label>Пароль</label><input id="alPass" type="password" autocomplete="current-password"></div>
+      <div id="admMsg" class="adm-msg"></div><button type="submit" class="btn-shine" style="width:100%;padding:14px;border-radius:999px;">Войти</button></form></div></section>`;
+    $("#admLogin").onsubmit = async e => {
+      e.preventDefault();
+      const ph = gv("alPhone").replace(/\D/g, ""), pw = document.getElementById("alPass").value.replace(/\s/g, "");
+      if((ph === ADMIN_PHONE || ph === ADMIN_PHONE.slice(3)) && pw === ADMIN_PASS){
+        try{ localStorage.setItem(ADMIN_KEY, "1"); }catch(_){}
+        await loadProducts(); renderProfile();
+      }else admMsg("Неверный номер или пароль", 1);
+    };
+    return;
+  }
+  const g = ghCfg();
+  box.innerHTML = `<section class="prof-sec" id="admin"><h2 class="sec-title">Панель продавца</h2>
+  <form id="admForm" class="card" novalidate>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h3 id="admTitle" style="margin:0">Новый товар</h3><button type="button" class="btn-sm" id="admOut">Выйти</button></div>
+    <div class="field" style="margin-top:14px"><label>Фото (до 4, первое — главное)</label><div class="adm-photos" id="admPhotos"></div></div>
+    <div class="adm-2"><div class="field"><label>Категория</label><select id="admCat">${CATEGORIES.map(c => `<option value="${esc(c.id)}">${esc(c.ru)}</option>`).join("")}</select></div>
+    <div class="field"><label>Цена (сум)</label><input id="admPrice" type="number" min="0"></div></div>
+    <div class="adm-2"><div class="field"><label>Название (UZ)</label><input id="admName"></div><div class="field"><label>Название (RU)</label><input id="admNameRu"></div></div>
+    <div class="adm-tools"><button type="button" class="btn-sm" data-fix="admNameRu" data-lang="ru">✨ Исправить RU</button><button type="button" class="btn-sm" data-fix="admName" data-lang="uz">✨ Исправить UZ</button><button type="button" class="btn-sm" data-tr="admNameRu:admName:ru:uz">RU → UZ</button><button type="button" class="btn-sm" data-tr="admName:admNameRu:uz:ru">UZ → RU</button></div>
+    <div class="adm-2"><div class="field"><label>Описание (UZ)</label><textarea id="admDesc" rows="4"></textarea></div><div class="field"><label>Описание (RU)</label><textarea id="admDescRu" rows="4"></textarea></div></div>
+    <div class="adm-tools"><button type="button" class="btn-sm" data-fix="admDescRu" data-lang="ru">✨ Исправить RU</button><button type="button" class="btn-sm" data-fix="admDesc" data-lang="uz">✨ Исправить UZ</button><button type="button" class="btn-sm" data-tr="admDescRu:admDesc:ru:uz">RU → UZ</button><button type="button" class="btn-sm" data-tr="admDesc:admDescRu:uz:ru">UZ → RU</button></div>
+    <div class="field"><label>Вариации (цвет, размер, объём…) — у каждой своя цена</label>
+      <div class="adm-2"><input id="admVT" placeholder="Что выбираем (UZ), напр. Rang"><input id="admVTRu" placeholder="Что выбираем (RU), напр. Цвет"></div></div>
+    <div id="admVars" style="margin-top:8px"></div><div class="adm-tools"><button type="button" class="btn-sm" id="admAddVar">+ Вариация</button></div>
+    <div class="field"><label>Характеристики (материал, страна, гарантия…)</label></div>
+    <div id="admSpecs"></div><div class="adm-tools"><button type="button" class="btn-sm" id="admAddSpec">+ Характеристика</button></div>
+    <div id="admMsg" class="adm-msg"></div>
+    <div class="adm-tools"><button type="button" class="btn-sm" id="admFill">🌐 Перевести пустые поля</button><button type="button" class="btn-sm" id="admCancel">Очистить</button></div>
+    <button type="submit" class="btn-shine" style="width:100%;padding:14px;border-radius:999px;">Сохранить товар</button>
+  </form>
+  <div class="card" style="margin-top:16px"><h3>Мои товары</h3><div id="admList"></div></div>
+  <div class="card" style="margin-top:16px"><h3>Публикация</h3>
+    <p class="page-sub" style="font-size:.86rem;margin:0 0 12px">Пока вы не нажмёте «Опубликовать», новые товары видны только вам в этом браузере.</p>
+    <div class="adm-2"><div class="field"><label>GitHub репозиторий (логин/название)</label><input id="ghRepo" value="${esc(g.repo || "")}" placeholder="user/ProjectsSA"></div><div class="field"><label>Ветка</label><input id="ghBranch" value="${esc(g.branch || "main")}"></div></div>
+    <div class="field"><label>GitHub токен (fine-grained, право Contents: Read and write)</label><input id="ghToken" type="password" value="${esc(g.token || "")}"></div>
+    <div class="adm-tools"><button type="button" class="btn-shine" id="admPub" style="padding:12px 22px;border-radius:999px;">Опубликовать на сайте</button></div></div></section>`;
+  const form = $("#admForm");
+  renderPhotos(); renderAdminList();
+  $("#admOut").onclick = async () => { try{ localStorage.removeItem(ADMIN_KEY); }catch(_){} await loadProducts(); renderProfile(); };
+  form.onclick = async e => {
+    const b = e.target.closest("button"); if(!b) return;
+    try{
+      if(b.dataset.ph !== undefined){ adm.imgs.splice(+b.dataset.ph, 1); renderPhotos(); }
+      else if(b.hasAttribute("data-del")) b.parentElement.remove();
+      else if(b.id === "admAddVar") $("#admVars").insertAdjacentHTML("beforeend", varRowHTML());
+      else if(b.id === "admAddSpec") $("#admSpecs").insertAdjacentHTML("beforeend", specRowHTML());
+      else if(b.dataset.fix){ const el = document.getElementById(b.dataset.fix); el.value = await fixText(el.value, b.dataset.lang); }
+      else if(b.dataset.tr){ const [a, z, f, t2] = b.dataset.tr.split(":"); admMsg("Перевожу…"); document.getElementById(z).value = await mmTr(document.getElementById(a).value, f, t2); admMsg("Готово ✓ Проверьте перевод."); }
+      else if(b.id === "admFill") await fillMissing();
+      else if(b.id === "admCancel") resetForm();
+    }catch(err){ admMsg("Сервис перевода сейчас недоступен — попробуйте позже.", 1); }
+  };
+  form.onsubmit = async e => {
+    e.preventDefault(); admMsg("Сохраняю…");
+    try{ await fillMissing(); }catch(_){}
+    let name = gv("admName"), nameRu = gv("admNameRu"), desc = gv("admDesc"), descRu = gv("admDescRu");
+    const price = Number(gv("admPrice"));
+    if(!(name || nameRu)) return admMsg("Введите название", 1);
+    if(!(price > 0)) return admMsg("Укажите цену", 1);
+    name = name || nameRu; nameRu = nameRu || name; desc = desc || descRu; descRu = descRu || desc;
+    const vt = gv("admVT") || gv("admVTRu"), vtr = gv("admVTRu") || vt;
+    const q = (r, k) => r.querySelector('[data-f=' + k + ']').value.trim();
+    const variants = $$("#admVars .adm-row").map(r => ({l:q(r, "l") || q(r, "r"), r:q(r, "r") || q(r, "l"), price:Number(q(r, "p")) || price})).filter(v => v.l);
+    const specs = $$("#admSpecs .adm-spec").map(r => ({tu:q(r, "tu") || q(r, "tr"), tr:q(r, "tr") || q(r, "tu"), vu:q(r, "vu") || q(r, "vr"), vr:q(r, "vr") || q(r, "vu")})).filter(s => s.tu && s.vu);
+    const old = adm.id ? PRODUCTS.find(x => x.id === adm.id) : null;
+    const p = {id:adm.id || Date.now(), cat:gv("admCat"), name, name_ru:nameRu, desc, desc_ru:descRu, price, rating:0, custom:true,
+      imgs:adm.imgs.slice(), vTitle:vt, vTitle_ru:vtr, variants, specs, created:old ? old.created : Date.now()};
+    const list = workList(), i = list.findIndex(x => x.id === p.id);
+    if(i >= 0) list[i] = p; else list.push(p);
+    if(!saveWork(list)) return;
+    applyProducts(list); syncBadges(); resetForm(); renderAdminList();
+    admMsg("Сохранено ✓ Чтобы товар увидели все, нажмите «Опубликовать на сайте».");
+  };
+  $("#admList").onclick = e => {
+    const b = e.target.closest("button"); if(!b) return;
+    if(b.dataset.edit){ const p = PRODUCTS.find(x => x.id === Number(b.dataset.edit)); if(p) fillForm(p); }
+    else if(b.dataset.rm && confirm("Удалить товар?")){
+      const list = workList().filter(x => x.id !== Number(b.dataset.rm));
+      if(saveWork(list)){ applyProducts(list); syncBadges(); renderAdminList(); }
+    }
+  };
+  $("#admPub").onclick = () => {
+    localStorage.setItem(GH_KEY, JSON.stringify({repo:gv("ghRepo"), branch:gv("ghBranch") || "main", token:gv("ghToken")}));
+    publishProducts();
+  };
 }
 
 window.onWishChange = function(){ renderProfile(); };
