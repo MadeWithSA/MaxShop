@@ -1025,6 +1025,38 @@ header.nav-open .burger span:nth-child(3){top:19px;transform:rotate(-45deg);}
 .adm-item img,.adm-item .nt{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--blush-soft);flex:none;}
 .adm-msg{font-size:.86rem;margin:8px 0;min-height:1.2em;}
 @media(max-width:640px){.adm-2{grid-template-columns:1fr;}.adm-row{grid-template-columns:1fr 1fr;}.adm-spec{grid-template-columns:1fr 1fr;}}
+
+/* ---- extra polish ---- */
+::selection{background:var(--gold-bright);color:var(--ink);}
+html{scroll-behavior:smooth;}
+body{animation:pageIn .7s ease both;}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+@keyframes cardIn{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes sheen{from{background-position:-200% 0}to{background-position:200% 0}}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--gold-deep));border-radius:10px;border:2px solid var(--cream)}
+.header{backdrop-filter:saturate(1.5) blur(14px);-webkit-backdrop-filter:saturate(1.5) blur(14px);}
+.p-card{animation:cardIn .6s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 1px 0 rgba(197,160,89,.12);}
+.p-card:nth-child(2){animation-delay:.06s}.p-card:nth-child(3){animation-delay:.12s}.p-card:nth-child(4){animation-delay:.18s}
+.p-card:nth-child(5){animation-delay:.24s}.p-card:nth-child(6){animation-delay:.3s}.p-card:nth-child(7){animation-delay:.36s}.p-card:nth-child(8){animation-delay:.42s}
+.p-card:hover{transform:translateY(-8px);box-shadow:0 28px 60px -28px rgba(156,122,50,.55),0 0 0 1px var(--gold);}
+.p-add{transition:transform .3s,box-shadow .3s}.p-add:hover{transform:rotate(90deg) scale(1.1);box-shadow:0 8px 20px -6px rgba(156,122,50,.6)}
+.card{transition:box-shadow .35s,transform .35s,border-color .35s}
+.card:hover{box-shadow:0 22px 50px -32px rgba(43,33,24,.4);border-color:var(--gold)}
+.btn-shine{transition:transform .3s,box-shadow .3s}
+.btn-shine:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(156,122,50,.7)}
+.btn-shine:active{transform:translateY(0) scale(.98)}
+.btn-sm{transition:background .25s,color .25s,transform .25s,border-color .25s}
+.btn-sm:hover{transform:translateY(-1px);border-color:var(--gold);background:var(--blush-soft)}
+.field input,.field textarea,.field select{transition:border-color .25s,box-shadow .25s,background .25s}
+.field input:focus,.field textarea:focus,.field select:focus,.adm-row input:focus,.adm-spec input:focus,#admForm select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(197,160,89,.2);background:#fffdf8}
+.sec-title{position:relative;padding-bottom:12px}
+.sec-title::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright),var(--blush));background-size:200% 100%;animation:sheen 4s linear infinite}
+.adm-item{transition:background .25s}.adm-item:hover{background:var(--blush-soft)}
+.pd-thumbs img{transition:transform .25s}.pd-thumbs img:hover{transform:translateY(-3px) scale(1.06)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body data-page="profile">
@@ -1550,7 +1582,13 @@ EXTRA_DSL.trim().split("\n").forEach(line=>{
 });
 
 /* ===== seller products: published list (products.json) + seller working copy ===== */
-const ADMIN_PHONE = "998955557343", ADMIN_PASS = "16.12.2010";
+const ADMIN_SALT = "maxi-seller-v1", ADMIN_HASH = "70bb0eb81ab290c1c86ae8c9995084ebbea9db985d837110b07b0aa54d0922eb", ADMIN_ITER = 150000;
+async function sellerHash(ph, pw){
+  const enc = new TextEncoder(), d = ph.replace(/\D/g, "").slice(-9);
+  const key = await crypto.subtle.importKey("raw", enc.encode(d + "|" + pw.replace(/\s/g, "")), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({name:"PBKDF2", hash:"SHA-256", salt:enc.encode(ADMIN_SALT), iterations:ADMIN_ITER}, key, 256);
+  return [...new Uint8Array(bits)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
 const WORK_KEY = "maxi_work_products_v1", ADMIN_KEY = "maxi_admin_v1";
 function isAdmin(){ try{ return localStorage.getItem(ADMIN_KEY) === "1"; }catch(e){ return false; } }
 function registerProduct(p){
@@ -2319,13 +2357,15 @@ function renderAdmin(){
   const box = $("#admRoot"); if(!box) return;
   if(!isAdmin()){
     box.innerHTML = `<section class="prof-sec"><div class="card"><h3>Вход для продавца</h3>
-      <form id="admLogin" novalidate><div class="field"><label>Телефон</label><input id="alPhone" type="tel" autocomplete="tel" placeholder="+998 95 555 73 43"></div>
+      <form id="admLogin" novalidate><div class="field"><label>Телефон</label><input id="alPhone" type="tel" autocomplete="tel" placeholder="+998 123456789"></div>
       <div class="field"><label>Пароль</label><input id="alPass" type="password" autocomplete="current-password"></div>
       <div id="admMsg" class="adm-msg"></div><button type="submit" class="btn-shine" style="width:100%;padding:14px;border-radius:999px;">Войти</button></form></div></section>`;
     $("#admLogin").onsubmit = async e => {
       e.preventDefault();
       const ph = gv("alPhone").replace(/\D/g, ""), pw = document.getElementById("alPass").value.replace(/\s/g, "");
-      if((ph === ADMIN_PHONE || ph === ADMIN_PHONE.slice(3)) && pw === ADMIN_PASS){
+      let okLogin = false;
+      try{ okLogin = (await sellerHash(ph, pw)) === ADMIN_HASH; }catch(_){ return admMsg("Вход работает только на защищённом адресе (https).", 1); }
+      if(okLogin){
         try{ localStorage.setItem(ADMIN_KEY, "1"); }catch(_){}
         await loadProducts(); renderProfile();
       }else admMsg("Неверный номер или пароль", 1);

@@ -1010,6 +1010,38 @@ header.nav-open .burger span:nth-child(3){top:19px;transform:rotate(-45deg);}
 .pd-media .pd-main{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .pd-thumbs{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:8px;z-index:2;}
 .pd-thumbs img{width:54px;height:54px;object-fit:cover;border-radius:10px;border:2px solid #fff;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);}
+
+/* ---- extra polish ---- */
+::selection{background:var(--gold-bright);color:var(--ink);}
+html{scroll-behavior:smooth;}
+body{animation:pageIn .7s ease both;}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+@keyframes cardIn{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes sheen{from{background-position:-200% 0}to{background-position:200% 0}}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--gold-deep));border-radius:10px;border:2px solid var(--cream)}
+.header{backdrop-filter:saturate(1.5) blur(14px);-webkit-backdrop-filter:saturate(1.5) blur(14px);}
+.p-card{animation:cardIn .6s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 1px 0 rgba(197,160,89,.12);}
+.p-card:nth-child(2){animation-delay:.06s}.p-card:nth-child(3){animation-delay:.12s}.p-card:nth-child(4){animation-delay:.18s}
+.p-card:nth-child(5){animation-delay:.24s}.p-card:nth-child(6){animation-delay:.3s}.p-card:nth-child(7){animation-delay:.36s}.p-card:nth-child(8){animation-delay:.42s}
+.p-card:hover{transform:translateY(-8px);box-shadow:0 28px 60px -28px rgba(156,122,50,.55),0 0 0 1px var(--gold);}
+.p-add{transition:transform .3s,box-shadow .3s}.p-add:hover{transform:rotate(90deg) scale(1.1);box-shadow:0 8px 20px -6px rgba(156,122,50,.6)}
+.card{transition:box-shadow .35s,transform .35s,border-color .35s}
+.card:hover{box-shadow:0 22px 50px -32px rgba(43,33,24,.4);border-color:var(--gold)}
+.btn-shine{transition:transform .3s,box-shadow .3s}
+.btn-shine:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(156,122,50,.7)}
+.btn-shine:active{transform:translateY(0) scale(.98)}
+.btn-sm{transition:background .25s,color .25s,transform .25s,border-color .25s}
+.btn-sm:hover{transform:translateY(-1px);border-color:var(--gold);background:var(--blush-soft)}
+.field input,.field textarea,.field select{transition:border-color .25s,box-shadow .25s,background .25s}
+.field input:focus,.field textarea:focus,.field select:focus,.adm-row input:focus,.adm-spec input:focus,#admForm select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(197,160,89,.2);background:#fffdf8}
+.sec-title{position:relative;padding-bottom:12px}
+.sec-title::after{content:"";position:absolute;left:0;bottom:0;width:64px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold-deep),var(--gold-bright),var(--blush));background-size:200% 100%;animation:sheen 4s linear infinite}
+.adm-item{transition:background .25s}.adm-item:hover{background:var(--blush-soft)}
+.pd-thumbs img{transition:transform .25s}.pd-thumbs img:hover{transform:translateY(-3px) scale(1.06)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body data-page="products">
@@ -1535,7 +1567,6 @@ EXTRA_DSL.trim().split("\n").forEach(line=>{
 });
 
 /* ===== seller products: published list (products.json) + seller working copy ===== */
-const ADMIN_PHONE = "998955557343", ADMIN_PASS = "16.12.2010";
 const WORK_KEY = "maxi_work_products_v1", ADMIN_KEY = "maxi_admin_v1";
 function isAdmin(){ try{ return localStorage.getItem(ADMIN_KEY) === "1"; }catch(e){ return false; } }
 function registerProduct(p){
